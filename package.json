@@ -1,0 +1,13 @@
+{
+	"$schema": "https://json.schemastore.org/package",
+	"name": "@caufande/act",
+	"version": "0.1.0",
+	"author": {
+		"name": "qifande",
+		"email": "3823642480@qq.com"
+	},
+	"repository": {
+		"url": "git+https://github.com/caufande/act.git",
+		"type": "git"
+	}
+}
