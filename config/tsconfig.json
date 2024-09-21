@@ -1,0 +1,8 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": "./tsbase.json",
+	"compilerOptions": {
+		"noEmit": true
+	},
+	"include": ["**/*"]
+}

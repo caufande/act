@@ -1,0 +1,14 @@
+{
+	"$schema": "https://json.schemastore.org/package",
+	"private": true,
+	"name": "config",
+	"license": "GPL-2.0-or-later",
+	"type": "commonjs",
+	"scripts": {
+		"test": "tsc"
+	},
+	"dependencies": {
+		"@types/node": "^22.5.5",
+		"@commitlint/types": "^19.5.0"
+	}
+}
