@@ -1,0 +1,47 @@
+name: GitHub Pages
+
+on:
+    push:
+        branches: ['master']
+    pull_request:
+        branches: ['master']
+
+permissions:
+    contents: write
+    pages: write
+    id-token: write
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 22.x
+
+            - uses: actions/checkout@master
+              with:
+                  persist-credentials: false
+                  fetch-depth: 0
+
+            - name: Build
+              run: |
+                  npm i pnpm -g
+                  rm -rf package-lock.json
+                  pnpm i
+                  pnpm i
+                  pnpm build
+
+            - name: Save changes
+              run: |
+                  find . -name '.gitignore' -type f -print | xargs rm -rf
+                  git add .
+
+            - name: Push Branch
+              uses: actions-js/push@master
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  branch: gh-pages
+                  amend: true
+                  force: true
