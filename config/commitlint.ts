@@ -1,7 +1,6 @@
 import type { UserConfig } from '@commitlint/types';
 import { RuleConfigSeverity } from '@commitlint/types';
-
-import czConfig = require('./cz-config');
+import * as czConfig from './cz-config.cjs';
 
 function allList<T>(s: Set<T>): Set<T[]> {
 	const r = new Set<T[]>([[]]);

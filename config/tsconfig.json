@@ -2,6 +2,8 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": "./tsbase.json",
 	"compilerOptions": {
+		"module": "ESNext",
+		"allowSyntheticDefaultImports": true,
 		"noEmit": true
 	},
 	"include": ["**/*"]

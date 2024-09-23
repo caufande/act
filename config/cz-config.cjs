@@ -4,7 +4,7 @@
 
 const fs = require('fs');
 /**@type {string[]} */
-const notPacks = require('../scripts/not-packs.json');
+const notPacks = require('./not-packs.json');
 const packages = [
 	...fs.readdirSync(__dirname + '/../scripts'),
 	'docs',

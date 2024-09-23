@@ -3,12 +3,20 @@
 	"private": true,
 	"name": "config",
 	"license": "GPL-2.0-or-later",
-	"type": "commonjs",
+	"type": "module",
 	"scripts": {
 		"test": "tsc"
 	},
 	"dependencies": {
-		"@types/node": "^22.5.5",
-		"@commitlint/types": "^19.5.0"
+		"esm-entry": "^1.0.4",
+		"@eslint/js": "^9.11.0",
+		"@types/eslint__js": "^8.42.3",
+		"typescript-eslint": "^8.6.0",
+		"eslint-config-accurtype-style": "^0.2.2",
+		"@eslint/markdown": "6.1.0",
+		"globals": "^15.9.0",
+		"@types/eslint": "^8.56.0",
+		"@types/node": "^20.11.17",
+		"@commitlint/types": "^18.6.1"
 	}
 }

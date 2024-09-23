@@ -8,23 +8,39 @@
 	"scripts": {
 		"prepare": "husky",
 		"commit": "cz",
+		"prefmt": "prettier -w .",
+		"fmt": "eslint . --fix",
+		"prelint": "prettier -c .",
+		"lint": "eslint .",
+		"build": "pnpm -F scripts/* -F docs build",
 		"test": "pnpm -F config -F docs -F scripts/* test"
 	},
 	"devDependencies": {
-		"typescript": "^5.6.2",
-		"ts-node": "^10.9.2",
 		"@commitlint/cli": "^19.5.0",
 		"commitizen": "^4.3.0",
 		"cz-customizable": "^7.2.1",
-		"husky": "^9.1.6"
+		"eslint": "^9.11.0",
+		"husky": "^9.1.6",
+		"prettier": "^3.3.3",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.6.2"
 	},
 	"config": {
 		"cz-customizable": {
-			"config": "./config/cz-config.js"
+			"config": "./config/cz-config.cjs"
 		},
 		"commitizen": {
 			"path": "node_modules/cz-customizable"
 		}
+	},
+	"prettier": {
+		"printWidth": 200,
+		"tabWidth": 4,
+		"useTabs": true,
+		"semi": true,
+		"singleQuote": true,
+		"jsxSingleQuote": false,
+		"trailingComma": "all"
 	},
 	"repository": {
 		"url": "git+https://github.com/caufande/act.git",
