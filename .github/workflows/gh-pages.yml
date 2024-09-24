@@ -36,6 +36,7 @@ jobs:
             - name: Save changes
               run: |
                   find . -name '.gitignore' -type f -print | xargs rm -rf
+                  rm -rf .husky
                   git add .
 
             - name: Push Branch
