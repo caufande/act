@@ -1,0 +1,26 @@
+{
+	"$schema": "https://json.schemastore.org/package",
+	"name": "@caufande/act-db",
+	"version": "0.1.0",
+	"description": "活动数据库接口相关",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc",
+		"clear": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js"
+	},
+	"files": [
+		"lib",
+		"index.js"
+	],
+	"author": "e0selmy4v",
+	"license": "GPL-2.0-or-later",
+	"repository": {
+		"directory": "scripts/db",
+		"type": "git",
+		"url": "git+https://github.com/caufande/act.git"
+	},
+	"bugs": {
+		"url": "https://github.com/caufande/act/issues"
+	},
+	"homepage": "https://github.com/caufande/act/blob/HEAD/scripts/db#readme"
+}

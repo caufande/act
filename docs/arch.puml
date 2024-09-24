@@ -2,11 +2,10 @@
 title 信  息  流  动  图
 package "数  据  库" {
 	database "act-db 仓  库" as dbrepo
-	component "数  据  库  编  程  接  口" as dbjs
 	actor "数  据  库  维  护  者" as dbadmin
 }
 package "网  站" {
-	component "本  地  缓  存  功  能" as wbsave
+	component "数  据  库  编  程  接  口" as wbjs
 	component "当  日  活  动  显  示  功  能" as wbtody
 }
 package "信  息  源" {
@@ -14,9 +13,8 @@ package "信  息  源" {
 	collections "活  动  发  布  信  息" as fminfo
 }
 dbadmin --> dbrepo
-dbjs <-- dbrepo
+wbjs <-- dbrepo
 fmorg --> dbrepo
-wbtody <-- wbsave
-wbsave <-- dbjs
+wbtody <-- wbjs
 fminfo --> dbadmin
 @enduml
