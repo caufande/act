@@ -12,8 +12,8 @@
 		"fmt": "eslint . --fix",
 		"prelint": "prettier -c .",
 		"lint": "eslint .",
-		"build": "pnpm -F scripts/* -F docs build",
-		"test": "pnpm -F config -F docs -F scripts/* test"
+		"build": "pnpm -F=./scripts/* -F=./docs build",
+		"test": "pnpm -F=./config -F=./docs -F=./scripts/* test"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.5.0",
