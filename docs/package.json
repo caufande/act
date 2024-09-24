@@ -1,1 +1,26 @@
-{}
+{
+	"$schema": "https://json.schemastore.org/package",
+	"name": "@caufande/act-site",
+	"version": "0.1.0",
+	"description": "网站",
+	"scripts": {
+		"serve": "serve --ssl-cert ssl.pem --ssl-key ssl-key.pem"
+	},
+	"author": "caufande",
+	"license": "GPL-2.0-or-later",
+	"dependencies": {
+		"@caufande/act-db": "workspace:^"
+	},
+	"devDependencies": {
+		"serve": "^14.2.3"
+	},
+	"repository": {
+		"directory": "docs",
+		"type": "git",
+		"url": "git+https://github.com/caufande/act.git"
+	},
+	"bugs": {
+		"url": "https://github.com/caufande/act/issues"
+	},
+	"homepage": "https://github.com/caufande/act/blob/HEAD/docs#readme"
+}
