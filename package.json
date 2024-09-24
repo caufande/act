@@ -13,6 +13,7 @@
 		"prelint": "prettier -c .",
 		"lint": "eslint .",
 		"build": "pnpm -F=./scripts/* -F=./docs build",
+		"clean": "pnpm -F=./scripts/* -F=./docs clean",
 		"test": "pnpm -F=./config -F=./docs -F=./scripts/* test"
 	},
 	"devDependencies": {
