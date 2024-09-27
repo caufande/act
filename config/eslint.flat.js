@@ -41,6 +41,7 @@ export default tseslint.config(
 		ignores: [
 			'packages/db/**/*.js',
 			'packages/db/**/*.d.ts',
+			'**/dist/**/*',
 		],
 	},
 	{

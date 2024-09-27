@@ -1,0 +1,20 @@
+{
+	"miniprogramRoot": "dist/",
+	"projectname": "cau-act",
+	"description": "CAU ACTivity",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"enhance": false,
+		"compileHotReLoad": false,
+		"postcss": false,
+		"minified": false,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "3.6.0"
+}
