@@ -25,12 +25,12 @@
 		"rimraf": "^6.0.1"
 	},
 	"repository": {
-		"directory": "scripts/db",
+		"directory": "packages/db",
 		"type": "git",
 		"url": "git+https://github.com/caufande/act.git"
 	},
 	"bugs": {
 		"url": "https://github.com/caufande/act/issues"
 	},
-	"homepage": "https://github.com/caufande/act/blob/HEAD/scripts/db#readme"
+	"homepage": "https://github.com/caufande/act/blob/HEAD/packages/db#readme"
 }

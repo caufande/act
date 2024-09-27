@@ -19,7 +19,7 @@ export default tseslint.config(
 				tsconfigRootDir: path.join(getDirname(import.meta.url), '..'),
 				project: [
 					'config/tsconfig.json',
-					'scripts/*/tsconfig.json',
+					'packages/*/tsconfig.json',
 				],
 			},
 		},
@@ -34,6 +34,13 @@ export default tseslint.config(
 			'**/*.md',
 			'eslint.config.mjs',
 			'.*',
+		],
+	},
+	{
+		name: 'JS Ignore',
+		ignores: [
+			'packages/db/**/*.js',
+			'packages/db/**/*.d.ts',
 		],
 	},
 	{

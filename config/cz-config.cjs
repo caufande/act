@@ -6,7 +6,7 @@ const fs = require('fs');
 /**@type {string[]} */
 const notPacks = require('./not-packs.json');
 const packages = [
-	...fs.readdirSync(__dirname + '/../scripts'),
+	...fs.readdirSync(__dirname + '/../packages'),
 	'docs',
 ].filter(n => !notPacks.includes(n));
 

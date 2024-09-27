@@ -12,9 +12,9 @@
 		"fmt": "eslint . --fix",
 		"prelint": "prettier -c .",
 		"lint": "eslint .",
-		"build": "pnpm -F=./scripts/* -F=./docs build",
-		"clean": "pnpm -F=./scripts/* -F=./docs clean",
-		"test": "pnpm -F=./config -F=./docs -F=./scripts/* test"
+		"build": "pnpm -F=./packages/* -F=./docs build",
+		"clean": "pnpm -F=./packages/* -F=./docs clean",
+		"test": "pnpm -F=./config -F=./docs -F=./packages/* test"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.5.0",
