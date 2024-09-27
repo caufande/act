@@ -11,6 +11,8 @@
 		"framework": "React"
 	},
 	"scripts": {
+		"build": "pnpm build:weapp",
+		"test": "tsc --noEmit",
 		"build:weapp": "taro build --type weapp",
 		"dev:weapp": "npm run build:weapp -- --watch"
 	},

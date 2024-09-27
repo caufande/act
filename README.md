@@ -1,4 +1,7 @@
-# CAU ACTion
+# CAU ACTivity
+
+[![All test](https://github.com/caufande/act/actions/workflows/test-all.yml/badge.svg)](https://github.com/caufande/act/actions/workflows/test-all.yml)
+[![Build](https://github.com/caufande/act/actions/workflows/dobuild.yml/badge.svg)](https://github.com/caufande/act/actions/workflows/dobuild.yml)
 
 <!-- [项目网址](https://caufande.github.io/act/) -->
 
