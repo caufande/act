@@ -19,6 +19,7 @@
 	"dependencies": {
 		"json-schema-to-typescript": "^15.0.2",
 		"localforage": "^1.10.0",
+		"@types/node": "^22.7.4",
 		"@cauact/db-repo": "workspace:^"
 	},
 	"devDependencies": {
