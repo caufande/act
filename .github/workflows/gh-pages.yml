@@ -32,6 +32,9 @@ jobs:
                   pnpm i
                   pnpm i
                   pnpm build
+                  rm docs/app
+                  mkdir docs/app
+                  cp -r packages/weapp/dist/** docs/app
 
             - name: Save changes
               run: |
