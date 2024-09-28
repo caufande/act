@@ -1,11 +1,11 @@
 {
 	"$schema": "https://json.schemastore.org/package",
-	"name": "@caufande/act-db",
+	"name": "@cauact/db",
 	"version": "0.1.0",
-	"description": "活动数据库接口相关",
+	"description": "CAU ACTivity 数据库操作接口",
 	"main": "index.js",
 	"scripts": {
-		"prepare": "json2ts node_modules/@caufande/act-db-repo/acts/schema.json lib/schema.ts",
+		"prepare": "json2ts node_modules/@cauact/db-repo/acts/schema.json lib/schema.ts",
 		"build": "tsc",
 		"test": "tsc --noEmit",
 		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js"
@@ -19,7 +19,7 @@
 	"dependencies": {
 		"json-schema-to-typescript": "^15.0.2",
 		"localforage": "^1.10.0",
-		"@caufande/act-db-repo": "workspace:^"
+		"@cauact/db-repo": "workspace:^"
 	},
 	"devDependencies": {
 		"rimraf": "^6.0.1"

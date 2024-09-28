@@ -1,15 +1,15 @@
 {
 	"$schema": "https://json.schemastore.org/package",
-	"name": "@caufande/act-site",
+	"name": "@cauact/site",
 	"version": "0.1.0",
-	"description": "网站",
+	"description": "CAU ACTivity 项目的网站",
 	"scripts": {
 		"serve": "serve --ssl-cert ssl.pem --ssl-key ssl-key.pem"
 	},
 	"author": "caufande",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
-		"@caufande/act-db": "workspace:^"
+		"@cauact/db": "workspace:^"
 	},
 	"devDependencies": {
 		"serve": "^14.2.3"

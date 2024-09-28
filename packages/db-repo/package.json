@@ -1,7 +1,9 @@
 {
 	"$schema": "https://json.schemastore.org/package",
 	"private": true,
-	"name": "@caufande/act-db-repo",
+	"name": "@cauact/db-repo",
+	"version": "0.1.0",
+	"description": "CAU ACTivity 的作为数据库的仓库及其机器人",
 	"type": "commonjs",
 	"author": "caufande",
 	"scripts": {
