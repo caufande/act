@@ -3,3 +3,5 @@
 **/*.mjs
 **/*.ts
 **/*.md
+**/dist/*
+packages/weapp/src/index.html
