@@ -26,7 +26,7 @@ export default tseslint.config(
 	},
 	{
 		name: 'Opt Rules',
-		rules: { 'no-unused-vars': 'warn' },
+		rules: { 'no-unused-vars': 'off' },
 	},
 	{
 		name: 'Global Ignore',
