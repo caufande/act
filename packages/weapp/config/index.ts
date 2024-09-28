@@ -41,7 +41,7 @@ export default defineConfig<'vite'>(async merge => {
 			},
 		},
 		h5: {
-			publicPath: '/',
+			publicPath: '.',
 			staticDirectory: 'static',
 
 			miniCssExtractPluginOption: {
@@ -62,10 +62,6 @@ export default defineConfig<'vite'>(async merge => {
 					},
 				},
 			},
-		},
-		rn: {
-			appName: 'taroDemo',
-			postcss: { cssModules: { enable: false } },
 		},
 	};
 	if (process.env.NODE_ENV === 'development') {
