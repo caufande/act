@@ -11,9 +11,11 @@
 		"framework": "React"
 	},
 	"scripts": {
-		"build": "pnpm build:weapp",
+		"build": "pnpm build:h5",
 		"test": "tsc --noEmit",
+		"build:h5": "taro build --type h5",
 		"build:weapp": "taro build --type weapp",
+		"dev:h5": "npm run build:h5 -- --watch",
 		"dev:weapp": "npm run build:weapp -- --watch"
 	},
 	"author": "caufande",
@@ -24,9 +26,11 @@
 		"@tarojs/shared": "^4.0.6",
 		"@tarojs/runtime": "^4.0.6",
 		"@tarojs/helper": "^4.0.6",
+		"@tarojs/plugin-platform-h5": "^4.0.6",
 		"@tarojs/plugin-platform-weapp": "^4.0.6",
 		"@tarojs/plugin-framework-react": "^4.0.6",
 		"@tarojs/components": "^4.0.6",
+		"react-dom": "^18.3.1",
 		"react": "^18.3.1"
 	},
 	"devDependencies": {
