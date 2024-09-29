@@ -6,10 +6,10 @@ declare module './Requester';
 
 import type { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 
-export { IncomingHttpHeaders } from 'http';
+export type { IncomingHttpHeaders } from 'http';
 
 export type RequesterIniter = new (
-	baseHeader: IncomingHttpHeaders,
+	baseHeader?: IncomingHttpHeaders,
 ) => Requester;
 
 export const enum Method {
@@ -24,22 +24,22 @@ export const enum Method {
 	CONNECT = 'CONNECT',
 }
 
-export interface Config<T> {
+export interface RequestParams<T> {
 	url: string;
 	header?: IncomingHttpHeaders;
 	data?: T;
 	method?: Method;
 }
 
-export interface Data {
+export interface RequestedData {
 	ok: boolean;
 	error?: Error;
-	body: string;
+	data: any;
 	code: number;
 	header: OutgoingHttpHeaders;
 }
 
 export default abstract class Requester {
-	abstract readonly baseHeader: IncomingHttpHeaders;
-	abstract send<T>(config: Config<T>): Promise<Data>;
+	abstract baseHeader: IncomingHttpHeaders;
+	abstract send<T>(params: RequestParams<T>): Promise<RequestedData>;
 }

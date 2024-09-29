@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/package",
-	"name": "@caufande/act-db-operator-taro",
+	"name": "@cauact/db-operator-taro",
 	"version": "0.1.0",
 	"description": "CAU ACTion 数据库接口配套的 taro 框架操作器",
 	"main": "lib/index",

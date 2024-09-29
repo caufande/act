@@ -1,7 +1,9 @@
 **/*.js
 **/*.cjs
 **/*.mjs
+**/*.jsx
 **/*.ts
+**/*.tsx
 **/*.md
 **/dist/*
 packages/weapp/src/index.html
