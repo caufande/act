@@ -8,6 +8,8 @@ on:
 
 jobs:
     build:
+        env:
+            CAUACT_RUNTIME: ${{ secrets.CAUACT_RUNTIME }}
         runs-on: ubuntu-latest
 
         strategy:
@@ -32,3 +34,4 @@ jobs:
             - name: build
               run: |
                   pnpm build
+                  pnpm -F ./packages/weapp test:build
