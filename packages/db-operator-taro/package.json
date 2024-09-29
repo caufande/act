@@ -4,6 +4,7 @@
 	"version": "0.1.0",
 	"description": "CAU ACTion 数据库接口配套的 taro 框架操作器",
 	"main": "lib/index",
+	"type": "module",
 	"scripts": {
 		"build": "tsc",
 		"test": "tsc --noEmit",
