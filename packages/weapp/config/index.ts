@@ -17,7 +17,7 @@ export default defineConfig<'vite'>(async merge => {
 		sourceRoot: 'src',
 		outputRoot: 'dist',
 		plugins: [],
-		defineConstants: {},
+		defineConstants: { __CAUACT_RUNTIME__: process.env.CAUACT_RUNTIME },
 		copy: {
 			patterns: [
 			],

@@ -2,6 +2,7 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": "../../config/tsbase.json",
 	"compilerOptions": {
+		"noEmit": true,
 		"jsx": "react-jsx"
 	},
 	"exclude": ["dist/**/*"],
