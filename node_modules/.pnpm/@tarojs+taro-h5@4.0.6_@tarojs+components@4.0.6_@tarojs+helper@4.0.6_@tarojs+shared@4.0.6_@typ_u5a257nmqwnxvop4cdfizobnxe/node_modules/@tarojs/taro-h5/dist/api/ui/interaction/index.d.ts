@@ -1,0 +1,10 @@
+import Taro from '@tarojs/api';
+declare const showToast: typeof Taro.showToast;
+declare const hideToast: typeof Taro.hideToast;
+declare const showLoading: typeof Taro.showLoading;
+declare const hideLoading: typeof Taro.hideLoading;
+declare const showModal: typeof Taro.showModal;
+declare const showActionSheet: (options?: Taro.showActionSheet.Option, methodName?: string) => Promise<Taro.showActionSheet.SuccessCallbackResult>;
+declare const enableAlertBeforeUnload: (option?: {}, ...args: any[]) => Promise<Partial<TaroGeneral.CallbackResult> & Record<string, unknown> & TaroGeneral.CallbackResult>;
+declare const disableAlertBeforeUnload: (option?: {}, ...args: any[]) => Promise<Partial<TaroGeneral.CallbackResult> & Record<string, unknown> & TaroGeneral.CallbackResult>;
+export { disableAlertBeforeUnload, enableAlertBeforeUnload, hideLoading, hideToast, showActionSheet, showLoading, showModal, showToast };

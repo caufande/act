@@ -8,16 +8,16 @@
 		"test": "tsc"
 	},
 	"dependencies": {
-		"clipboardy": "^4.0.0",
-		"esm-entry": "^1.0.4",
-		"@eslint/js": "^9.11.0",
-		"@types/eslint__js": "^8.42.3",
-		"typescript-eslint": "^8.6.0",
-		"eslint-config-accurtype-style": "^0.2.2",
+		"@commitlint/types": "^18.6.1",
+		"@eslint/js": "^9.11.1",
 		"@eslint/markdown": "6.1.0",
+		"@types/eslint": "^8.56.12",
+		"@types/eslint__js": "^8.42.3",
+		"@types/node": "^20.16.10",
+		"clipboardy": "^4.0.0",
+		"eslint-config-accurtype-style": "^0.2.2",
+		"esm-entry": "^1.0.4",
 		"globals": "^15.9.0",
-		"@types/eslint": "^8.56.0",
-		"@types/node": "^20.11.17",
-		"@commitlint/types": "^18.6.1"
+		"typescript-eslint": "^8.7.0"
 	}
 }

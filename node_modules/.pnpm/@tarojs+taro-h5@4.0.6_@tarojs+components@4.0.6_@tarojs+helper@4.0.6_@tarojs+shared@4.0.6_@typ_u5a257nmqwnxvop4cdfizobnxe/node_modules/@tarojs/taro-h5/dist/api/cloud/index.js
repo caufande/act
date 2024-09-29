@@ -1,0 +1,25 @@
+import { temporarilyNotSupport } from '../../utils/index.js';
+
+class cloud {
+    constructor() {
+        this.init = temporarilyNotSupport('cloud.init');
+        this.CloudID = temporarilyNotSupport('cloud.CloudID');
+        // @ts-ignore
+        this.callFunction = temporarilyNotSupport('cloud.callFunction');
+        // @ts-ignore
+        this.uploadFile = temporarilyNotSupport('cloud.uploadFile');
+        // @ts-ignore
+        this.downloadFile = temporarilyNotSupport('cloud.downloadFile');
+        // @ts-ignore
+        this.getTempFileURL = temporarilyNotSupport('cloud.getTempFileURL');
+        // @ts-ignore
+        this.deleteFile = temporarilyNotSupport('cloud.deleteFile');
+        // @ts-ignore
+        this.database = temporarilyNotSupport('cloud.database');
+        // @ts-ignore
+        this.callContainer = temporarilyNotSupport('cloud.callContainer');
+    }
+}
+
+export { cloud };
+//# sourceMappingURL=index.js.map

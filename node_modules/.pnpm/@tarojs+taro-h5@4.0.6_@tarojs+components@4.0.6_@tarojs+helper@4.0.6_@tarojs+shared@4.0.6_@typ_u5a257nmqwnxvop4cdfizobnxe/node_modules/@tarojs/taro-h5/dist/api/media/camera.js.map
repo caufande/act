@@ -1,0 +1,1 @@
+{"version":3,"file":"camera.js","sources":["../../../src/api/media/camera.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 相机\nexport const createCameraContext = /* @__PURE__ */ temporarilyNotSupport('createCameraContext')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,mBAAmB,mBAAmB,qBAAqB,CAAC,qBAAqB;;;;"}

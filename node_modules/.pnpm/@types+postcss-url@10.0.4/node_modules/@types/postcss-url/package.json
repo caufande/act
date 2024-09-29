@@ -1,0 +1,33 @@
+{
+    "name": "@types/postcss-url",
+    "version": "10.0.4",
+    "description": "TypeScript definitions for postcss-url",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/postcss-url",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Silas Rech",
+            "githubUsername": "lenovouser",
+            "url": "https://github.com/lenovouser"
+        },
+        {
+            "name": "Remco Haszing",
+            "githubUsername": "remcohaszing",
+            "url": "https://github.com/remcohaszing"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/postcss-url"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/node": "*",
+        "postcss": "^8.0.0"
+    },
+    "typesPublisherContentHash": "9371ff2211ea9e2157442203cc8b9b4822c61e0730f124dbd306b8c500efde64",
+    "typeScriptVersion": "4.6"
+}

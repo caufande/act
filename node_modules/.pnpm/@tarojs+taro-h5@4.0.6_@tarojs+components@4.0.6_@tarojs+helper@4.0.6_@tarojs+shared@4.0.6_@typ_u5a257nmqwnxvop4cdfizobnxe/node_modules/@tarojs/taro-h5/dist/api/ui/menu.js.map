@@ -1,0 +1,1 @@
+{"version":3,"file":"menu.js","sources":["../../../src/api/ui/menu.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 菜单\nexport const getMenuButtonBoundingClientRect = /* @__PURE__ */ temporarilyNotSupport('getMenuButtonBoundingClientRect')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,+BAA+B,mBAAmB,qBAAqB,CAAC,iCAAiC;;;;"}

@@ -4,6 +4,7 @@
 	"version": "0.1.0",
 	"description": "CAU ACTivity 数据库操作接口",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
 		"prepare": "json2ts node_modules/@cauact/db-repo/acts/schema.json lib/schema.ts",
 		"build": "tsc",

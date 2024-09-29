@@ -1,0 +1,1 @@
+{"version":3,"file":"group.js","sources":["../../../src/api/open-api/group.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 微信群\nexport const getGroupEnterInfo = /* @__PURE__ */ temporarilyNotSupport('getGroupEnterInfo')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,iBAAiB,mBAAmB,qBAAqB,CAAC,mBAAmB;;;;"}

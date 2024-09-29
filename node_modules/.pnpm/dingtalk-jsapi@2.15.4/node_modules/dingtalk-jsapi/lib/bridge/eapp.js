@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var eappBridge=function(e,n){return new Promise(function(o,t){dd.dtBridge({m:e,args:n,onSuccess:function(e){"function"==typeof n.onSuccess&&n.onSuccess(e),o(e)},onFail:function(e){"function"==typeof n.onFail&&n.onFail(e),t(e)}})})};exports.default=eappBridge;

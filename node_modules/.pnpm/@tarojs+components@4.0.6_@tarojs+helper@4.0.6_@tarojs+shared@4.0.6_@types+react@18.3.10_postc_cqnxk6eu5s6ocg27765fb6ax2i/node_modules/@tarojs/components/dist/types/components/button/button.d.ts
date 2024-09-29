@@ -1,0 +1,21 @@
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
+export declare class Button implements ComponentInterface {
+  disabled: boolean;
+  hoverClass: string;
+  type: string;
+  hoverStartTime: number;
+  hoverStayTime: number;
+  size: string;
+  plain: boolean;
+  loading: boolean;
+  formType: 'submit' | 'reset' | null;
+  el: HTMLElement;
+  hover: boolean;
+  touch: boolean;
+  onSubmit: EventEmitter;
+  onReset: EventEmitter;
+  onClick(e: Event): void;
+  onTouchStart(): void;
+  onTouchEnd(): void;
+  render(): any;
+}

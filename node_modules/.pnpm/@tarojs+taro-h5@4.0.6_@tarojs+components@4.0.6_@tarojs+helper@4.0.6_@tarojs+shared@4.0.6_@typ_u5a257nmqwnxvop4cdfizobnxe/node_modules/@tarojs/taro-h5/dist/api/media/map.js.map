@@ -1,0 +1,1 @@
+{"version":3,"file":"map.js","sources":["../../../src/api/media/map.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 地图\nexport const createMapContext = /* @__PURE__ */ temporarilyNotSupport('createMapContext')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,gBAAgB,mBAAmB,qBAAqB,CAAC,kBAAkB;;;;"}
