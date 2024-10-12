@@ -18,6 +18,7 @@
 	"author": "caufande",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
+		"entities": "^5.0.0",
 		"json-schema-to-typescript": "^15.0.2",
 		"localforage": "^1.10.0",
 		"@types/node": "^22.7.4",
