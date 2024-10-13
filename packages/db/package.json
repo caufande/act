@@ -18,11 +18,11 @@
 	"author": "caufande",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
+		"@cauact/db-repo": "workspace:^",
+		"@types/node": "^22.7.5",
 		"entities": "^5.0.0",
 		"json-schema-to-typescript": "^15.0.2",
-		"localforage": "^1.10.0",
-		"@types/node": "^22.7.4",
-		"@cauact/db-repo": "workspace:^"
+		"localforage": "^1.10.0"
 	},
 	"devDependencies": {
 		"rimraf": "^6.0.1"
