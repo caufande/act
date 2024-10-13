@@ -14,7 +14,8 @@
 		"lint": "eslint .",
 		"build": "pnpm -F=./packages/* -F=./docs build",
 		"clean": "pnpm -F=./packages/* -F=./docs clean",
-		"test": "pnpm -F=./config -F=./docs -F=./packages/* test"
+		"test": "pnpm -F=./config -F=./docs -F=./packages/* test",
+		"dev:weapp": "pnpm -F ./packages/weapp dev:weapp"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.5.0",

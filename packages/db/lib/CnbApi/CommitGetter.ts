@@ -4,8 +4,9 @@
  */
 declare module './CommitGetter';
 
+import { decodeHTML } from 'entities';
 import Requester, { Method } from '../Requester';
-import { calcPageNum, calcWhichPage, fmtCommit, safeRequest } from './util';
+import { calcPageNum, calcWhichPage, safeRequest } from './util';
 
 export interface CommitOrigin {
 	/**编号 */
@@ -23,7 +24,7 @@ export interface CommitOrigin {
 	/**添加时间 */
 	DateAdded: string;
 }
-export interface Commit {
+export class Commit {
 	readonly id: number;
 	readonly body: string;
 	readonly author: string;
@@ -31,6 +32,24 @@ export interface Commit {
 	readonly faceUrl: string | null;
 	readonly floor: number;
 	readonly dateAdded: Date;
+	constructor({
+		Id,
+		Body,
+		Author,
+		AuthorUrl,
+		FaceUrl,
+		Floor,
+		DateAdded,
+	}: CommitOrigin) {
+		Body = Body.slice(Body.indexOf('>') + 1, Body.lastIndexOf('<'));
+		this.id = Id;
+		this.body = decodeHTML(Body);
+		this.author = Author;
+		this.authorUrl = AuthorUrl;
+		this.faceUrl = FaceUrl;
+		this.floor = Floor;
+		this.dateAdded = new Date(DateAdded);
+	};
 }
 
 
@@ -50,7 +69,7 @@ export default class CommitGetter {
 			method: Method.GET,
 			url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
 		}));
-		const page = data.map(fmtCommit);
+		const page = data.map(n => new Commit(n));
 		return this.cache[index] = page;
 	}
 
