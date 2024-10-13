@@ -19,7 +19,7 @@ export default function Index() {
 function IndexMain() {
 	const commitGetterRef = useRef<null | CommitGetter>(null);
 	function getCnbApi() {
-		return commitGetterRef.current ?? (commitGetterRef.current = new CnbApi(Requester, runtimeConfig.cnb).getCommitGetter('CodeBlogMan', 17983370));
+		return commitGetterRef.current ?? (commitGetterRef.current = new CnbApi(Requester, runtimeConfig.cnb).getCommitGetter('cmt', 18432948));
 	}
 
 	return (

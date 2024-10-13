@@ -4,7 +4,7 @@
 declare module '.';
 
 import Requester, { Method, RequesterIniter } from '../Requester';
-import { safeRequest } from '../util';
+import { safeRequest } from './util';
 import CommitGetter from './CommitGetter';
 
 export { CommitGetter };

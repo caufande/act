@@ -3,11 +3,10 @@
  */
 declare module './CommitGetter';
 
-import { decodeHTML } from 'entities';
 import Requester, { Method } from '../Requester';
-import { safeRequest } from '../util';
+import { calcPageNum, calcWhichPage, fmtCommit, safeRequest } from './util';
 
-interface CommitOrigin {
+export interface CommitOrigin {
 	/**编号 */
 	Id: number;
 	/**内容 */
@@ -17,7 +16,7 @@ interface CommitOrigin {
 	/**作者链接 */
 	AuthorUrl: string;
 	/**头像链接 */
-	FaceUrl: string;
+	FaceUrl: string | null;
 	/**楼层，倒序，从 1 开始数起 */
 	Floor: number;
 	/**添加时间 */
@@ -28,31 +27,12 @@ export interface Commit {
 	body: string;
 	author: string;
 	authorUrl: string;
-	faceUrl: string;
+	faceUrl: string | null;
 	floor: number;
 	dateAdded: Date;
 }
 
-function toCommit({
-	Id,
-	Body,
-	Author,
-	AuthorUrl,
-	FaceUrl,
-	Floor,
-	DateAdded,
-}: CommitOrigin): Commit {
-	Body = Body.slice(Body.indexOf('>') + 1, Body.lastIndexOf('<'));
-	return {
-		id: Id,
-		body: decodeHTML(Body),
-		author: Author,
-		authorUrl: AuthorUrl,
-		faceUrl: FaceUrl,
-		floor: Floor,
-		dateAdded: new Date(DateAdded),
-	};
-};
+
 export default class CommitGetter {
 	constructor(
 		protected readonly requesterPromise: Promise<Requester>,
@@ -61,38 +41,44 @@ export default class CommitGetter {
 		readonly pageSize = 50,
 	) {	}
 
-	requested = false;
-	protected pageNext = 1;
-	protected pointer = 0;
-	protected readonly cache: Commit[] = [];
-	async requestNextPage(): Promise<Commit[]> {
-		if (this.requested) return [];
+	protected readonly cache: Commit[][] = [];
+	async getPage(index: number): Promise<Commit[]> {
+		if (this.cache[index]) return this.cache[index];
 		const requester = await this.requesterPromise;
 		const data: CommitOrigin[] = await safeRequest(requester.send({
 			method: Method.GET,
-			url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${this.pageNext}&pageSize=${this.pageSize}`,
+			url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
 		}));
-		if (data.length === 0 || data.at(-1)?.Floor === 1) this.requested = true;
-		this.pageNext++;
-		const page = data.map(toCommit);
-		page.forEach(n => {
-			this.cache[n.floor] = n;
-		});
-		this.pointer = page[0]?.floor ?? 0;
-		return page;
+		const page = data.map(fmtCommit);
+		return this.cache[index] = page;
+	}
+
+	private total: null | number = null;
+	async count() {
+		return this.total ?? (this.total = (await this.getPage(1)).at(0)?.floor ?? 0);
+	}
+
+	async getFloor(index: number) {
+		const { pageIndex, eleIndex } = calcWhichPage(index, await this.count(), this.pageSize);
+		return (await this.getPage(pageIndex)).at(eleIndex);
 	}
 
 	[Symbol.asyncIterator]() {
 		const _this = this;
+		let pointer = 0;
 		return {
 			async next() {
-				const value = _this.cache[--_this.pointer] ?? (await _this.requestNextPage()).at(0);
-				const done = !value;
-				return { value, done };
+				return pointer === await _this.count()
+					? { value: void 0, done: true }
+					: { value: await _this.getFloor(++pointer), done: false };
 			},
 		};
 	}
 	async getAll() {
-		return Array.fromAsync(this);
+		const pageNum = calcPageNum(await this.count(), this.pageSize);
+		await Promise.allSettled(Array(pageNum - 1).fill(2)
+			.map((n, i) => this.getPage(i + n)));
+		console.log(this.cache);
+		return this.cache.flat().reverse();
 	}
 }
