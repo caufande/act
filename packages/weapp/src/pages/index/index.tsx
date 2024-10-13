@@ -6,6 +6,7 @@ import { useContext, useRef } from 'react';
 import runtimeConfig from '../../lib/runtime-config';
 import './index.less';
 import { DataContent } from '../../lib/data-content';
+import Puller, { Act, Version } from '@cauact/db/lib/Puller';
 import Base from '../../component/Base';
 
 export default function Index() {
@@ -17,15 +18,23 @@ export default function Index() {
 }
 
 function IndexMain() {
-	const commitGetterRef = useRef<null | Storager<number>>(null);
+	const commitGetterRef = useRef<null | Puller>(null);
 	function getCnbApi() {
-		return commitGetterRef.current ?? (commitGetterRef.current = new Storager<number>());
+		if (commitGetterRef.current) return commitGetterRef.current;
+		const storager = new Storager<any>();
+		return commitGetterRef.current ?? (commitGetterRef.current = new Puller(
+			18437205,
+			runtimeConfig.cnb,
+			Requester,
+			storager,
+			storager,
+		));
 	}
 
 	return (
-		<View className="index">
+		<View className="index" style={{ background: '#333', height: 800 }}>
 			<Text>Hello world!{JSON.stringify(runtimeConfig.cnb, null, 2)}</Text>
-			<Button onClick={() => getCnbApi().clear()
+			<Button onClick={() => getCnbApi().getDiff()
 				.then(console.log)}>get</Button>
 		</View>
 	);

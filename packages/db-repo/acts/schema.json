@@ -3,12 +3,12 @@
 	"description": "项目具体数据",
 	"type": "object",
 	"properties": {
-		"id": {
+		"floor": {
 			"description": "项目编号",
 			"type": "number",
-			"minimum": 0
+			"minimum": 1
 		},
-		"name": {
+		"title": {
 			"description": "项目名称",
 			"type": "string"
 		},
@@ -16,14 +16,14 @@
 			"description": "项目介绍",
 			"type": "string"
 		},
-		"acts": {
+		"stages": {
 			"description": "活动具体内容",
 			"type": "array",
 			"items": {
 				"type": "object",
 				"properties": {
-					"title": {
-						"description": "活动名称",
+					"name": {
+						"description": "内容名称",
 						"type": "string"
 					},
 					"timeStep": {
@@ -42,10 +42,10 @@
 						"type": "string"
 					}
 				},
-				"required": ["title", "timeStep"]
+				"required": ["name", "timeStep"]
 			},
 			"minItems": 1
 		}
 	},
-	"required": ["id", "acts", "name"]
+	"required": ["floor", "stages", "title"]
 }
