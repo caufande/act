@@ -1,4 +1,4 @@
-import Requester from '@cauact/db-operator-taro/lib/Requester';
+import { Requester, Storager } from '@cauact/db-operator-taro';
 import CnbApi, { CommitGetter } from '@cauact/db/lib/CnbApi';
 import { Button, Text, View } from '@tarojs/components';
 import { useLoad } from '@tarojs/taro';
@@ -17,15 +17,15 @@ export default function Index() {
 }
 
 function IndexMain() {
-	const commitGetterRef = useRef<null | CommitGetter>(null);
+	const commitGetterRef = useRef<null | Storager<number>>(null);
 	function getCnbApi() {
-		return commitGetterRef.current ?? (commitGetterRef.current = new CnbApi(Requester, runtimeConfig.cnb).getCommitGetter('cmt', 18432948));
+		return commitGetterRef.current ?? (commitGetterRef.current = new Storager<number>());
 	}
 
 	return (
 		<View className="index">
 			<Text>Hello world!{JSON.stringify(runtimeConfig.cnb, null, 2)}</Text>
-			<Button onClick={() => getCnbApi().getAll()
+			<Button onClick={() => getCnbApi().clear()
 				.then(console.log)}>get</Button>
 		</View>
 	);

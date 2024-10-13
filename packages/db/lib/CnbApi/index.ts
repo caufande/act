@@ -1,5 +1,6 @@
 /**
  * 博客 API 相关
+ * @license GPL-2.0-or-later
  */
 declare module '.';
 

@@ -8,9 +8,9 @@ export type StoragerIniter<T> = new () => Storager<T>;
 
 export default abstract class Storager<T> {
 	abstract clear(): Promise<void>;
-	abstract delete(key: string): Promise<boolean>;
-	abstract get(key: string): Promise<T | undefined>;
+	abstract delete(key: string): Promise<void>;
+	abstract get(key: string): Promise<T | null>;
 	abstract set(key: string, value: T): Promise<boolean>;
-	abstract batchGet(keys: readonly string[]): Promise<T[]>;
-	abstract batchSet(kvs: readonly { key: string; value: T }[]): Promise<boolean[]>;
+	abstract batchGet(keys: readonly string[]): Promise<(T | null)[]>;
+	abstract batchSet(kvs: Map<string, T>): Promise<boolean>;
 }
