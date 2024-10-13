@@ -4,5 +4,11 @@
  */
 declare module '.';
 
-export { default as Requester } from './Requester';
-export { default as Storager } from './Storager';
+import IOperator from '@cauact/db/lib/Operator';
+import Requester from './Requester';
+import Storager from './Storager';
+
+export default class Operator extends IOperator {
+	requesterIniter = Requester;
+	storagerIniter = Storager;
+}

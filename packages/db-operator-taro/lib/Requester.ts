@@ -4,14 +4,14 @@
  */
 declare module './Requester';
 
-import type IRequester from '@cauact/db/lib/Requester';
 import {
+	Requester as IRequester,
+	IncomingHttpHeaders,
 	Method,
+	RequestParams,
+	RequestedData,
 	RequesterIniter,
-	type IncomingHttpHeaders,
-	type RequestParams,
-	type RequestedData,
-} from '@cauact/db/lib/Requester';
+} from '@cauact/db/lib/Operator';
 import { request } from '@tarojs/taro';
 
 export default class Requester implements IRequester {
