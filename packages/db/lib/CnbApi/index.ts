@@ -15,7 +15,6 @@ export interface CnbConfig {
 	secret: string;
 }
 
-
 export default class CnbApi {
 	static readonly baseHeader = { 'content-type': 'application/x-www-form-urlencoded' };
 	protected readonly requesterPromise: Promise<Requester>;

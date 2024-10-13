@@ -23,13 +23,13 @@ export interface CommitOrigin {
 	DateAdded: string;
 }
 export interface Commit {
-	id: number;
-	body: string;
-	author: string;
-	authorUrl: string;
-	faceUrl: string | null;
-	floor: number;
-	dateAdded: Date;
+	readonly id: number;
+	readonly body: string;
+	readonly author: string;
+	readonly authorUrl: string;
+	readonly faceUrl: string | null;
+	readonly floor: number;
+	readonly dateAdded: Date;
 }
 
 
@@ -41,8 +41,8 @@ export default class CommitGetter {
 		readonly pageSize = 50,
 	) {	}
 
-	protected readonly cache: Commit[][] = [];
-	async getPage(index: number): Promise<Commit[]> {
+	protected readonly cache: (readonly Commit[])[] = [];
+	async getPage(index: number): Promise<readonly Commit[]> {
 		if (this.cache[index]) return this.cache[index];
 		const requester = await this.requesterPromise;
 		const data: CommitOrigin[] = await safeRequest(requester.send({
@@ -74,11 +74,11 @@ export default class CommitGetter {
 			},
 		};
 	}
+
 	async getAll() {
 		const pageNum = calcPageNum(await this.count(), this.pageSize);
 		await Promise.allSettled(Array(pageNum - 1).fill(2)
 			.map((n, i) => this.getPage(i + n)));
-		console.log(this.cache);
 		return this.cache.flat().reverse();
 	}
 }
