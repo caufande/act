@@ -5,7 +5,7 @@
 declare module './CommitGetter';
 
 import { decodeHTML } from 'entities';
-import Requester, { Method } from '../Requester';
+import { Requester, Method } from '../Operator';
 import { calcPageNum, calcWhichPage, safeRequest } from './util';
 
 export interface CommitOrigin {

@@ -2,7 +2,7 @@
  * 请求器定义
  * @license GPL-2.0-or-later
  */
-declare module './Requester';
+declare module './requester';
 
 import type { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 
@@ -39,7 +39,7 @@ export interface RequestedData {
 	header: OutgoingHttpHeaders;
 }
 
-export default abstract class Requester {
+export abstract class Requester {
 	abstract baseHeader: IncomingHttpHeaders;
 	abstract send<T>(params: RequestParams<T>): Promise<RequestedData>;
 }

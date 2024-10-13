@@ -5,8 +5,7 @@
 declare module './Puller';
 
 import CnbApi, { CnbConfig, Commit } from './CnbApi';
-import { RequesterIniter } from './Requester';
-import Storager from './Storager';
+import Operator, { Storager } from './Operator';
 import type { Schema as IAct } from './schema';
 import { range } from './util';
 
@@ -22,15 +21,17 @@ type Act = IAct;
 
 export default class Puller {
 	protected readonly cnbApi: CnbApi;
+	protected readonly storagerVersion: Storager<Version>;
+	protected readonly storagerAct: Storager<Act>;
 	constructor(
-		requesterIniter: RequesterIniter,
+		operator: Operator,
 		cnbConfig: CnbConfig,
 		readonly postId: number,
 		readonly blogApp: string,
-		protected readonly storagerAct: Storager<Act>,
-		protected readonly storagerVersion: Storager<Version>,
 	) {
-		this.cnbApi = new CnbApi(requesterIniter, cnbConfig);
+		this.cnbApi = new CnbApi(operator, cnbConfig);
+		this.storagerVersion = new operator.storagerIniter();
+		this.storagerAct = new operator.storagerIniter();
 	}
 	async getVersion() {
 		const post = await this.cnbApi.getPost(this.postId);

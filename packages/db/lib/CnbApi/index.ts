@@ -4,12 +4,12 @@
  */
 declare module '.';
 
-import Requester, { Method, RequesterIniter } from '../Requester';
-import { safeRequest } from './util';
+import Operator, { Method, Requester } from '../Operator';
 import CommitGetter from './CommitGetter';
+import { safeRequest } from './util';
 
-export { CommitGetter };
 export * from './CommitGetter';
+export { CommitGetter };
 
 export interface CnbConfig {
 	id: string;
@@ -20,10 +20,10 @@ export default class CnbApi {
 	static readonly baseHeader = { 'content-type': 'application/x-www-form-urlencoded' };
 	protected readonly requesterPromise: Promise<Requester>;
 	constructor(
-		requesterIniter: RequesterIniter,
+		protected readonly operator: Operator,
 		protected readonly config: CnbConfig,
 	) {
-		const requester = new requesterIniter(CnbApi.baseHeader);
+		const requester = new operator.requesterIniter(CnbApi.baseHeader);
 		this.requesterPromise = this.login(requester);
 	}
 

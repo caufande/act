@@ -4,7 +4,7 @@
  */
 declare module './util';
 
-import { RequestedData } from '../Requester';
+import { RequestedData } from '../Operator';
 
 export async function safeRequest(resultPromise: Promise<RequestedData>) {
 	const { ok, error, code, data, header } = await resultPromise;
