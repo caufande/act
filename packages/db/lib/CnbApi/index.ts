@@ -5,11 +5,11 @@
 declare module '.';
 
 import Operator, { Method, Requester } from '../Operator';
-import CommitGetter from './CommitGetter';
+import CommentGetter from './CommentGetter';
 import { safeRequest } from './util';
 
-export * from './CommitGetter';
-export { CommitGetter };
+export * from './CommentGetter';
+export { CommentGetter };
 
 export interface CnbConfig {
 	id: string;
@@ -51,7 +51,7 @@ export default class CnbApi {
 		return body as string;
 	}
 
-	getCommitGetter(blogApp: string, postId: number, pageSize?: number) {
-		return new CommitGetter(this.requesterPromise, blogApp, postId, pageSize);
+	getCommentGetter(blogApp: string, postId: number, pageSize?: number) {
+		return new CommentGetter(this.requesterPromise, blogApp, postId, pageSize);
 	}
 }

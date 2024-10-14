@@ -15,9 +15,9 @@ export default function Index() {
 }
 
 function IndexMain() {
-	const commitGetterRef = useRef<null | Puller>(null);
+	const commentGetterRef = useRef<null | Puller>(null);
 	function getCnbApi() {
-		return commitGetterRef.current ?? (commitGetterRef.current = new Puller(
+		return commentGetterRef.current ?? (commentGetterRef.current = new Puller(
 			new Operator(),
 			runtimeConfig.cnb,
 			18437205,

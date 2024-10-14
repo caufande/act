@@ -4,7 +4,7 @@
  */
 declare module './Puller';
 
-import CnbApi, { CnbConfig, Commit } from './CnbApi';
+import CnbApi, { CnbConfig, Comment } from './CnbApi';
 import Operator, { Storager } from './Operator';
 import type { Schema as IAct } from './schema';
 import { range } from './util';

@@ -2,13 +2,13 @@
  * 评论获取处理相关
  * @license GPL-2.0-or-later
  */
-declare module './CommitGetter';
+declare module './CommentGetter';
 
 import { decodeHTML } from 'entities';
 import { Requester, Method } from '../Operator';
 import { calcPageNum, calcWhichPage, safeRequest } from './util';
 
-export interface CommitOrigin {
+export interface CommentOrigin {
 	/**编号 */
 	Id: number;
 	/**内容 */
@@ -24,7 +24,7 @@ export interface CommitOrigin {
 	/**添加时间 */
 	DateAdded: string;
 }
-export class Commit {
+export class Comment {
 	readonly id: number;
 	readonly body: string;
 	readonly author: string;
@@ -40,7 +40,7 @@ export class Commit {
 		FaceUrl,
 		Floor,
 		DateAdded,
-	}: CommitOrigin) {
+	}: CommentOrigin) {
 		Body = Body.slice(Body.indexOf('>') + 1, Body.lastIndexOf('<'));
 		this.id = Id;
 		this.body = decodeHTML(Body);
@@ -53,7 +53,7 @@ export class Commit {
 }
 
 
-export default class CommitGetter {
+export default class CommentGetter {
 	constructor(
 		protected readonly requesterPromise: Promise<Requester>,
 		readonly blogApp: string,
@@ -61,15 +61,15 @@ export default class CommitGetter {
 		readonly pageSize = 50,
 	) {	}
 
-	protected readonly cache: (readonly Commit[])[] = [];
-	async getPage(index: number): Promise<readonly Commit[]> {
+	protected readonly cache: (readonly Comment[])[] = [];
+	async getPage(index: number): Promise<readonly Comment[]> {
 		if (this.cache[index]) return this.cache[index];
 		const requester = await this.requesterPromise;
-		const data: CommitOrigin[] = await safeRequest(requester.send({
+		const data: CommentOrigin[] = await safeRequest(requester.send({
 			method: Method.GET,
 			url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
 		}));
-		const page = data.map(n => new Commit(n));
+		const page = data.map(n => new Comment(n));
 		return this.cache[index] = page;
 	}
 
