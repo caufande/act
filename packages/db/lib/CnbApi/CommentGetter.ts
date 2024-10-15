@@ -32,23 +32,16 @@ export class Comment {
 	readonly faceUrl: string | null;
 	readonly floor: number;
 	readonly dateAdded: Date;
-	constructor({
-		Id,
-		Body,
-		Author,
-		AuthorUrl,
-		FaceUrl,
-		Floor,
-		DateAdded,
-	}: CommentOrigin) {
+	constructor(commentOrigin: CommentOrigin) {
+		let { Body } = commentOrigin;
 		Body = Body.slice(Body.indexOf('>') + 1, Body.lastIndexOf('<'));
-		this.id = Id;
+		this.id = commentOrigin.Id;
 		this.body = decodeHTML(Body);
-		this.author = Author;
-		this.authorUrl = AuthorUrl;
-		this.faceUrl = FaceUrl;
-		this.floor = Floor;
-		this.dateAdded = new Date(DateAdded);
+		this.author = commentOrigin.Author;
+		this.authorUrl = commentOrigin.AuthorUrl;
+		this.faceUrl = commentOrigin.FaceUrl;
+		this.floor = commentOrigin.Floor;
+		this.dateAdded = new Date(commentOrigin.DateAdded);
 	};
 }
 
