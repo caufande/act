@@ -4,6 +4,7 @@
  */
 declare module '.';
 
+import LangInfo from './LangInfo';
 import { RequesterIniter } from './requester';
 import { StoragerIniter } from './storager';
 
@@ -11,6 +12,7 @@ export * from './requester';
 export * from './storager';
 
 export default abstract class Operator {
-	abstract requesterIniter: RequesterIniter;
-	abstract storagerIniter: StoragerIniter;
+	abstract readonly langInfo: LangInfo;
+	abstract readonly requesterIniter: RequesterIniter;
+	abstract readonly storagerIniter: StoragerIniter;
 }
