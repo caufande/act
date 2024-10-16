@@ -7,41 +7,37 @@ declare module './CommentGetter';
 import { decodeHTML } from 'entities';
 import { Requester, Method } from '../Operator';
 import { calcPageNum, calcWhichPage, safeRequest } from './util';
+import { lowerFirst } from '../util';
 
 export interface CommentOrigin {
-	/**编号 */
 	Id: number;
-	/**内容 */
 	Body: string;
-	/**作者 */
 	Author: string;
-	/**作者链接 */
 	AuthorUrl: string;
-	/**头像链接 */
 	FaceUrl: string | null;
-	/**楼层，倒序，从 1 开始数起 */
 	Floor: number;
-	/**添加时间 */
 	DateAdded: string;
 }
 export class Comment {
-	readonly id: number;
-	readonly body: string;
-	readonly author: string;
-	readonly authorUrl: string;
-	readonly faceUrl: string | null;
-	readonly floor: number;
-	readonly dateAdded: Date;
+	/**编号 */
+	readonly id!: number;
+	/**内容 */
+	readonly body!: string;
+	/**作者 */
+	readonly author!: string;
+	/**作者链接 */
+	readonly authorUrl!: string;
+	/**头像链接 */
+	readonly faceUrl!: string | null;
+	/**楼层，倒序，从 1 开始数起 */
+	readonly floor!: number;
+	/**添加时间 */
+	readonly dateAdded!: Date;
 	constructor(commentOrigin: CommentOrigin) {
-		let { Body } = commentOrigin;
-		Body = Body.slice(Body.indexOf('>') + 1, Body.lastIndexOf('<'));
-		this.id = commentOrigin.Id;
-		this.body = decodeHTML(Body);
-		this.author = commentOrigin.Author;
-		this.authorUrl = commentOrigin.AuthorUrl;
-		this.faceUrl = commentOrigin.FaceUrl;
-		this.floor = commentOrigin.Floor;
-		this.dateAdded = new Date(commentOrigin.DateAdded);
+		// @ts-ignore
+		Object.keys(commentOrigin).forEach(n => this[lowerFirst(n)] = commentOrigin[n]);
+		this.body = decodeHTML(this.body);
+		this.dateAdded = new Date(this.dateAdded);
 	};
 }
 
