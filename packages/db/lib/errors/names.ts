@@ -4,9 +4,9 @@
  */
 declare module './names';
 
+import { ErrorType } from '.';
 import { Lang, LangMap } from '../lang';
 import Operator from '../Operator';
-import { ErrorType } from './error';
 
 type ErrorNames = Record<ErrorType, LangMap>;
 
@@ -20,9 +20,9 @@ export const errorName: LangMap = {
 };
 
 export const errorNames: ErrorNames = {
-	NoBigTitle: {
+	WrongBigTitle: {
 		'*': Lang.zh,
-		[Lang.zh]: '没有大标题，无法判断活动名称',
+		[Lang.zh]: '大标题格式错误，无法判断活动名称',
 	},
 	NoTitle: {
 		'*': Lang.zh,
