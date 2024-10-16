@@ -4,9 +4,11 @@
  */
 declare module '.';
 
+import { Type } from '@sinclair/typebox';
 import Operator, { Method, Requester } from '../Operator';
 import CommentGetter from './CommentGetter';
 import { safeRequest } from './util';
+import { Value } from '@sinclair/typebox/value';
 
 export * from './CommentGetter';
 export { CommentGetter };
@@ -37,8 +39,8 @@ export default class CnbApi {
 				grant_type: 'client_credentials',
 			},
 		}));
-		const token = body.access_token as string;
-		requester.baseHeader.authorization = `Bearer ${token}`;
+		Value.Assert(Type.Object({ access_token: Type.String() }), body);
+		requester.baseHeader.authorization = `Bearer ${body.access_token}`;
 		return requester;
 	}
 
@@ -48,7 +50,8 @@ export default class CnbApi {
 			method: Method.GET,
 			url: `https://api.cnblogs.com/api/blogposts/${postId}/body`,
 		}));
-		return body as string;
+		Value.Assert(Type.String(), body);
+		return body;
 	}
 
 	getCommentGetter(blogApp: string, postId: number, pageSize?: number) {

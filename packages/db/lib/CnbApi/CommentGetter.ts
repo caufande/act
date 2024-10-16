@@ -4,20 +4,24 @@
  */
 declare module './CommentGetter';
 
+import { Static, Type } from '@sinclair/typebox';
+import { Value } from '@sinclair/typebox/value';
 import { decodeHTML } from 'entities';
-import { Requester, Method } from '../Operator';
-import { calcPageNum, calcWhichPage, safeRequest } from './util';
+import { Method, Requester } from '../Operator';
 import { lowerFirst } from '../util';
+import { calcPageNum, calcWhichPage, safeRequest } from './util';
 
-export interface CommentOrigin {
-	Id: number;
-	Body: string;
-	Author: string;
-	AuthorUrl: string;
-	FaceUrl: string | null;
-	Floor: number;
-	DateAdded: string;
-}
+const CommentOrigin = Type.Object({
+	Id: Type.Number(),
+	Body: Type.String(),
+	Author: Type.String(),
+	AuthorUrl: Type.String(),
+	FaceUrl: Type.Union([Type.String(), Type.Null()]),
+	Floor: Type.Number(),
+	DateAdded: Type.String(),
+});
+export type CommentOrigin = Static<typeof CommentOrigin>;
+
 export class Comment {
 	/**编号 */
 	readonly id!: number;
@@ -54,10 +58,11 @@ export default class CommentGetter {
 	async getPage(index: number): Promise<readonly Comment[]> {
 		if (this.cache[index]) return this.cache[index];
 		const requester = await this.requesterPromise;
-		const data: CommentOrigin[] = await safeRequest(requester.send({
+		const data = await safeRequest(requester.send({
 			method: Method.GET,
 			url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
 		}));
+		Value.Assert(Type.Array(CommentOrigin), data);
 		const page = data.map(n => new Comment(n));
 		return this.cache[index] = page;
 	}
