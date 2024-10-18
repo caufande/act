@@ -6,12 +6,7 @@ declare module '.';
 
 import Operator from '../Operator';
 import { getTip } from './names';
-
-type ErrorDefs = Record<string, (n: any) => any>;
-const errorDefs = {
-	NoTitle: (n: { floor: number }) => n,
-	WrongBigTitle: (n: { floor: number }) => n,
-} satisfies ErrorDefs;
+import { errorDefs } from './defs';
 
 export type ErrorType = keyof typeof errorDefs;
 export type InfosColl = { [I in ErrorType]: Parameters<(typeof errorDefs)[I]>[0]; };
