@@ -14,9 +14,10 @@ import {
 } from '@cauact/db/lib/Operator';
 import { request } from '@tarojs/taro';
 
-export default class Requester implements IRequester {
+export default class Requester extends IRequester {
 	baseHeader: IncomingHttpHeaders;
 	constructor(...[baseHeader]: ConstructorParameters<RequesterIniter>) {
+		super();
 		this.baseHeader = baseHeader ?? {};
 	}
 

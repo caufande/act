@@ -9,7 +9,7 @@ import { Value } from '@sinclair/typebox/value';
 import { decodeHTML } from 'entities';
 import { Method, Requester } from '../Operator';
 import { lowerFirst } from '../util';
-import { calcPageNum, calcWhichPage, safeRequest } from './util';
+import { calcPageNum, calcWhichPage } from './util';
 
 const CommentOrigin = Type.Object({
 	Id: Type.Number(),
@@ -58,11 +58,13 @@ export default class CommentGetter {
 	async getPage(index: number): Promise<readonly Comment[]> {
 		if (this.cache[index]) return this.cache[index];
 		const requester = await this.requesterPromise;
-		const data = await safeRequest(requester.send({
-			method: Method.GET,
-			url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
-		}));
-		Value.Assert(Type.Array(CommentOrigin), data);
+		const data = await requester.easyRequest(
+			{
+				method: Method.GET,
+				url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
+			},
+			Type.Array(CommentOrigin),
+		);
 		const page = data.map(n => new Comment(n));
 		return this.cache[index] = page;
 	}

@@ -4,6 +4,8 @@
  */
 declare module './requester';
 
+import { TSchema } from '@sinclair/typebox';
+import { Value } from '@sinclair/typebox/value';
 import type { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
 
 export type { IncomingHttpHeaders } from 'http';
@@ -42,4 +44,10 @@ export interface RequestedData {
 export abstract class Requester {
 	abstract baseHeader: IncomingHttpHeaders;
 	abstract send<T>(params: RequestParams<T>): Promise<RequestedData>;
+	async easyRequest<T, R extends TSchema>(params: RequestParams<T>, schema: R) {
+		const { ok, error, code, data, header } = await this.send(params);
+		if (!ok) throw [error, code, header];
+		Value.Assert(schema, data);
+		return data;
+	}
 }

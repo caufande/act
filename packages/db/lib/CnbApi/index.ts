@@ -8,7 +8,6 @@ import { Type } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 import { getOperator, Method, Requester } from '../Operator';
 import CommentGetter from './CommentGetter';
-import { safeRequest } from './util';
 
 export * from './CommentGetter';
 export { CommentGetter };
@@ -29,15 +28,18 @@ export default class CnbApi {
 	}
 
 	protected async login(requester: Requester) {
-		const body = await safeRequest(requester.send({
-			method: Method.POST,
-			url: 'https://api.cnblogs.com/token',
-			data: {
-				client_id: this.config.id,
-				client_secret: this.config.secret,
-				grant_type: 'client_credentials',
+		const body = await requester.easyRequest(
+			{
+				method: Method.POST,
+				url: 'https://api.cnblogs.com/token',
+				data: {
+					client_id: this.config.id,
+					client_secret: this.config.secret,
+					grant_type: 'client_credentials',
+				},
 			},
-		}));
+			Type.Object({ access_token: Type.String() }),
+		);
 		Value.Assert(Type.Object({ access_token: Type.String() }), body);
 		requester.baseHeader.authorization = `Bearer ${body.access_token}`;
 		return requester;
@@ -45,11 +47,13 @@ export default class CnbApi {
 
 	async getPost(postId: number) {
 		const requester = await this.requesterPromise;
-		const body = await safeRequest(requester.send({
-			method: Method.GET,
-			url: `https://api.cnblogs.com/api/blogposts/${postId}/body`,
-		}));
-		Value.Assert(Type.String(), body);
+		const body = await requester.easyRequest(
+			{
+				method: Method.GET,
+				url: `https://api.cnblogs.com/api/blogposts/${postId}/body`,
+			},
+			Type.String(),
+		);
 		return body;
 	}
 

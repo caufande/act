@@ -4,14 +4,6 @@
  */
 declare module './util';
 
-import { RequestedData } from '../Operator';
-
-export async function safeRequest(resultPromise: Promise<RequestedData>) {
-	const { ok, error, code, data, header } = await resultPromise;
-	if (!ok) throw [error, code, header];
-	return data;
-}
-
 export function calcWhichPage(floor: number, total: number, pageSize: number) {
 	const over = total % pageSize;
 	const pageIndex = (total - over) / pageSize - Math.ceil((floor - over) / pageSize) + 1;
