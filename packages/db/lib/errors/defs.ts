@@ -8,4 +8,5 @@ export type ErrorDefs = Record<string, (n: any) => any>;
 export const errorDefs = {
 	NoTitle: (n: { floor: number }) => n,
 	WrongBigTitle: (n: { floor: number }) => n,
+	TooManyDatesInACommentLine: (n: { floor: number; line: string }) => n,
 } satisfies ErrorDefs;

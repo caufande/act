@@ -28,4 +28,8 @@ export const errorNames: ErrorNames = {
 		'*': Lang.zh,
 		[Lang.zh]: '没有标题，无法判断活动名称',
 	},
+	TooManyDatesInACommentLine: {
+		'*': Lang.zh,
+		[Lang.zh]: '一行中包含太多（三个）日期，导致无法理解日期时段',
+	},
 };

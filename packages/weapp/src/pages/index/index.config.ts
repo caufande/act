@@ -1,1 +1,2 @@
-export default definePageConfig({ navigationBarTitleText: '首页' });
+const config: Taro.PageConfig = definePageConfig({ navigationBarTitleText: '首页' });
+export default config;

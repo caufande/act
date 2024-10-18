@@ -6,7 +6,7 @@ import Base from '../../component/Base';
 import runtimeConfig from '../../lib/runtime-config';
 import './index.less';
 import CnbApi, { CommentGetter } from '@cauact/db/lib/CnbApi';
-import CommentParser from '@cauact/db/lib/CommentParser';
+import parseComment from '@cauact/db/lib/parseComment';
 
 
 export default function Index() {
@@ -25,13 +25,12 @@ function IndexMain() {
 			runtimeConfig.cnb,
 		).getCommentGetter('QiFande', 18437205));
 	}
-	console.log(BigInt('2') ** BigInt('64'));
 
 	return (
 		<View className="index" style={{ background: '#333', height: 800 }}>
 			<Text>Hello world!{JSON.stringify(runtimeConfig.cnb, null, 2)}</Text>
 			<Button onClick={() => getCnbApi().getAll()
-				.then(n => new CommentParser(n[0]))
+				.then(n => parseComment(new Operator(), n[0]))
 				.then(console.log)}>get</Button>
 		</View>
 	);
