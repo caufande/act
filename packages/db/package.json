@@ -21,7 +21,7 @@
 		"@cauact/db-repo": "workspace:^",
 		"@types/node": "^22.7.5",
 		"html-to-json-parser": "^2.0.1",
-		"@sinclair/typebox": "^0.33.16",
+		"@sinclair/typebox": "^0.33.17",
 		"entities": "^5.0.0",
 		"json-schema-to-typescript": "^15.0.2",
 		"localforage": "^1.10.0"
