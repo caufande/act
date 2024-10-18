@@ -1,0 +1,1 @@
+"use strict";function quit$(d){return ddSdk_1.ddSdk.invokeAPI(apiName,d)}var _a;Object.defineProperty(exports,"__esModule",{value:!0}),exports.quit$=void 0;var ddSdk_1=require("../../../lib/ddSdk"),apiName="biz.navigation.quit";ddSdk_1.ddSdk.setAPI(apiName,(_a={},_a[ddSdk_1.ENV_ENUM.pc]={vs:"2.5.0"},_a)),exports.quit$=quit$,exports.default=quit$;

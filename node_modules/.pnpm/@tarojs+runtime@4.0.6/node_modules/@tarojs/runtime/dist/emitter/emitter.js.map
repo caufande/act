@@ -1,0 +1,1 @@
+{"version":3,"file":"emitter.js","sources":["../../src/emitter/emitter.ts"],"sourcesContent":["import { Events, hooks } from '@tarojs/shared'\n\nconst eventCenter = hooks.call('getEventCenter', Events)!\n\nexport type EventsType = typeof Events\nexport { eventCenter, Events }\n"],"names":[],"mappings":";;;AAEM,MAAA,WAAW,GAAG,KAAK,CAAC,IAAI,CAAC,gBAAgB,EAAE,MAAM;;;;"}

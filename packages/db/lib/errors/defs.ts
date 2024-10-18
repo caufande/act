@@ -4,9 +4,18 @@
  */
 declare module './defs';
 
-export type ErrorDefs = Record<string, (n: any) => any>;
+import { TSchema, Type } from '@sinclair/typebox';
+
+export type ErrorDefs = Record<string, Record<string, TSchema>>;
 export const errorDefs = {
-	NoTitle: (n: { floor: number }) => n,
-	WrongBigTitle: (n: { floor: number }) => n,
-	TooManyDatesInACommentLine: (n: { floor: number; line: string }) => n,
+	NoTitle: {
+		floor: Type.Number(),
+	},
+	WrongBigTitle: {
+		floor: Type.Number(),
+	},
+	TooManyDatesInACommentLine: {
+		floor: Type.Number(),
+		line: Type.String(),
+	},
 } satisfies ErrorDefs;
