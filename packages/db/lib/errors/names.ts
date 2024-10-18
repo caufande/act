@@ -6,11 +6,12 @@ declare module './names';
 
 import { ErrorType } from '.';
 import { Lang, LangMap } from '../lang';
-import Operator from '../Operator';
+import { getOperator } from '../Operator';
 
 type ErrorNames = Record<ErrorType, LangMap>;
 
-export function getTip(operator: Operator, errorType: ErrorType) {
+export function getTip(errorType: ErrorType) {
+	const operator = getOperator();
 	return `${operator.l10n(errorName)} - ${operator.l10n(errorNames[errorType])}`;
 }
 

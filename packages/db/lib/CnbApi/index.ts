@@ -5,10 +5,10 @@
 declare module '.';
 
 import { Type } from '@sinclair/typebox';
-import Operator, { Method, Requester } from '../Operator';
+import { Value } from '@sinclair/typebox/value';
+import { getOperator, Method, Requester } from '../Operator';
 import CommentGetter from './CommentGetter';
 import { safeRequest } from './util';
-import { Value } from '@sinclair/typebox/value';
 
 export * from './CommentGetter';
 export { CommentGetter };
@@ -22,10 +22,9 @@ export default class CnbApi {
 	static readonly baseHeader = { 'content-type': 'application/x-www-form-urlencoded' };
 	protected readonly requesterPromise: Promise<Requester>;
 	constructor(
-		protected readonly operator: Operator,
 		protected readonly config: CnbConfig,
 	) {
-		const requester = new operator.requesterIniter(CnbApi.baseHeader);
+		const requester = new (getOperator().requesterIniter)(CnbApi.baseHeader);
 		this.requesterPromise = this.login(requester);
 	}
 

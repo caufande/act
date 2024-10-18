@@ -9,6 +9,7 @@ import LangInfo from './LangInfo';
 import { RequesterIniter } from './requester';
 import { StoragerIniter } from './storager';
 
+export * from './register';
 export * from './requester';
 export * from './storager';
 

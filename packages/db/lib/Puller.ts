@@ -4,8 +4,8 @@
  */
 declare module './Puller';
 
-import CnbApi, { CnbConfig, Comment } from './CnbApi';
-import Operator, { Storager } from './Operator';
+import CnbApi, { CnbConfig } from './CnbApi';
+import { getOperator, Storager } from './Operator';
 import type { Schema as IAct } from './schema';
 import { range } from './util';
 
@@ -24,12 +24,12 @@ export default class Puller {
 	protected readonly storagerVersion: Storager<Version>;
 	protected readonly storagerAct: Storager<Act>;
 	constructor(
-		operator: Operator,
 		cnbConfig: CnbConfig,
 		readonly postId: number,
 		readonly blogApp: string,
 	) {
-		this.cnbApi = new CnbApi(operator, cnbConfig);
+		const operator = getOperator();
+		this.cnbApi = new CnbApi(cnbConfig);
 		this.storagerVersion = new operator.storagerIniter();
 		this.storagerAct = new operator.storagerIniter();
 	}

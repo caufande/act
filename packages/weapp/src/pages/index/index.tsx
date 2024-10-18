@@ -21,7 +21,6 @@ function IndexMain() {
 	const commentGetterRef = useRef<null | CommentGetter>(null);
 	function getCnbApi() {
 		return commentGetterRef.current ?? (commentGetterRef.current = new CnbApi(
-			new Operator(),
 			runtimeConfig.cnb,
 		).getCommentGetter('QiFande', 18437205));
 	}
@@ -30,7 +29,7 @@ function IndexMain() {
 		<View className="index" style={{ background: '#333', height: 800 }}>
 			<Text>Hello world!{JSON.stringify(runtimeConfig.cnb, null, 2)}</Text>
 			<Button onClick={() => getCnbApi().getAll()
-				.then(n => parseComment(new Operator(), n[0]))
+				.then(n => parseComment(n[0]))
 				.then(console.log)}>get</Button>
 		</View>
 	);

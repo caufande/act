@@ -1,10 +1,11 @@
-import { createContext, PropsWithChildren, useContext } from 'react';
+import Operator from '@cauact/db-operator-taro';
+import { regOperator } from '@cauact/db/lib/Operator';
 import { useLaunch } from '@tarojs/taro';
-import { getData } from './lib/data-content';
+import { PropsWithChildren } from 'react';
 
 export default function App({ children }: PropsWithChildren<any>) {
 	useLaunch(() => {
-		console.log('App launched.');
+		regOperator(new Operator());
 	});
 
 	return children;

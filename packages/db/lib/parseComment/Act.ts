@@ -6,8 +6,6 @@ declare module './Act';
 
 import { JSONContent } from 'html-to-json-parser/dist/types';
 import { Comment } from '../CnbApi';
-import { getThrower, Thrower } from '../errors';
-import Operator from '../Operator';
 import { getText, parseDate } from './parseDate';
 
 export interface Stage {
@@ -61,9 +59,7 @@ export class Act {
 	 */
 	readonly stages: readonly Stage[] = [{} as any];
 	protected parsingStage = false;
-	protected readonly throw: Thrower;
-	constructor(operator: Operator, { floor, author, authorUrl }: Comment, json: JSONContent) {
-		this.throw = getThrower(operator);
+	constructor({ floor, author, authorUrl }: Comment, json: JSONContent) {
 		this.floor = floor;
 		this.author = author;
 		this.authorUrl = authorUrl;
@@ -95,7 +91,7 @@ export class Act {
 			case 'p':
 				if (this.stageNow.timeStep?.length !== 0) (this.stageNow.detail as any).push(getText(ele));
 				else {
-					const dateRange = parseDate(this.throw, getText(ele), this.floor);
+					const dateRange = parseDate(getText(ele), this.floor);
 					this.stageNow.timeStep = this.stageNow.timeStep?.concat(dateRange);
 				}
 				break;
