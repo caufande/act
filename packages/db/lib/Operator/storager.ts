@@ -6,16 +6,17 @@ declare module './storager';
 
 import { Static, TSchema } from '@sinclair/typebox';
 
-export type StoragerIniter = new<S extends TSchema>(schema: S) => Storager<S>;
+export type Asserter<T> = (n: unknown) => asserts n is T;
+export type StoragerIniter = new<T>(asserter: Asserter<T>) => Storager<T>;
 
-export abstract class Storager<S extends TSchema> {
+export abstract class Storager<T> {
 	constructor(
-		protected readonly schema: S,
+		protected readonly assert: Asserter<T>,
 	) {	}
 	abstract clear(): Promise<void>;
 	abstract delete(key: string): Promise<void>;
-	abstract get(key: string): Promise<Static<S> | null>;
-	abstract set(key: string, value: Static<S>): Promise<boolean>;
-	abstract batchGet(keys: readonly string[]): Promise<(Static<S> | null)[]>;
-	abstract batchSet(kvs: Map<string, Static<S>>): Promise<boolean>;
+	abstract get(key: string): Promise<T | null>;
+	abstract set(key: string, value: T): Promise<boolean>;
+	abstract batchGet(keys: readonly string[]): Promise<(T | null)[]>;
+	abstract batchSet(kvs: Map<string, T>): Promise<boolean>;
 }

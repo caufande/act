@@ -8,6 +8,7 @@ import CnbApi, { CnbConfig } from './CnbApi';
 import { getOperator, Storager } from './Operator';
 import { Static, Type } from '@sinclair/typebox';
 import { range } from './util';
+import { Value } from '@sinclair/typebox/value';
 
 const versionStartString = `<pre><code class="language-js">`;
 const versionEndString = `</code></pre>`;
@@ -29,7 +30,7 @@ export default class Puller {
 	) {
 		const operator = getOperator();
 		this.cnbApi = new CnbApi(cnbConfig);
-		this.storagerVersion = new operator.storagerIniter(Version);
+		this.storagerVersion = new operator.storagerIniter(n => Value.Assert(Version, n));
 	}
 	async getVersion() {
 		const post = await this.cnbApi.getPost(this.postId);

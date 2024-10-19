@@ -16,7 +16,6 @@
 	"author": "caufande",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
-		"@sinclair/typebox": "^0.33.17",
 		"@tarojs/taro": "^4.0.6",
 		"@cauact/db": "workspace:^"
 	},
