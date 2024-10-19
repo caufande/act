@@ -6,7 +6,7 @@ declare module './Puller';
 
 import CnbApi, { CnbConfig } from './CnbApi';
 import { getOperator, Storager } from './Operator';
-import type { Schema as IAct } from './schema';
+import { Static, Type } from '@sinclair/typebox';
 import { range } from './util';
 
 const versionStartString = `<pre><code class="language-js">`;
@@ -16,13 +16,12 @@ function getStorageKey(floor: number) {
 }
 const versionStorageKey = 'cauact_game_version';
 
-export type Version = readonly number[];
-type Act = IAct;
+export const Version = Type.Array(Type.Number());
+export type Version = Static<typeof Version>;
 
 export default class Puller {
 	protected readonly cnbApi: CnbApi;
-	protected readonly storagerVersion: Storager<Version>;
-	protected readonly storagerAct: Storager<Act>;
+	protected readonly storagerVersion: Storager<typeof Version>;
 	constructor(
 		cnbConfig: CnbConfig,
 		readonly postId: number,
@@ -30,8 +29,7 @@ export default class Puller {
 	) {
 		const operator = getOperator();
 		this.cnbApi = new CnbApi(cnbConfig);
-		this.storagerVersion = new operator.storagerIniter();
-		this.storagerAct = new operator.storagerIniter();
+		this.storagerVersion = new operator.storagerIniter(Version);
 	}
 	async getVersion() {
 		const post = await this.cnbApi.getPost(this.postId);
