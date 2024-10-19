@@ -4,8 +4,7 @@
  */
 declare module '.';
 
-import IOperator from '@cauact/db/lib/Operator';
-import LangInfo from '@cauact/db/lib/Operator/LangInfo';
+import { Operator as IOperator, LangInfo } from '@cauact/db';
 import Requester from './Requester';
 import Storager from './Storager';
 

@@ -3,7 +3,9 @@
 	"name": "@cauact/db",
 	"version": "0.1.0",
 	"description": "CAU ACTivity 数据库操作接口",
-	"main": "index.js",
+	"main": "lib/index",
+	"types": "lib/index",
+	"module": "lib/index",
 	"type": "module",
 	"scripts": {
 		"build": "tsc",
@@ -11,8 +13,7 @@
 		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js"
 	},
 	"files": [
-		"lib",
-		"index.js"
+		"lib"
 	],
 	"author": "caufande",
 	"license": "GPL-2.0-or-later",

@@ -1,4 +1,4 @@
-import Puller from '@cauact/db/lib/Puller';
+import { Puller } from '@cauact/db';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { Data, DataContent } from '../lib/data-content';
 import { cnb } from '../lib/runtime-config';

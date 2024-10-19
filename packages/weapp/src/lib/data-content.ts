@@ -1,4 +1,4 @@
-import { Pulled } from '@cauact/db/lib/Puller';
+import { Pulled } from '@cauact/db';
 import { createContext } from 'react';
 
 export interface Data extends Pulled {}

@@ -11,7 +11,7 @@ import {
 	RequestParams,
 	RequestedData,
 	RequesterIniter,
-} from '@cauact/db/lib/Operator';
+} from '@cauact/db';
 import { request } from '@tarojs/taro';
 
 export default class Requester extends IRequester {

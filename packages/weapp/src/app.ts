@@ -1,5 +1,5 @@
 import Operator from '@cauact/db-operator-taro';
-import { regOperator } from '@cauact/db/lib/Operator';
+import { regOperator } from '@cauact/db';
 import { useLaunch } from '@tarojs/taro';
 import { PropsWithChildren } from 'react';
 

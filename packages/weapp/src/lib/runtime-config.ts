@@ -1,4 +1,4 @@
-import { CnbConfig } from '@cauact/db/lib/CnbApi';
+import { CnbConfig } from '@cauact/db';
 
 interface Cnb extends CnbConfig {
 	postId: number;

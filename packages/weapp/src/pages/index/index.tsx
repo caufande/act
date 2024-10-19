@@ -1,5 +1,4 @@
-import CnbApi, { CommentGetter } from '@cauact/db/lib/CnbApi';
-import parseComment from '@cauact/db/lib/parseComment';
+import { CnbApi, CommentGetter, parseComment } from '@cauact/db';
 import { Button, Text, View } from '@tarojs/components';
 import { useContext, useRef } from 'react';
 import Base from '../../component/Base';

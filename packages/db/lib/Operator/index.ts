@@ -12,6 +12,7 @@ import { StoragerIniter } from './storager';
 export * from './register';
 export * from './requester';
 export * from './storager';
+export { LangInfo };
 
 export default abstract class Operator {
 	abstract readonly langInfo: LangInfo;

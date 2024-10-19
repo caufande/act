@@ -4,7 +4,7 @@
  */
 declare module './Storager';
 
-import { Storager as IStorager } from '@cauact/db/lib/Operator';
+import { Storager as IStorager } from '@cauact/db';
 import {
 	batchGetStorage,
 	batchSetStorage,
