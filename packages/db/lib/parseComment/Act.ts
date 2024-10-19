@@ -11,9 +11,9 @@ import { Comment } from '../CnbApi';
 import { getText, parseDate } from './parseDate';
 
 export const Stage = Type.Object({
-	name: Type.String(),
-	timeStep: Type.Array(Type.Tuple([Type.Date(), Type.Date()])),
-	detail: Type.Array(Type.String()),
+	name: Type.String({ default: '' }),
+	timeStep: Type.Array(Type.Tuple([Type.Date(), Type.Date()]), { default: [] }),
+	detail: Type.Array(Type.String(), { default: [] }),
 });
 export interface Stage {
 	/**
@@ -85,7 +85,7 @@ export default class Act {
 	 *
 	 * @minItems 1
 	 */
-	readonly stages: readonly Stage[] = [{} as any];
+	readonly stages: readonly Stage[] = [Value.Create(Stage)];
 	protected parsingStage = false;
 	constructor({ floor, author, authorUrl }: Comment, json: JSONContent) {
 		this.floor = floor;
@@ -112,9 +112,8 @@ export default class Act {
 		switch (ele.type) {
 			case 'h2': break;
 			case 'h3':
-				if ('name' in this.stageNow) (this.stages as any).push(this.stageNow = { name: '', timeStep: [], detail: [] });
+				(this.stages as any).push(this.stageNow = Value.Create(Stage));
 				this.stageNow.name = getText(ele);
-				this.stageNow.timeStep = [];
 				break;
 			case 'p':
 				if (this.stageNow.timeStep?.length !== 0) (this.stageNow.detail as any).push(getText(ele));

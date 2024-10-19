@@ -34,19 +34,16 @@ export interface Pulled {
 export default class Puller {
 	protected static verStartStr = `<pre><code class="language-js">`;
 	protected static verEndStr = `</code></pre>`;
+	protected static keySign = 'cauact_game';
 	protected static getKey(floor: number) {
-		return `cauact_game_${floor}`;
+		return `${this.keySign}_${floor}`;
 	}
 
-	protected static verInfoKey = 'cauact_game_ver_info';
-	static assertVerInfo(n: unknown): asserts n is VerInfo {
-		Value.Assert(VerInfo, n);
-		if (!(n.diff instanceof Set)) throw Error();
-	}
+	protected static versionKey = `${this.keySign}_version`;
 
 	protected readonly cnbApi: CnbApi;
 	protected readonly commentGetter: CommentGetter;
-	protected readonly storagerVerInfo: Storager<VerInfo>;
+	protected readonly storagerVersion: Storager<Version>;
 	protected readonly storagerAct: Storager<Act>;
 	constructor(
 		cnbConfig: CnbConfig,
@@ -56,7 +53,7 @@ export default class Puller {
 		const operator = getOperator();
 		this.cnbApi = new CnbApi(cnbConfig);
 		this.commentGetter = this.cnbApi.getCommentGetter(blogApp, postId);
-		this.storagerVerInfo = new operator.storagerIniter(Puller.assertVerInfo);
+		this.storagerVersion = new operator.storagerIniter(n => Value.Assert(Version, n));
 		this.storagerAct = new operator.storagerIniter(Act.assert);
 	}
 
@@ -66,11 +63,11 @@ export default class Puller {
 	protected async setStoragedAct(floor: number, act: Act) {
 		return await this.storagerAct.set(Puller.getKey(floor), act);
 	}
-	protected async getStoragedVerInfo() {
-		return await this.storagerVerInfo.get(Puller.verInfoKey);
+	protected async getStoragedVersion() {
+		return await this.storagerVersion.get(Puller.versionKey);
 	}
-	protected async setStoragedVerInfo(verInfo: VerInfo) {
-		return await this.storagerVerInfo.set(Puller.verInfoKey, verInfo);
+	protected async setStoragedVersion(version: Version) {
+		return await this.storagerVersion.set(Puller.versionKey, version);
 	}
 
 	private cachedVerInfo: VerInfo | null = null;
@@ -94,14 +91,19 @@ export default class Puller {
 	}
 	async update() {
 		const version = await this.reqVerInfo();
-		const verInfoLast = await this.getStoragedVerInfo();
+		const versionLast = await this.getStoragedVersion();
 		const verInfo: VerInfo = {
 			version,
-			diff: await this.getDiff(version, verInfoLast?.version),
+			diff: await this.getDiff(version, versionLast),
 		};
 		this.cachedVerInfo = verInfo;
-		await this.setStoragedVerInfo(verInfo);
+		await this.setStoragedVersion(verInfo.version);
 		return verInfo;
+	}
+	private async getStoragedVerInfo(): Promise<VerInfo | null> {
+		const version = await this.getStoragedVersion();
+		if (version === null) return null;
+		return { version, diff: new Set() };
 	}
 	protected async getVerInfo(): Promise<VerInfo> {
 		return this.cachedVerInfo ?? await this.getStoragedVerInfo() ?? await this.update();

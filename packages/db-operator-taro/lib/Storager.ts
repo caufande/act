@@ -26,13 +26,15 @@ export default class Storager<T> extends IStorager<T> {
 		return dataList;
 	}
 	async get(key: string): Promise<T | null> {
+		let data;
 		try {
-			const { data } = await getStorage({ key });
-			this.assert(data);
-			return data;
+			data = (await getStorage({ key })).data;
 		} catch {
-			return null;
+			1 + 1;
 		}
+		if (!data) return null;
+		this.assert(data);
+		return data;
 	}
 	async set(key: string, value: T): Promise<boolean> {
 		const res = await setStorage({ key, data: value });
