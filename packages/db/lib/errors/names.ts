@@ -33,4 +33,8 @@ export const errorNames: ErrorNames = {
 		'*': Lang.zh,
 		[Lang.zh]: '一行中包含太多（三个）日期，导致无法理解日期时段',
 	},
+	NoComment: {
+		'*': Lang.zh,
+		[Lang.zh]: '找不到这一层评论，可能是数据已经被删除',
+	},
 };

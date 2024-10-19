@@ -4,7 +4,7 @@
  */
 declare module './Puller';
 
-import { Static, Type } from '@sinclair/typebox';
+import { Type } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 import CnbApi, { CnbConfig, CommentGetter } from './CnbApi';
 import { throwError } from './errors';
@@ -20,13 +20,23 @@ function getStorageKey(floor: number) {
 const versionStorageKey = 'cauact_game_version';
 
 export const Version = Type.Array(Type.Number());
-export type Version = Static<typeof Version>;
+export type Version = readonly number[];
+
 export type Diff = Set<number>;
+
 export const VerInfo = Type.Object({
 	version: Version,
-	diff: Type.Any(),
+	diff: Type.Unknown(),
 });
-export type VerInfo = Static<typeof VerInfo> & { diff: Diff };
+export interface VerInfo {
+	readonly version: Version;
+	readonly diff: Diff;
+}
+
+export interface Pulled {
+	readonly verInfo: VerInfo;
+	readonly acts: readonly Act[];
+}
 
 export default class Puller {
 	static assertVerInfo(n: unknown): asserts n is VerInfo {
@@ -95,5 +105,38 @@ export default class Puller {
 		this.cachedVerInfo = verInfo;
 		await this.setStoragedVerInfo(verInfo);
 		return verInfo;
+	}
+
+	protected cachedAct: Act[] = [];
+	protected async reqAct(floor: number) {
+		const comment = await this.commentGetter.getFloor(floor) ?? throwError('NoComment', { floor });
+		const act = await parseComment(comment);
+		this.cachedAct[floor] = act;
+		await this.setStoragedAct(floor, act);
+		return act;
+	}
+	async getAct(floor: number): Promise<Act> {
+		if (this.cachedVerInfo?.diff.has(floor)) return await this.reqAct(floor);
+		return this.cachedAct[floor]
+			?? await this.storagerAct.get(getStorageKey(floor))
+			?? await this.reqAct(floor);
+	}
+
+	async upgradeAll() {
+		await Promise.allSettled(Array.from(this.cachedVerInfo?.diff ?? [])
+			.map(async floor => await this.setStoragedAct(floor, await this.reqAct(floor))));
+	}
+
+	protected async getActAll(): Promise<Act[]> {
+		const version = (await this.getVerInfo()).version;
+		const acts = await Promise.all(range(1, version.length).map(floor => this.getAct(floor)));
+		acts.unshift(void 0 as any);
+		return acts;
+	}
+	async getAll(): Promise<Pulled> {
+		return {
+			verInfo: await this.getVerInfo(),
+			acts: await this.getActAll(),
+		};
 	}
 }

@@ -1,13 +1,11 @@
-import Operator from '@cauact/db-operator-taro';
-import Puller from '@cauact/db/lib/Puller';
+import CnbApi, { CommentGetter } from '@cauact/db/lib/CnbApi';
+import parseComment from '@cauact/db/lib/parseComment';
 import { Button, Text, View } from '@tarojs/components';
 import { useContext, useRef } from 'react';
 import Base from '../../component/Base';
+import { DataContent } from '../../lib/data-content';
 import runtimeConfig from '../../lib/runtime-config';
 import './index.less';
-import CnbApi, { CommentGetter } from '@cauact/db/lib/CnbApi';
-import parseComment from '@cauact/db/lib/parseComment';
-import { DataContent } from '../../lib/data-content';
 
 
 export default function Index() {
@@ -29,7 +27,7 @@ function IndexMain() {
 
 	return (
 		<View className="index" style={{ background: '#333', height: 800 }}>
-			<Text>Hello world!{JSON.stringify(data)}</Text>
+			<Text userSelect={true}>Hello world!{JSON.stringify(data)}</Text>
 			<Button onClick={() => getCnbApi().getAll()
 				.then(n => parseComment(n[0]))
 				.then(console.log)}>get</Button>

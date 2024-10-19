@@ -18,4 +18,7 @@ export const errorDefs = {
 		floor: Type.Number(),
 		line: Type.String(),
 	},
+	NoComment: {
+		floor: Type.Number(),
+	},
 } satisfies ErrorDefs;

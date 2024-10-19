@@ -1,7 +1,7 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
-import { cnb } from '../lib/runtime-config';
-import { Data, DataContent } from '../lib/data-content';
 import Puller from '@cauact/db/lib/Puller';
+import { PropsWithChildren, useEffect, useState } from 'react';
+import { Data, DataContent } from '../lib/data-content';
+import { cnb } from '../lib/runtime-config';
 
 export default function Base({ children }: PropsWithChildren) {
 	const [data, setData] = useState<Data | null>(null);
@@ -11,12 +11,12 @@ export default function Base({ children }: PropsWithChildren) {
 		setData(null);
 		const puller = new Puller(cnb, cnb.postId, cnb.blogApp);
 		(async () => {
-			const verInfo = await puller.update();
+			const pulled = await puller.getAll();
 			if (reseted) return;
-			setData(verInfo);
+			setData(pulled);
 		})();
 		return () => { reseted = true; };
-	}, []);
+	}, [cnb]);
 
 	return (
 		<DataContent.Provider value={data}>
