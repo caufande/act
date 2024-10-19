@@ -20,10 +20,11 @@ export default class Storager<T> extends IStorager<T> {
 		if (!('dataList' in res)) throw Error();
 		const { dataList } = res;
 		if (!Array.isArray(dataList)) throw Error();
-		for (const data of dataList) {
+		const deserialized = dataList.map(n => (n ? this.deserializer(n) : null));
+		for (const data of deserialized) {
 			if (data !== null) this.assert(data);
 		}
-		return dataList;
+		return deserialized;
 	}
 	async get(key: string): Promise<T | null> {
 		let data;
@@ -33,8 +34,9 @@ export default class Storager<T> extends IStorager<T> {
 			1 + 1;
 		}
 		if (!data) return null;
-		this.assert(data);
-		return data;
+		const deserialized = this.deserializer(data);
+		this.assert(deserialized);
+		return deserialized;
 	}
 	async set(key: string, value: T): Promise<boolean> {
 		const res = await setStorage({ key, data: value });

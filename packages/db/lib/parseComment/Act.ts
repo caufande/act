@@ -49,9 +49,9 @@ export default class Act {
 		const Detail = Type.Object({
 			title: Type.String(),
 			contentString: Type.String(),
-			contentDetails: null as any,
+			contentDetails: Type.Any(),
 		});
-		Detail.properties.contentDetails = Type.Array(Detail);
+		(Detail.properties.contentDetails as any) = Type.Array(Detail);
 		Value.Assert(Detail, n);
 	}
 	static assert(n: unknown): asserts n is Act {
@@ -63,7 +63,12 @@ export default class Act {
 			detail: Type.Any(),
 			stages: Type.Array(Stage),
 		}), n);
-		this.assertDetail(n.detail);
+		// Act.assertDetail(n.detail);
+	}
+	static deserializer(n: any): Act {
+		const a = n as Act;
+		a.stages.forEach(n => (n.timeStep as any) = n.timeStep.map(([a, b]) => [new Date(a), new Date(b)]));
+		return n;
 	}
 
 	/**

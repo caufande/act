@@ -11,6 +11,7 @@ export default function Base({ children }: PropsWithChildren) {
 		setData(null);
 		const puller = new Puller(cnb, cnb.postId, cnb.blogApp);
 		(async () => {
+			await puller.update();
 			const pulled = await puller.getAll();
 			if (reseted) return;
 			setData(pulled);

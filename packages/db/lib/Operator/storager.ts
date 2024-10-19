@@ -7,11 +7,14 @@ declare module './storager';
 import { Static, TSchema } from '@sinclair/typebox';
 
 export type Asserter<T> = (n: unknown) => asserts n is T;
-export type StoragerIniter = new<T>(asserter: Asserter<T>) => Storager<T>;
+export type Deserializer<T> = (n: any) => T;
+export type StoragerIniter = new<T>(asserter: Asserter<T>, deserializer?: Deserializer<T>) => Storager<T>;
+const defaultDeserializer: Deserializer<any> = n => n;
 
 export abstract class Storager<T> {
 	constructor(
 		protected readonly assert: Asserter<T>,
+		protected readonly deserializer: Deserializer<T> = defaultDeserializer,
 	) {	}
 	abstract clear(): Promise<void>;
 	abstract delete(key: string): Promise<void>;

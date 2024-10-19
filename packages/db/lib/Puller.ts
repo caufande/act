@@ -54,7 +54,7 @@ export default class Puller {
 		this.cnbApi = new CnbApi(cnbConfig);
 		this.commentGetter = this.cnbApi.getCommentGetter(blogApp, postId);
 		this.storagerVersion = new operator.storagerIniter(n => Value.Assert(Version, n));
-		this.storagerAct = new operator.storagerIniter(Act.assert);
+		this.storagerAct = new operator.storagerIniter(Act.assert, Act.deserializer);
 	}
 
 	protected async getStoragedAct(floor: number) {
