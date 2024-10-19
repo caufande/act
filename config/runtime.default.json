@@ -1,5 +1,7 @@
 {
 	"cnb": {
+		"blogApp": "cmt",
+		"postId": 11111111,
 		"id": "11111111-1111-1111-1111-111111111111",
 		"secret": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 	}

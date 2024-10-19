@@ -1,6 +1,8 @@
-interface Cnb {
-	id: string;
-	secret: string;
+import { CnbConfig } from '@cauact/db/lib/CnbApi';
+
+interface Cnb extends CnbConfig {
+	postId: number;
+	blogApp: string;
 }
 
 export interface CauactRuntimeConfig { cnb: Cnb }
@@ -8,3 +10,6 @@ export interface CauactRuntimeConfig { cnb: Cnb }
 // @ts-ignore
 const runtimeConfig = __CAUACT_RUNTIME__ as CauactRuntimeConfig;
 export default runtimeConfig;
+export const {
+	cnb,
+} = runtimeConfig;
