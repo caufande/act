@@ -3,9 +3,7 @@
 	"name": "@cauact/db",
 	"version": "0.1.0",
 	"description": "CAU ACTivity 数据库操作接口",
-	"main": "lib/index",
-	"types": "lib/index",
-	"module": "lib/index",
+	"main": "index",
 	"type": "module",
 	"scripts": {
 		"build": "tsc",

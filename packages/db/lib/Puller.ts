@@ -12,13 +12,6 @@ import { getOperator, Storager } from './Operator';
 import parseComment, { Act } from './parseComment';
 import { range } from './util';
 
-const versionStartString = `<pre><code class="language-js">`;
-const versionEndString = `</code></pre>`;
-function getStorageKey(floor: number) {
-	return `cauact_game_${floor}`;
-}
-const versionStorageKey = 'cauact_game_version';
-
 export const Version = Type.Array(Type.Number());
 export type Version = readonly number[];
 
@@ -39,6 +32,13 @@ export interface Pulled {
 }
 
 export default class Puller {
+	protected static verStartStr = `<pre><code class="language-js">`;
+	protected static verEndStr = `</code></pre>`;
+	protected static getKey(floor: number) {
+		return `cauact_game_${floor}`;
+	}
+
+	protected static verInfoKey = 'cauact_game_ver_info';
 	static assertVerInfo(n: unknown): asserts n is VerInfo {
 		Value.Assert(VerInfo, n);
 		if (!(n.diff instanceof Set)) throw Error();
@@ -61,16 +61,16 @@ export default class Puller {
 	}
 
 	protected async getStoragedAct(floor: number) {
-		return await this.storagerAct.get(getStorageKey(floor));
+		return await this.storagerAct.get(Puller.getKey(floor));
 	}
 	protected async setStoragedAct(floor: number, act: Act) {
-		return await this.storagerAct.set(getStorageKey(floor), act);
+		return await this.storagerAct.set(Puller.getKey(floor), act);
 	}
 	protected async getStoragedVerInfo() {
-		return await this.storagerVerInfo.get(versionStorageKey);
+		return await this.storagerVerInfo.get(Puller.verInfoKey);
 	}
 	protected async setStoragedVerInfo(verInfo: VerInfo) {
-		return await this.storagerVerInfo.set(versionStorageKey, verInfo);
+		return await this.storagerVerInfo.set(Puller.verInfoKey, verInfo);
 	}
 
 	private cachedVerInfo: VerInfo | null = null;
@@ -85,15 +85,12 @@ export default class Puller {
 	}
 	private async reqVerInfo(): Promise<Version> {
 		const post = await this.cnbApi.getPost(this.postId);
-		const startIndex = post.indexOf(versionStartString) + versionStartString.length;
-		const endIndex = post.indexOf(versionEndString, startIndex);
+		const startIndex = post.indexOf(Puller.verStartStr) + Puller.verStartStr.length;
+		const endIndex = post.indexOf(Puller.verEndStr, startIndex);
 		const data = post.slice(startIndex, endIndex);
 		const version = JSON.parse(data);
 		Value.Assert(Version, version);
 		return version;
-	}
-	protected async getVerInfo(): Promise<VerInfo> {
-		return this.cachedVerInfo ?? await this.getStoragedVerInfo() ?? await this.update();
 	}
 	async update() {
 		const version = await this.reqVerInfo();
@@ -105,6 +102,9 @@ export default class Puller {
 		this.cachedVerInfo = verInfo;
 		await this.setStoragedVerInfo(verInfo);
 		return verInfo;
+	}
+	protected async getVerInfo(): Promise<VerInfo> {
+		return this.cachedVerInfo ?? await this.getStoragedVerInfo() ?? await this.update();
 	}
 
 	protected cachedAct: Act[] = [];
@@ -118,7 +118,7 @@ export default class Puller {
 	async getAct(floor: number): Promise<Act> {
 		if (this.cachedVerInfo?.diff.has(floor)) return await this.reqAct(floor);
 		return this.cachedAct[floor]
-			?? await this.storagerAct.get(getStorageKey(floor))
+			?? await this.storagerAct.get(Puller.getKey(floor))
 			?? await this.reqAct(floor);
 	}
 
