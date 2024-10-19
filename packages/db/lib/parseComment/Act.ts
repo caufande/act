@@ -4,10 +4,17 @@
  */
 declare module './Act';
 
+import { Type } from '@sinclair/typebox';
+import { Value } from '@sinclair/typebox/value';
 import { JSONContent } from 'html-to-json-parser/dist/types';
 import { Comment } from '../CnbApi';
 import { getText, parseDate } from './parseDate';
 
+export const Stage = Type.Object({
+	name: Type.String(),
+	timeStep: Type.Array(Type.Tuple([Type.Date(), Type.Date()])),
+	detail: Type.Array(Type.String()),
+});
 export interface Stage {
 	/**
 	 * 内容名称
@@ -37,7 +44,28 @@ export interface Detail {
 /**
  * 项目具体数据
  */
-export class Act {
+export default class Act {
+	protected static assertDetail(n: unknown): asserts n is Detail {
+		const Detail = Type.Object({
+			title: Type.String(),
+			contentString: Type.String(),
+			contentDetails: null as any,
+		});
+		Detail.properties.contentDetails = Type.Array(Detail);
+		Value.Assert(Detail, n);
+	}
+	static assert(n: unknown): asserts n is Act {
+		Value.Assert(Type.Object({
+			floor: Type.Number(),
+			title: Type.String(),
+			author: Type.String(),
+			authorUrl: Type.String(),
+			detail: Type.Any(),
+			stages: Type.Array(Stage),
+		}), n);
+		this.assertDetail(n.detail);
+	}
+
 	/**
 	 * 项目编号
 	 */

@@ -1,13 +1,12 @@
-import { JSONContent } from 'html-to-json-parser/dist/types';
-import { throwError } from '../errors';
-import { textToDate } from '../util';
-
 /**
  * 解析时间
  * @license GPL-2.0-or-later
  */
 declare module './parseDate';
 
+import { JSONContent } from 'html-to-json-parser/dist/types';
+import { throwError } from '../errors';
+import { textToDate } from '../util';
 
 export function getText(json: JSONContent): string {
 	switch (json.type) {

@@ -8,7 +8,10 @@ import { HTMLToJSON } from 'html-to-json-parser';
 import { JSONContent } from 'html-to-json-parser/dist/types';
 import { Comment } from '../CnbApi';
 import { removeBlankBetweenAttr } from '../util';
-import { Act } from './Act';
+import Act from './Act';
+
+export * from './Act';
+export { Act };
 
 export default async function parseComment(comment: Comment) {
 	const html = removeBlankBetweenAttr(`<div>${comment.body}</div>`);
