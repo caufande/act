@@ -15,28 +15,20 @@ import {
 } from '@tarojs/taro';
 
 export default class Storager<T> extends IStorager<T> {
-	async batchGet(keys: readonly string[]): Promise<(T | null)[]> {
+	protected async batchGetOrigin(keys: readonly string[]): Promise<unknown> {
 		const res = await batchGetStorage({ keyList: keys.slice() });
 		if (!('dataList' in res)) throw Error();
 		const { dataList } = res;
-		if (!Array.isArray(dataList)) throw Error();
-		const deserialized = dataList.map(n => (n ? this.deserializer(n) : null));
-		for (const data of deserialized) {
-			if (data !== null) this.assert(data);
-		}
-		return deserialized;
+		return dataList;
 	}
-	async get(key: string): Promise<T | null> {
+	protected async getOrigin(key: string): Promise<T | null> {
 		let data;
 		try {
-			data = (await getStorage({ key })).data;
+			const { data } = await getStorage({ key });
+			return data;
 		} catch {
-			1 + 1;
+			return null;
 		}
-		if (!data) return null;
-		const deserialized = this.deserializer(data);
-		this.assert(deserialized);
-		return deserialized;
 	}
 	async set(key: string, value: T): Promise<boolean> {
 		const res = await setStorage({ key, data: value });
