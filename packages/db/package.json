@@ -6,7 +6,6 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"prepare": "json2ts node_modules/@cauact/db-repo/acts/schema.json lib/schema.ts",
 		"build": "tsc",
 		"test": "tsc --noEmit",
 		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js"
@@ -23,7 +22,6 @@
 		"html-to-json-parser": "^2.0.1",
 		"@sinclair/typebox": "^0.33.17",
 		"entities": "^5.0.0",
-		"json-schema-to-typescript": "^15.0.2",
 		"localforage": "^1.10.0"
 	},
 	"devDependencies": {
