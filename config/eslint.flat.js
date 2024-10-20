@@ -40,7 +40,7 @@ export default tseslint.config(
 		name: 'JS Ignore',
 		ignores: [
 			'packages/db/**/*.js',
-			'packages/db/**/*.d.ts',
+			'packages/db/lib/**/*.d.ts',
 			'**/dist/**/*',
 		],
 	},

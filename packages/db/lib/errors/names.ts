@@ -37,4 +37,8 @@ export const errorNames: ErrorNames = {
 		'*': Lang.zh,
 		[Lang.zh]: '找不到这一层评论，可能是数据已经被删除',
 	},
+	NoUser: {
+		'*': Lang.zh,
+		[Lang.zh]: '你没设置 MetaWeblog 用户！如果你真的不用用户也能登录，请联系我对此修复',
+	},
 };

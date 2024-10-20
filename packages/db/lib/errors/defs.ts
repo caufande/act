@@ -21,4 +21,8 @@ export const errorDefs = {
 	NoComment: {
 		floor: Type.Number(),
 	},
+	NoUser: {
+		postId: Type.Number(),
+		blogApp: Type.String(),
+	},
 } satisfies ErrorDefs;

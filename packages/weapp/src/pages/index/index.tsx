@@ -17,19 +17,21 @@ export default function Index() {
 
 function IndexMain() {
 	const data = useContext(DataContent);
-	const commentGetterRef = useRef<null | CommentGetter>(null);
+	const commentGetterRef = useRef<null | CnbApi>(null);
 	function getCnbApi() {
 		return commentGetterRef.current ?? (commentGetterRef.current = new CnbApi(
 			runtimeConfig.cnb,
-		).getCommentGetter('QiFande', 18437205));
+		));
+	}
+	console.log(data);
+	async function handleClick() {
+		const cnbApi = getCnbApi();
 	}
 
 	return (
 		<View className="index" style={{ background: '#333', height: 800 }}>
-			<Text userSelect={true}>Hello world!{JSON.stringify(data)}</Text>
-			<Button onClick={() => getCnbApi().getAll()
-				.then(n => parseComment(n[0]))
-				.then(console.log)}>get</Button>
+			<Text userSelect={true}>Hello world!</Text>
+			<Button onClick={handleClick}>get</Button>
 		</View>
 	);
 }
