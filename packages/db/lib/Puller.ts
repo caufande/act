@@ -132,7 +132,7 @@ export default class Puller {
 	protected async getActAll(): Promise<Act[]> {
 		const version = (await this.getVerInfo()).version;
 		const acts = await Promise.all(range(1, version.length).map(floor => this.getAct(floor)));
-		acts.unshift(void 0 as any);
+		acts.unshift(null as any);
 		return acts;
 	}
 	async getAll(): Promise<Pulled> {
