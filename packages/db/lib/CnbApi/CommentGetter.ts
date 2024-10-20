@@ -10,6 +10,7 @@ import { decodeHTML } from 'entities';
 import { Method, Requester } from '../Operator';
 import { lowerFirst } from '../util';
 import { calcPageNum, calcWhichPage } from './util';
+import CnbApi from '.';
 
 const CommentOrigin = Type.Object({
 	Id: Type.Number(),
@@ -48,7 +49,7 @@ export class Comment {
 
 export default class CommentGetter {
 	constructor(
-		protected readonly requesterPromise: Promise<Requester>,
+		protected readonly cnbApi: CnbApi,
 		readonly blogApp: string,
 		readonly postId: number,
 		readonly pageSize = 50,
@@ -57,11 +58,12 @@ export default class CommentGetter {
 	protected readonly cache: (readonly Comment[])[] = [];
 	async getPage(index: number): Promise<readonly Comment[]> {
 		if (this.cache[index]) return this.cache[index];
-		const requester = await this.requesterPromise;
+		const { requester } = this.cnbApi;
 		const data = await requester.easyRequest(
 			{
 				method: Method.GET,
 				url: `https://api.cnblogs.com/api/blogs/${this.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
+				header: await this.cnbApi.getApiHeader(),
 			},
 			Type.Array(CommentOrigin),
 		);
