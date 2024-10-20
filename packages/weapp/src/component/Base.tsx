@@ -1,7 +1,7 @@
 import { Puller } from '@cauact/db';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { Data, DataContent } from '../lib/data-content';
-import { runtimeConfig } from '@cauact/db-repo-runner';
+import { runtimeConfig } from '@cauact/runner';
 
 const { cnb } = runtimeConfig;
 

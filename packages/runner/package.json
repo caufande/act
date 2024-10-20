@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/package",
-	"name": "@cauact/db-repo-runner",
+	"name": "@cauact/runner",
 	"version": "0.1.0",
 	"description": "CAU ACTion 数据库仓库相关运行脚本",
 	"main": "lib/index",
@@ -34,5 +34,5 @@
 	"bugs": {
 		"url": "https://github.com/caufande/act/issues"
 	},
-	"homepage": "https://github.com/caufande/act/blob/HEAD/packages/db-repo-runner#readme"
+	"homepage": "https://github.com/caufande/act/blob/HEAD/packages/runner#readme"
 }
