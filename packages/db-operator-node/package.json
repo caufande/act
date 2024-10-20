@@ -1,0 +1,35 @@
+{
+	"$schema": "https://json.schemastore.org/package",
+	"name": "@cauact/db-operator-node",
+	"version": "0.1.0",
+	"description": "CAU ACTion 数据库接口配套的 node 环境操作器",
+	"main": "lib/index",
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"test": "tsc --noEmit",
+		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js"
+	},
+	"files": [
+		"lib"
+	],
+	"author": "caufande",
+	"license": "GPL-2.0-or-later",
+	"dependencies": {
+		"@types/needle": "^3.3.0",
+		"needle": "^3.3.1",
+		"@cauact/db": "workspace:^"
+	},
+	"devDependencies": {
+		"rimraf": "^6.0.1"
+	},
+	"repository": {
+		"directory": "packages/db-operator-taro",
+		"type": "git",
+		"url": "git+https://github.com/caufande/act.git"
+	},
+	"bugs": {
+		"url": "https://github.com/caufande/act/issues"
+	},
+	"homepage": "https://github.com/caufande/act/blob/HEAD/packages/db-operator-node#readme"
+}
