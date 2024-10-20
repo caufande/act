@@ -5,7 +5,7 @@
 /// <reference path="../../types/xmlrpc-parser.d.ts" />
 declare module '.';
 
-import { Type } from '@sinclair/typebox';
+import { Static, Type } from '@sinclair/typebox';
 import { XmlRpcMessage } from 'xmlrpc-parser';
 import { throwError } from '../errors';
 import { getOperator, IncomingHttpHeaders, Method, Requester } from '../Operator';
@@ -21,6 +21,17 @@ export interface CnbConfig {
 	password?: string;
 	blogApp?: string;
 }
+
+const CommentOrigin = Type.Object({
+	Id: Type.Number(),
+	Body: Type.String(),
+	Author: Type.String(),
+	AuthorUrl: Type.String(),
+	FaceUrl: Type.Union([Type.String(), Type.Null()]),
+	Floor: Type.Number(),
+	DateAdded: Type.String(),
+});
+export type CommentOrigin = Static<typeof CommentOrigin>;
 
 export namespace Post {
 	export interface Enclosure {
@@ -77,9 +88,9 @@ export default class CnbApi {
 		})),
 	});
 
-	readonly requester: Requester;
+	protected readonly requester: Requester;
 	constructor(
-		protected readonly config: CnbConfig,
+		public config: CnbConfig,
 	) {
 		this.requester = new (getOperator().requesterIniter)();
 	}
@@ -87,7 +98,7 @@ export default class CnbApi {
 	static readonly baseApiHeader: IncomingHttpHeaders = {
 		'content-type': 'application/x-www-form-urlencoded',
 	};
-	async getApiHeader(header: IncomingHttpHeaders = {}): Promise<IncomingHttpHeaders> {
+	protected async getApiHeader(header: IncomingHttpHeaders = {}): Promise<IncomingHttpHeaders> {
 		return {
 			...CnbApi.baseApiHeader,
 			authorization: await this.login(),
@@ -132,14 +143,26 @@ export default class CnbApi {
 		return body;
 	}
 
+	async getCommentPage(postId: number, index: number, pageSize: number): Promise<CommentOrigin[]> {
+		const data = await this.requester.easyRequest(
+			{
+				method: Method.GET,
+				url: `https://api.cnblogs.com/api/blogs/${this.config.blogApp}/posts/${postId}/comments?pageIndex=${index}&pageSize=${pageSize}`,
+				header: await this.getApiHeader(),
+			},
+			Type.Array(CommentOrigin),
+		);
+		return data;
+	}
+
 	getCommentGetter(postId: number, pageSize?: number) {
-		return new CommentGetter(this, this.config, postId, pageSize);
+		return new CommentGetter(this, postId, pageSize);
 	}
 
 	static readonly baseXmlHeader: IncomingHttpHeaders = {
 		'content-type': 'text/xml',
 	};
-	getXmlHeader(n: IncomingHttpHeaders = {}) {
+	protected getXmlHeader(n: IncomingHttpHeaders = {}) {
 		return {
 			...CnbApi.baseXmlHeader,
 			...n,

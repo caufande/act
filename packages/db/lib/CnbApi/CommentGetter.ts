@@ -4,24 +4,10 @@
  */
 declare module './CommentGetter';
 
-import { Static, Type } from '@sinclair/typebox';
-import { Value } from '@sinclair/typebox/value';
 import { decodeHTML } from 'entities';
-import { Method, Requester } from '../Operator';
+import CnbApi, { CnbConfig, CommentOrigin } from '.';
 import { lowerFirst } from '../util';
 import { calcPageNum, calcWhichPage } from './util';
-import CnbApi, { CnbConfig } from '.';
-
-const CommentOrigin = Type.Object({
-	Id: Type.Number(),
-	Body: Type.String(),
-	Author: Type.String(),
-	AuthorUrl: Type.String(),
-	FaceUrl: Type.Union([Type.String(), Type.Null()]),
-	Floor: Type.Number(),
-	DateAdded: Type.String(),
-});
-export type CommentOrigin = Static<typeof CommentOrigin>;
 
 export class Comment {
 	/**编号 */
@@ -48,25 +34,19 @@ export class Comment {
 
 
 export default class CommentGetter {
+	protected readonly config: CnbConfig;
 	constructor(
-		protected readonly cnbApi: CnbApi,
-		readonly config: CnbConfig,
+		readonly cnbApi: CnbApi,
 		readonly postId: number,
 		readonly pageSize = 50,
-	) {	}
+	) {
+		this.config = cnbApi.config;
+	}
 
 	protected readonly cache: (readonly Comment[])[] = [];
 	async getPage(index: number): Promise<readonly Comment[]> {
 		if (this.cache[index]) return this.cache[index];
-		const { requester } = this.cnbApi;
-		const data = await requester.easyRequest(
-			{
-				method: Method.GET,
-				url: `https://api.cnblogs.com/api/blogs/${this.config.blogApp}/posts/${this.postId}/comments?pageIndex=${index}&pageSize=${this.pageSize}`,
-				header: await this.cnbApi.getApiHeader(),
-			},
-			Type.Array(CommentOrigin),
-		);
+		const data = await this.cnbApi.getCommentPage(this.postId, index, this.pageSize);
 		const page = data.map(n => new Comment(n));
 		return this.cache[index] = page;
 	}
