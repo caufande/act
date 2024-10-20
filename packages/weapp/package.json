@@ -23,6 +23,7 @@
 	"dependencies": {
 		"@cauact/db": "workspace:^",
 		"@cauact/db-operator-taro": "workspace:^",
+		"@sinclair/typebox": "^0.33.17",
 		"@tarojs/components": "^4.0.6",
 		"@tarojs/helper": "^4.0.6",
 		"@tarojs/plugin-framework-react": "^4.0.6",
