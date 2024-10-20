@@ -1,7 +1,9 @@
 import { Puller } from '@cauact/db';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { Data, DataContent } from '../lib/data-content';
-import { cnb } from '../lib/runtime-config';
+import { runtimeConfig } from '@cauact/db-repo-runner';
+
+const { cnb } = runtimeConfig;
 
 export default function Base({ children }: PropsWithChildren) {
 	const [data, setData] = useState<Data | null>(null);

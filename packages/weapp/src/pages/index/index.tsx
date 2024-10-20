@@ -3,7 +3,7 @@ import { Button, Text, View } from '@tarojs/components';
 import { useContext, useRef } from 'react';
 import Base from '../../component/Base';
 import { DataContent } from '../../lib/data-content';
-import runtimeConfig from '../../lib/runtime-config';
+import { runtimeConfig } from '@cauact/db-repo-runner';
 import './index.less';
 
 

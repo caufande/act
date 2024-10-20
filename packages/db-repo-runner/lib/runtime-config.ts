@@ -1,8 +1,14 @@
+/**
+ * 运行时环境变量相关
+ * @license GPL-2.0-or-later
+ */
+declare module './runtime-config';
+
 import { CnbConfig } from '@cauact/db';
 import { Type } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 
-export const Cnb = Type.Object({
+const Cnb = Type.Object({
 	id: Type.String(),
 	secret: Type.String(),
 
@@ -23,10 +29,11 @@ export const CauactRuntimeConfig = Type.Object({
 });
 export interface CauactRuntimeConfig { cnb: Cnb }
 
-Value.Assert(CauactRuntimeConfig, __CAUACT_RUNTIME__);
-const runtimeConfig = __CAUACT_RUNTIME__;
+// @ts-ignore
+const chk: unknown = typeof __CAUACT_RUNTIME__ as any === 'undefined'
+	? JSON.parse(process.env.CAUACT_RUNTIME?.toString() ?? '{}')
+	// @ts-ignore
+	: __CAUACT_RUNTIME__ as any;
+Value.Assert(CauactRuntimeConfig, chk);
 
-export default runtimeConfig;
-export const {
-	cnb,
-} = runtimeConfig;
+export const runtimeConfig: CauactRuntimeConfig = chk;
