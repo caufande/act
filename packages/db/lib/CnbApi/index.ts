@@ -15,10 +15,11 @@ export * from './CommentGetter';
 export { CommentGetter };
 
 export interface CnbConfig {
-	id: string;
-	secret: string;
+	id?: string;
+	secret?: string;
 	user?: string;
 	password?: string;
+	blogApp?: string;
 }
 
 export namespace Post {
@@ -50,6 +51,12 @@ export interface Post {
 	mt_excerpt?: string;
 	mt_keywords?: string;
 	wp_slug?: string;
+}
+
+interface LoginData {
+	client_id: string;
+	client_secret: string;
+	grant_type: 'client_credentials';
 }
 
 export default class CnbApi {
@@ -92,15 +99,16 @@ export default class CnbApi {
 	private authorizationStr = '';
 	protected async login() {
 		if (this.expiresDate && new Date() < this.expiresDate) return this.authorizationStr;
+		const data: LoginData = {
+			client_id: this.config.id ?? throwError('NoClientId', { cnbConfig: this.config }),
+			client_secret: this.config.secret ?? throwError('NoClientSecret', { cnbConfig: this.config }),
+			grant_type: 'client_credentials',
+		};
 		const body = await this.requester.easyRequest(
 			{
 				method: Method.POST,
 				url: 'https://api.cnblogs.com/token',
-				data: {
-					client_id: this.config.id,
-					client_secret: this.config.secret,
-					grant_type: 'client_credentials',
-				},
+				data,
 				header: CnbApi.baseApiHeader,
 			},
 			Type.Object({
@@ -124,8 +132,8 @@ export default class CnbApi {
 		return body;
 	}
 
-	getCommentGetter(blogApp: string, postId: number, pageSize?: number) {
-		return new CommentGetter(this, blogApp, postId, pageSize);
+	getCommentGetter(postId: number, pageSize?: number) {
+		return new CommentGetter(this, this.config, postId, pageSize);
 	}
 
 	static readonly baseXmlHeader: IncomingHttpHeaders = {
@@ -142,14 +150,14 @@ export default class CnbApi {
 		return new XmlRpcMessage(methodName, params).xml();
 	}
 
-	async editPost(post: Post, postId: number, blogApp: string, publish = true) {
-		const user = this.config.user ?? throwError('NoUser', { postId, blogApp });
-		const password = this.config.password ?? '';
+	async editPost(postId: number, post: Post, publish = true) {
+		const user = this.config.user ?? throwError('NoUser', { cnbConfig: this.config });
+		const password = this.config.password ?? throwError('NoPassword', { cnbConfig: this.config });
 		const xml = this.xml('metaWeblog.editPost', [postId, user, password, post, publish]);
 		await this.requester.easyRequest(
 			{
 				method: Method.POST,
-				url: `https://rpc.cnblogs.com/metaweblog/${blogApp}`,
+				url: `https://rpc.cnblogs.com/metaweblog/${this.config.blogApp}`,
 				data: xml,
 				header: { 'content-type': 'text/xml' },
 			},

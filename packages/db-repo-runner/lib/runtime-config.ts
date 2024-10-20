@@ -11,17 +11,14 @@ import { Value } from '@sinclair/typebox/value';
 const Cnb = Type.Object({
 	id: Type.String(),
 	secret: Type.String(),
-
 	user: Type.String(),
 	password: Type.String(),
-	postId: Type.Number(),
 	blogApp: Type.String(),
+
+	postId: Type.Number(),
 });
-interface Cnb extends CnbConfig {
-	user: string;
-	password: string;
+interface Cnb extends Required<CnbConfig> {
 	postId: number;
-	blogApp: string;
 }
 
 export const CauactRuntimeConfig = Type.Object({

@@ -4,25 +4,33 @@
  */
 declare module './defs';
 
-import { TSchema, Type } from '@sinclair/typebox';
+import { Any, Number, String, TSchema } from '@sinclair/typebox';
 
 export type ErrorDefs = Record<string, Record<string, TSchema>>;
 export const errorDefs = {
 	NoTitle: {
-		floor: Type.Number(),
+		floor: Number(),
 	},
 	WrongBigTitle: {
-		floor: Type.Number(),
+		floor: Number(),
 	},
 	TooManyDatesInACommentLine: {
-		floor: Type.Number(),
-		line: Type.String(),
+		floor: Number(),
+		line: String(),
 	},
 	NoComment: {
-		floor: Type.Number(),
+		floor: Number(),
 	},
 	NoUser: {
-		postId: Type.Number(),
-		blogApp: Type.String(),
+		cnbConfig: Any(),
+	},
+	NoPassword: {
+		cnbConfig: Any(),
+	},
+	NoClientId: {
+		cnbConfig: Any(),
+	},
+	NoClientSecret: {
+		cnbConfig: Any(),
 	},
 } satisfies ErrorDefs;

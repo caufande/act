@@ -11,7 +11,7 @@ export default function Base({ children }: PropsWithChildren) {
 	useEffect(() => {
 		let reseted = false;
 		setData(null);
-		const puller = new Puller(cnb, cnb.postId, cnb.blogApp);
+		const puller = new Puller(cnb, cnb.postId);
 		(async () => {
 			await puller.update();
 			const pulled = await puller.getAll();

@@ -48,11 +48,10 @@ export default class Puller {
 	constructor(
 		cnbConfig: CnbConfig,
 		readonly postId: number,
-		readonly blogApp: string,
 	) {
 		const operator = getOperator();
 		this.cnbApi = new CnbApi(cnbConfig);
-		this.commentGetter = this.cnbApi.getCommentGetter(blogApp, postId);
+		this.commentGetter = this.cnbApi.getCommentGetter(postId);
 		this.storagerVersion = new operator.storagerIniter(n => Value.Assert(Version, n));
 		this.storagerAct = new operator.storagerIniter(Act.assert, Act.deserializer);
 	}

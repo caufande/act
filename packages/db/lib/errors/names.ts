@@ -20,6 +20,10 @@ export const errorName: LangMap = {
 	[Lang.zh]: '博客园评论编译错误',
 };
 
+function m(...args: readonly string[]) {
+	return args.join('\n');
+}
+
 export const errorNames: ErrorNames = {
 	WrongBigTitle: {
 		'*': Lang.zh,
@@ -39,6 +43,30 @@ export const errorNames: ErrorNames = {
 	},
 	NoUser: {
 		'*': Lang.zh,
-		[Lang.zh]: '你没设置 MetaWeblog 用户！如果你真的不用用户也能登录，请联系我对此修复',
+		[Lang.zh]: m(
+			'提供的 CnbConfig 里没有 MetaWeblog 用户名。',
+			'如果你真的不用用户也能登录，请联系我对此修复',
+		),
+	},
+	NoPassword: {
+		'*': Lang.zh,
+		[Lang.zh]: m(
+			'提供的 CnbConfig 里没有 MetaWeblog 用户密码。',
+			'如果你真的不用密码也能登录，请联系我对此修复',
+		),
+	},
+	NoClientId: {
+		'*': Lang.zh,
+		[Lang.zh]: m(
+			'提供的 CnbConfig 里没有 API 的 ID ，无法得到 Token 来请求 API。',
+			'如果你是开发者且不知道这是什么，请去 https://oauth.cnblogs.com/ 进行申请',
+		),
+	},
+	NoClientSecret: {
+		'*': Lang.zh,
+		[Lang.zh]: m(
+			'提供的 CnbConfig 里没有 API 的 Secret ，无法得到 Token 来请求 API',
+			'如果你是开发者且不知道这是什么，请去 https://oauth.cnblogs.com/ 进行申请',
+		),
 	},
 };
