@@ -7,7 +7,7 @@
 	"author": "caufande",
 	"scripts": {
 		"prepare": "husky",
-		"cz": "pnpm lint; cz",
+		"cz": "pnpm lint && cz",
 		"prefmt": "prettier -w .",
 		"fmt": "eslint . --fix",
 		"prelint": "prettier -c .",
