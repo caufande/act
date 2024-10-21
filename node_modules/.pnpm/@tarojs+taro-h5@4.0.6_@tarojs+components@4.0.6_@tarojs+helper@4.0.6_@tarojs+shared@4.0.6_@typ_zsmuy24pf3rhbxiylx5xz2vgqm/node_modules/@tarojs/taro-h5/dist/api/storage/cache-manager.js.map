@@ -1,0 +1,1 @@
+{"version":3,"file":"cache-manager.js","sources":["../../../src/api/storage/cache-manager.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 周期性更新\nexport const createCacheManager = /* @__PURE__ */ temporarilyNotSupport('createCacheManager')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,kBAAkB,mBAAmB,qBAAqB,CAAC,oBAAoB;;;;"}

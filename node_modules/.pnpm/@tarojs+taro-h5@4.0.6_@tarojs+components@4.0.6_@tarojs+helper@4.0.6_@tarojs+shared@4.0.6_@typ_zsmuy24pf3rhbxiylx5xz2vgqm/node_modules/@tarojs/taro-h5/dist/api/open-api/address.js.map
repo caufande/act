@@ -1,0 +1,1 @@
+{"version":3,"file":"address.js","sources":["../../../src/api/open-api/address.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 收货地址\nexport const chooseAddress = /* @__PURE__ */ temporarilyNotSupport('chooseAddress')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,aAAa,mBAAmB,qBAAqB,CAAC,eAAe;;;;"}

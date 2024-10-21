@@ -1,0 +1,1 @@
+{"version":3,"file":"options.js","sources":["../src/options.ts"],"sourcesContent":["import type { Options } from './interface'\n\nexport const options: Options = {\n  prerender: true,\n  debug: false\n}\n"],"names":[],"mappings":"AAEa,MAAA,OAAO,GAAY;AAC9B,IAAA,SAAS,EAAE,IAAI;AACf,IAAA,KAAK,EAAE,KAAK;;;;;"}

@@ -1,0 +1,11 @@
+import Taro from '@tarojs/api';
+declare const previewMedia: typeof Taro.previewMedia;
+declare const compressImage: (option?: {}, ...args: any[]) => Promise<Partial<TaroGeneral.CallbackResult> & Record<string, unknown> & TaroGeneral.CallbackResult>;
+declare const chooseMessageFile: (option?: {}, ...args: any[]) => Promise<Partial<TaroGeneral.CallbackResult> & Record<string, unknown> & TaroGeneral.CallbackResult>;
+declare const editImage: (option?: {}, ...args: any[]) => Promise<Partial<TaroGeneral.CallbackResult> & Record<string, unknown> & TaroGeneral.CallbackResult>;
+declare const cropImage: (option?: {}, ...args: any[]) => Promise<Partial<TaroGeneral.CallbackResult> & Record<string, unknown> & TaroGeneral.CallbackResult>;
+export * from "./saveImageToPhotosAlbum.js";
+export { previewMedia, compressImage, chooseMessageFile, editImage, cropImage };
+export * from "./getImageInfo.js";
+export * from "./previewImage.js";
+export * from "./chooseImage.js";

@@ -1,0 +1,1 @@
+"use strict";var dd=require("../core");require("../platform/android"),require("../platform/ios"),module.exports=dd;

@@ -1,0 +1,1 @@
+{"version":3,"file":"constants.js","sources":["../../../src/components/virtual-waterfall/constants.ts"],"sourcesContent":["export const IS_SCROLLING_DEBOUNCE_INTERVAL = 200\n"],"names":[],"mappings":"AAAO,MAAM,8BAA8B,GAAG;;;;"}

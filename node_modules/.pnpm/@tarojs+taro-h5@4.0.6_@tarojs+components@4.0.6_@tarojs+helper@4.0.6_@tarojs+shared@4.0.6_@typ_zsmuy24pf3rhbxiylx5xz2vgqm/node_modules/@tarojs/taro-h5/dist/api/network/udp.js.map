@@ -1,0 +1,1 @@
+{"version":3,"file":"udp.js","sources":["../../../src/api/network/udp.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// UDP 通信\nexport const createUDPSocket = /* @__PURE__ */ temporarilyNotSupport('createUDPSocket')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,eAAe,mBAAmB,qBAAqB,CAAC,iBAAiB;;;;"}
