@@ -1,13 +1,8 @@
-import Operator from '@cauact/db-operator-node';
-import { CnbApi, getOperator, Method, Puller, regOperator } from '@cauact/db/lib';
-import { runtimeConfig } from './runtime-config';
+import sharp from 'sharp';
+import * as fsp from 'fs/promises';
 
-regOperator(new Operator());
-
-const cnbApi = new CnbApi(runtimeConfig.cnb);
-await cnbApi.editPost(runtimeConfig.cnb.postId, {
-	title: 'CAU ACTivity 活动目录',
-	description: '这篇文章是中国农业大学活动目录的中转。\n下方是索引数据，评论是具体数据。\n\n```js\n[10,0,3]\n```',
-	categories: ['[Markdown]'],
-});
+const buf = await sharp('packages/runner/house.png')
+	.flatten({	background: '#0f0' })
+	.toBuffer();
+fsp.writeFile('packages/runner/test.png', buf);
 

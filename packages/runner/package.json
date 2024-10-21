@@ -16,10 +16,11 @@
 	"author": "caufande",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
+		"@twemoji/api": "^15.1.0",
+		"sharp": "^0.33.5",
 		"@foxglove/xmlrpc": "^1.3.0",
 		"@sinclair/typebox": "^0.33.17",
 		"@types/node": "^22.7.7",
-		"xmlrpc-parser": "^1.0.4",
 		"@cauact/db-operator-node": "workspace:^",
 		"@cauact/db": "workspace:^"
 	},
