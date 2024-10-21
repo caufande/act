@@ -48,6 +48,8 @@ export default tseslint.config(
 		name: 'Node Env',
 		files: [
 			'config/**/*',
+			'packages/runner/**/*',
+			'packages/weapp/config/**/*',
 		],
 		languageOptions: { globals: globals.node },
 	},

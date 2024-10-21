@@ -1,6 +1,17 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli';
 import devConfig from './dev';
 import prodConfig from './prod';
+import { apply, resize, extend } from '@cauact/runner/lib/emoji.cjs';
+
+(async () => {
+	const imgNames = [
+		'calendar',
+		'house',
+	];
+	for (const imgName of imgNames) {
+		await apply(`${__dirname}/../src/asserts/${imgName}.png`, 'small', [resize, extend]);
+	}
+})();
 
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 export default defineConfig<'vite'>(async merge => {
