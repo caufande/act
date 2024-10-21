@@ -6,9 +6,12 @@
 	"main": "lib/index",
 	"type": "module",
 	"scripts": {
+		"prepare": "pnpm build",
+		"prepublishOnly": "pnpm build",
+		"prebuild": "pnpm clean",
 		"build": "tsc",
 		"test": "tsc --noEmit",
-		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js"
+		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.d.cts"
 	},
 	"files": [
 		"lib"

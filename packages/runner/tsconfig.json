@@ -2,7 +2,9 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": "../../config/tsbase.json",
 	"compilerOptions": {
+		"emitDeclarationOnly": true,
 		"allowSyntheticDefaultImports": true
 	},
-	"include": ["**/*"]
+	"include": ["**/*", "lib/emoji.cjs", "lib/util.cjs"],
+	"exclude": ["**/*.d.ts", "lib/util.d.cts", "lib/emoji.d.cts"]
 }
