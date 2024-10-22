@@ -41,11 +41,6 @@ export default tseslint.config(
 		ignores: [
 			'packages/db/**/*.js',
 			'packages/db/lib/**/*.d.ts',
-			'packages/db/index.d.ts',
-			'packages/db-operator-*/**/*.d.ts',
-			'packages/db-operator-*/**/*.js',
-			'packages/runner/lib/**/*.d.ts',
-			'packages/runner/lib/**/*.d.cts',
 			'**/dist/**/*',
 		],
 	},

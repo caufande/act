@@ -1,10 +1,10 @@
 /**
  * 运行时环境变量相关
- * @module
  * @license GPL-2.0-or-later
  */
+declare module './runtime-config';
 
-/**@import { CnbConfig } from '@cauact/db' */
+import { CnbConfig } from '@cauact/db';
 import { Type } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 
@@ -17,24 +17,20 @@ const Cnb = Type.Object({
 
 	postId: Type.Number(),
 });
-/**
- * @typedef {Required<CnbConfig> & { postId: number }} Cnb
- */
+interface Cnb extends Required<CnbConfig> {
+	postId: number;
+}
 
 export const CauactRuntimeConfig = Type.Object({
 	cnb: Cnb,
 });
-/**
- * @typedef {{  cnb: Cnb }} CauactRuntimeConfig
- */
+export interface CauactRuntimeConfig { cnb: Cnb }
 
 // @ts-ignore
-const chk = typeof __CAUACT_RUNTIME__ === 'undefined'
+const chk: unknown = typeof __CAUACT_RUNTIME__ as any === 'undefined'
 	? JSON.parse(process.env.CAUACT_RUNTIME?.toString() ?? '{}')
 	// @ts-ignore
-	// eslint-disable-next-line no-undef
-	: __CAUACT_RUNTIME__;
+	: __CAUACT_RUNTIME__ as any;
 Value.Assert(CauactRuntimeConfig, chk);
 
-/**@type {CauactRuntimeConfig} */
-export const runtimeConfig = chk;
+export const runtimeConfig: CauactRuntimeConfig = chk;
