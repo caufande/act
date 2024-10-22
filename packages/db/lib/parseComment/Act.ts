@@ -57,6 +57,7 @@ export default class Act {
 	static assert(n: unknown): asserts n is Act {
 		Value.Assert(Type.Object({
 			floor: Type.Number(),
+			id: Type.Number(),
 			title: Type.String(),
 			author: Type.String(),
 			authorUrl: Type.String(),
@@ -75,6 +76,7 @@ export default class Act {
 	 * 项目编号
 	 */
 	readonly floor: number;
+	readonly id: number;
 	/**
 	 * 项目名称
 	 */
@@ -92,8 +94,9 @@ export default class Act {
 	 */
 	readonly stages: readonly Stage[] = [Value.Create(Stage)];
 	protected parsingStage = false;
-	constructor({ floor, author, authorUrl }: Comment, json: JSONContent) {
+	constructor({ floor, id, author, authorUrl }: Comment, json: JSONContent) {
 		this.floor = floor;
+		this.id = id;
 		this.author = author;
 		this.authorUrl = authorUrl;
 		const titles: string[] = [];
