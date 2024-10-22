@@ -20,6 +20,7 @@ export default tseslint.config(
 				project: [
 					'config/tsconfig.json',
 					'packages/*/tsconfig.json',
+					'packages/runner/tsconfig-js.json',
 				],
 			},
 		},
@@ -46,6 +47,7 @@ export default tseslint.config(
 			'packages/db-operator-*/**/*.js',
 			'packages/runner/lib/**/*.d.ts',
 			'packages/runner/lib/**/*.d.cts',
+			'packages/runner/lib/**/*.js',
 			'**/dist/**/*',
 		],
 	},

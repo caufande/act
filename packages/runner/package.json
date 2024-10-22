@@ -6,9 +6,10 @@
 	"main": "lib/index",
 	"type": "module",
 	"scripts": {
-		"build": "tsc",
-		"test": "tsc --noEmit",
-		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js"
+		"prebuild": "pnpm clean",
+		"build": "tsc --build",
+		"test": "pnpm build",
+		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js lib/**/*.d.cts *.tsbuildinfo"
 	},
 	"files": [
 		"lib"
