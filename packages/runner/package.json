@@ -9,7 +9,7 @@
 		"prebuild": "pnpm clean",
 		"build": "tsc --build",
 		"test": "pnpm build",
-		"clean": "rimraf -g lib/**/*.d.ts test/**/*.d.ts lib/**/*.js test/**/*.js lib/**/*.d.cts *.tsbuildinfo"
+		"clean": "rimraf -g lib/{**/,}*.{d.ts,js,d.cts} *.tsbuildinfo"
 	},
 	"files": [
 		"lib"
