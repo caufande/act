@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": "../../config/tsbase.json",
-	"include": ["**/*.cjs"],
+	"include": ["**/*.cjs", "lib/types.ts"],
 	"compilerOptions": {
 		"emitDeclarationOnly": true,
 		"allowSyntheticDefaultImports": true,

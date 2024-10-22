@@ -48,8 +48,4 @@ module.exports = obj;
 const sharp = require('sharp');
 const fsp = require('fs/promises');
 const { postfixFile } = require('./util.cjs');
-
-/**
- * @typedef {(buffer: Buffer) => Promise<Buffer>} EmojiOperation
- */
-
+/**@import { EmojiOperation } from './types' */
