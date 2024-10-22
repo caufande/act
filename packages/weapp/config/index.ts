@@ -9,7 +9,7 @@ import { apply, resize, extend } from '@cauact/runner/lib/emoji.cjs';
 		'house',
 	];
 	for (const imgName of imgNames) {
-		await apply(`${__dirname}/../src/asserts/${imgName}.png`, 'small', [resize, extend]);
+		await apply(`${__dirname}/../src/asserts/${imgName}.png`, 'small', [extend]);
 	}
 })();
 

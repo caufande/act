@@ -29,9 +29,13 @@ const obj = {
 			.toBuffer();
 	},
 
+	ratio: 0.7,
 	/**@type {EmojiOperation} */
 	async extend(buffer) {
-		const border = (81 - obj.smallSize) / 2;
+		const metadata = await sharp(buffer)
+			.metadata();
+		const width = metadata.width ?? 64;
+		const border = Math.round(((width / obj.ratio) - width) / 2);
 		return await sharp(buffer)
 			.extend({
 				top: border,
