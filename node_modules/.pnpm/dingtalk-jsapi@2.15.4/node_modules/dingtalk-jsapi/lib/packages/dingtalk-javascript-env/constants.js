@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.FRAMEWORK=exports.PLATFORM=exports.RUNTIME=void 0,exports.RUNTIME={WEB:"Web",WEEX:"Weex",UNKNOWN:"Unknown"},exports.PLATFORM={MAC:"Mac",WINDOWS:"Windows",IOS:"iOS",ANDROID:"Android",IPAD:"iPad",BROWSER:"Browser",UNKNOWN:"Unknown"},exports.FRAMEWORK={VUE:"Vue",RAX:"Rax",UNKNOWN:"Unknown"};

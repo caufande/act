@@ -1,0 +1,102 @@
+import { h } from '@stencil/core';
+export class CoverImage {
+  constructor() {
+    this.src = undefined;
+    this.nativeProps = {};
+  }
+  imageOnLoad() {
+    const { width, height, } = this.imgRef;
+    this.onLoad.emit({
+      width,
+      height
+    });
+  }
+  imageOnError(e) {
+    this.onError.emit(e);
+  }
+  render() {
+    const { src, imageOnLoad, imageOnError, nativeProps } = this;
+    return (h("img", Object.assign({ ref: img => (this.imgRef = img), src: src, onLoad: imageOnLoad.bind(this), onError: imageOnError.bind(this) }, nativeProps)));
+  }
+  static get is() { return "taro-cover-image-core"; }
+  static get originalStyleUrls() {
+    return {
+      "$": ["./style/index.scss"]
+    };
+  }
+  static get styleUrls() {
+    return {
+      "$": ["./style/index.css"]
+    };
+  }
+  static get properties() {
+    return {
+      "src": {
+        "type": "string",
+        "mutable": false,
+        "complexType": {
+          "original": "string",
+          "resolved": "string",
+          "references": {}
+        },
+        "required": false,
+        "optional": false,
+        "docs": {
+          "tags": [],
+          "text": ""
+        },
+        "attribute": "src",
+        "reflect": false
+      },
+      "nativeProps": {
+        "type": "unknown",
+        "mutable": false,
+        "complexType": {
+          "original": "{}",
+          "resolved": "{}",
+          "references": {}
+        },
+        "required": false,
+        "optional": false,
+        "docs": {
+          "tags": [],
+          "text": ""
+        },
+        "defaultValue": "{}"
+      }
+    };
+  }
+  static get events() {
+    return [{
+        "method": "onLoad",
+        "name": "load",
+        "bubbles": true,
+        "cancelable": true,
+        "composed": true,
+        "docs": {
+          "tags": [],
+          "text": ""
+        },
+        "complexType": {
+          "original": "any",
+          "resolved": "any",
+          "references": {}
+        }
+      }, {
+        "method": "onError",
+        "name": "error",
+        "bubbles": true,
+        "cancelable": true,
+        "composed": true,
+        "docs": {
+          "tags": [],
+          "text": ""
+        },
+        "complexType": {
+          "original": "any",
+          "resolved": "any",
+          "references": {}
+        }
+      }];
+  }
+}

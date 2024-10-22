@@ -1,0 +1,1 @@
+{"version":3,"file":"video-decoder.js","sources":["../../../src/api/media/video-decoder.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 视频解码器\nexport const createVideoDecoder = /* @__PURE__ */ temporarilyNotSupport('createVideoDecoder')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,kBAAkB,mBAAmB,qBAAqB,CAAC,oBAAoB;;;;"}

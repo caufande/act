@@ -1,0 +1,1 @@
+{"version":3,"file":"media-recorder.js","sources":["../../../src/api/media/media-recorder.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 画面录制器\nexport const createMediaRecorder = /* @__PURE__ */ temporarilyNotSupport('createMediaRecorder')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,mBAAmB,mBAAmB,qBAAqB,CAAC,qBAAqB;;;;"}

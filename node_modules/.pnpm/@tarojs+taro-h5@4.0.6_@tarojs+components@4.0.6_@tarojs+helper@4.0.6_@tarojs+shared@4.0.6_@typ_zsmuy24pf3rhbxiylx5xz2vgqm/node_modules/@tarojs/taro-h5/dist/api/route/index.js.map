@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../../src/api/route/index.ts"],"sourcesContent":["// 路由\nexport {\n  navigateBack,\n  navigateTo,\n  redirectTo,\n  reLaunch,\n  switchTab\n} from '@tarojs/router'\n\n// FIXME 方法导出类型未对齐，后续修复\n"],"names":[],"mappings":";;AAAA;AASA"}

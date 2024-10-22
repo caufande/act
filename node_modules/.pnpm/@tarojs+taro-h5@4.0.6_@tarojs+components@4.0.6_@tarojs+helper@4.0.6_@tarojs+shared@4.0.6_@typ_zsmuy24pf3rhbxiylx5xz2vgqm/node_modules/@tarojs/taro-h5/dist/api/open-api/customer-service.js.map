@@ -1,0 +1,1 @@
+{"version":3,"file":"customer-service.js","sources":["../../../src/api/open-api/customer-service.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 微信客服\nexport const openCustomerServiceChat = /* @__PURE__ */ temporarilyNotSupport('openCustomerServiceChat')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,uBAAuB,mBAAmB,qBAAqB,CAAC,yBAAyB;;;;"}

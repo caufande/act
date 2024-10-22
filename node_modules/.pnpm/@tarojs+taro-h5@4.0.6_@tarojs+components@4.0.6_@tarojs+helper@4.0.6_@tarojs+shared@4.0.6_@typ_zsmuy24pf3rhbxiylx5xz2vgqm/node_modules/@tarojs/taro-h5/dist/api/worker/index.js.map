@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../../src/api/worker/index.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// Worker\nexport const createWorker = /* @__PURE__ */ temporarilyNotSupport('createWorker')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,YAAY,mBAAmB,qBAAqB,CAAC,cAAc;;;;"}
