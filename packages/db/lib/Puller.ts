@@ -112,6 +112,7 @@ export default class Puller {
 	protected async reqAct(floor: number) {
 		const comment = await this.commentGetter.getFloor(floor) ?? throwError('NoComment', { floor });
 		const act = await parseComment(comment);
+		this.cachedVerInfo?.diff.delete(floor);
 		this.cachedAct[floor] = act;
 		await this.setStoragedAct(floor, act);
 		return act;
