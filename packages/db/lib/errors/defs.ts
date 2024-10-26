@@ -6,6 +6,7 @@ declare module './defs';
 
 import { Any, Number, String, TSchema } from '@sinclair/typebox';
 
+export const message = String();
 export type ErrorDefs = Record<string, Record<string, TSchema>>;
 export const errorDefs = {
 	NoTitle: {
@@ -32,5 +33,8 @@ export const errorDefs = {
 	},
 	NoClientSecret: {
 		cnbConfig: Any(),
+	},
+	ActParsingError: {
+		message,
 	},
 } satisfies ErrorDefs;

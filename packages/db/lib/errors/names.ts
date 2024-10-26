@@ -17,7 +17,7 @@ export function getTip(errorType: ErrorType) {
 
 export const errorName: LangMap = {
 	'*': Lang.zh,
-	[Lang.zh]: '博客园评论编译错误',
+	[Lang.zh]: '运行时错误，请寻找管理员',
 };
 
 function m(...args: readonly string[]) {
@@ -68,5 +68,9 @@ export const errorNames: ErrorNames = {
 			'提供的 CnbConfig 里没有 API 的 Secret ，无法得到 Token 来请求 API',
 			'如果你是开发者且不知道这是什么，请去 https://oauth.cnblogs.com/ 进行申请',
 		),
+	},
+	ActParsingError: {
+		'*': Lang.zh,
+		[Lang.zh]: '活动对应的评论解析错误',
 	},
 };
