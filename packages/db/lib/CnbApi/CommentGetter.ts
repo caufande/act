@@ -4,7 +4,6 @@
  */
 declare module './CommentGetter';
 
-import { decodeHTML } from 'entities';
 import CnbApi, { CnbConfig, CommentOrigin } from '.';
 import { lowerFirst } from '../util';
 import { calcPageNum, calcWhichPage } from './util';
@@ -27,7 +26,6 @@ export class Comment {
 	constructor(commentOrigin: CommentOrigin) {
 		// @ts-ignore
 		Object.keys(commentOrigin).forEach(n => this[lowerFirst(n)] = commentOrigin[n]);
-		this.body = decodeHTML(this.body);
 		this.dateAdded = new Date(this.dateAdded);
 	};
 }

@@ -4,26 +4,8 @@
  */
 declare module './parseDate';
 
-import { JSONContent } from 'html-to-json-parser/dist/types';
 import { throwError } from '../errors';
 import { textToDate } from '../util';
-
-export function getText(json: JSONContent): string {
-	switch (json.type) {
-		case 'p':
-			return json.content.map(n => (typeof n === 'string' ? n : getText(n))).join('');
-		case 'h1':
-		case 'h2':
-		case 'h3':
-		case 'h4':
-		case 'h5':
-			return json.content.join('');
-		case 'br':
-			return '\n';
-		default:
-			return json.toString();
-	}
-}
 
 export type Parsed = [Date, Date][];
 function parseDateLine(line: string, floor: number): [Date, Date] | null {

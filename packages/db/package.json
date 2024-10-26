@@ -6,9 +6,11 @@
 	"main": "index",
 	"type": "module",
 	"scripts": {
+		"peggy:act": "peggy --format es --dts --return-types \"{\\\"Act\\\":\\\"import('./Act').ActParsed\\\"}\" lib/parseComment/act-parser.peggy",
+		"prepare": "pnpm peggy:act",
 		"build": "tsc",
 		"test": "tsc --noEmit",
-		"clean": "rimraf -g lib/{**/,}*.{d.ts,js}"
+		"clean": "rimraf -g lib/{**/,}*.{d.ts,js} index.{js,d.ts}"
 	},
 	"files": [
 		"index.js",
@@ -21,12 +23,11 @@
 		"@types/node": "^22.7.5",
 		"xmlrpc-parser": "^1.0.4",
 		"date-fns": "^4.1.0",
-		"html-to-json-parser": "^2.0.1",
 		"@sinclair/typebox": "^0.33.17",
-		"entities": "^5.0.0",
 		"localforage": "^1.10.0"
 	},
 	"devDependencies": {
+		"peggy": "^4.1.1",
 		"rimraf": "^6.0.1"
 	},
 	"repository": {
