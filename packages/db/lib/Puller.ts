@@ -47,11 +47,11 @@ export default class Puller {
 	protected readonly storagerAct: Storager<Act>;
 	constructor(
 		cnbConfig: CnbConfig,
-		readonly postId: number,
+		readonly actPostId: number,
 	) {
 		const operator = getOperator();
 		this.cnbApi = new CnbApi(cnbConfig);
-		this.commentGetter = this.cnbApi.getCommentGetter(postId);
+		this.commentGetter = this.cnbApi.getCommentGetter(actPostId);
 		this.storagerVersion = new operator.storagerIniter(n => Value.Assert(Version, n));
 		this.storagerAct = new operator.storagerIniter(Act.assert, Act.deserializer);
 	}
@@ -80,7 +80,7 @@ export default class Puller {
 		return diff;
 	}
 	private async reqVerInfo(): Promise<Version> {
-		const post = await this.cnbApi.getPost(this.postId);
+		const post = await this.cnbApi.getPost(this.actPostId);
 		const startIndex = post.indexOf(Puller.verStartStr) + Puller.verStartStr.length;
 		const endIndex = post.indexOf(Puller.verEndStr, startIndex);
 		const data = post.slice(startIndex, endIndex);

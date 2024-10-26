@@ -3,7 +3,7 @@
 		"user": "abc",
 		"password": "1111111111111111111111111111111111111111111111111111111111111111",
 		"blogApp": "cmt",
-		"postId": 11111111,
+		"actPostId": 11111111,
 		"id": "11111111-1111-1111-1111-111111111111",
 		"secret": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 	}

@@ -15,10 +15,10 @@ const Cnb = Type.Object({
 	password: Type.String(),
 	blogApp: Type.String(),
 
-	postId: Type.Number(),
+	actPostId: Type.Number(),
 });
 interface Cnb extends Required<CnbConfig> {
-	postId: number;
+	actPostId: number;
 }
 
 export const CauactRuntimeConfig = Type.Object({
