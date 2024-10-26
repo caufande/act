@@ -37,4 +37,12 @@ export const errorDefs = {
 	ActParsingError: {
 		message,
 	},
+	GroupsPostFormatError: {
+		content: String(),
+	},
+	WrongInfoNumberOfGroupLine: {
+		line: String(),
+		number: Number(),
+		lineNumber: Number(),
+	},
 } satisfies ErrorDefs;

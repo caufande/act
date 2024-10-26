@@ -7,6 +7,8 @@ declare module './lang';
 export * from './CnbApi';
 export { default as CnbApi } from './CnbApi';
 export * from './errors';
+export * from './GroupMannger';
+export { default as GroupMannger } from './GroupMannger';
 export * from './lang';
 export * from './Operator';
 export { default as Operator } from './Operator';

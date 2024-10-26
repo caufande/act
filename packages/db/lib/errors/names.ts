@@ -73,4 +73,12 @@ export const errorNames: ErrorNames = {
 		'*': Lang.zh,
 		[Lang.zh]: '活动对应的评论解析错误',
 	},
+	GroupsPostFormatError: {
+		'*': Lang.zh,
+		[Lang.zh]: '用户组博客内容有误',
+	},
+	WrongInfoNumberOfGroupLine: {
+		'*': Lang.zh,
+		[Lang.zh]: '一条用户组记录中的字段数量错误',
+	},
 };

@@ -16,9 +16,11 @@ const Cnb = Type.Object({
 	blogApp: Type.String(),
 
 	actPostId: Type.Number(),
+	groupsPostId: Type.Number(),
 });
 interface Cnb extends Required<CnbConfig> {
 	actPostId: number;
+	groupsPostId: number;
 }
 
 export const CauactRuntimeConfig = Type.Object({

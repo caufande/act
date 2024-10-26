@@ -1,8 +1,10 @@
-import sharp from 'sharp';
-import * as fsp from 'fs/promises';
+import { CnbApi, parseGroups, regOperator } from '@cauact/db';
+import Operator from '@cauact/db-operator-node';
+import { runtimeConfig } from './runtime-config';
 
-const buf = await sharp('packages/runner/house.png')
-	.flatten({	background: '#0f0' })
-	.toBuffer();
-fsp.writeFile('packages/runner/test.png', buf);
+regOperator(new Operator());
+const cnbApi = new CnbApi(runtimeConfig.cnb);
+const postHtml = await cnbApi.getPost(runtimeConfig.cnb.groupsPostId);
+const parsed = await parseGroups(postHtml);
+console.log(parsed);
 
