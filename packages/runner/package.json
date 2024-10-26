@@ -6,10 +6,16 @@
 	"main": "lib/index",
 	"type": "module",
 	"scripts": {
-		"prebuild": "pnpm clean",
+		"prepare": "pnpm build:js",
+		"prebuild:js": "pnpm clean:js",
+		"build:js": "tsc -p tsconfig-js.json",
+		"prebuild": "pnpm clean:all",
 		"build": "tsc --build",
-		"test": "pnpm build",
-		"clean": "rimraf -g lib/{**/,}*.{d.ts,js,d.cts} *.tsbuildinfo"
+		"test": "pnpm build && pnpm clean",
+		"clean:js": "rimraf -g tsconfig-js.tsbuildinfo lib/{**/,}*.d.cts",
+		"clean:ts": "rimraf -g tsconfig.tsbuildinfo lib/{**/,}*.{js,d.ts}",
+		"clean:all": "pnpm clean:ts; pnpm clean:js",
+		"clean": "pnpm clean:ts"
 	},
 	"files": [
 		"lib"

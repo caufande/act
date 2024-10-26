@@ -10,7 +10,8 @@
 		"prepare": "pnpm peggy:act",
 		"build": "tsc",
 		"test": "tsc --noEmit",
-		"clean": "rimraf -g lib/{**/,}*.{d.ts,js} index.{js,d.ts}"
+		"clean": "rimraf -g lib/{**/,}*.{d.ts,js} index.{js,d.ts}",
+		"postclean": "pnpm prepare"
 	},
 	"files": [
 		"index.js",
