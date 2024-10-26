@@ -13,6 +13,8 @@ permissions:
 
 jobs:
     test:
+        env:
+            CAUACT_RUNTIME: ${{ secrets.CAUACT_RUNTIME }}
         runs-on: ubuntu-latest
         strategy:
             matrix:
