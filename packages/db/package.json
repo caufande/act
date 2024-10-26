@@ -18,7 +18,6 @@
 	"author": "caufande",
 	"license": "GPL-2.0-or-later",
 	"dependencies": {
-		"@cauact/db-repo": "workspace:^",
 		"@types/node": "^22.7.5",
 		"xmlrpc-parser": "^1.0.4",
 		"date-fns": "^4.1.0",
