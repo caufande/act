@@ -1,20 +1,47 @@
-@startuml
+@startuml "信息流动图"
 title 信  息  流  动  图
-package "数  据  库" {
-	database "act-db 仓  库" as dbrepo
-	actor "数  据  库  维  护  者" as dbadmin
+package "cnblogs 博  客" {
+	database "活  动  列  表  评  论" as db_acts
+	database "用  户  组  博  文" as db_groups
+	database "活  动  索  引  博  文" as db_version
 }
-package "网  站" {
-	component "数  据  库  编  程  接  口" as wbjs
-	component "当  日  活  动  显  示  功  能" as wbtody
+component "编  程  接  口" {
+	component "cnblogs API" as dbapi_cnbapi
+	component "MetaWeblog" as dbapi_metaweblog
 }
+db_acts <--> dbapi_cnbapi
+db_groups --> dbapi_cnbapi
+db_version --> dbapi_cnbapi
+db_groups <-- dbapi_metaweblog
+db_version <-- dbapi_metaweblog
+component "Weapp" {
+	portin "构 建 时 secret" as weapp_secret
+	database "缓  存  用  户  组" as weapp_groups
+	database "缓  存  活  动  列  表" as weapp_acts
+	component "当  日  活  动  显  示" as weapp_tody
+	weapp_secret --> weapp_groups
+	weapp_secret --> weapp_acts
+	weapp_acts --> weapp_tody
+	weapp_groups --> weapp_tody
+}
+dbapi_cnbapi -> weapp_secret
+component "GitHub Pages" {
+	portin "用 户 secret" as pages_secret
+	portin "用 户 token" as pages_token
+	component "用  户  组  管  理" as pages_groups
+	component "活  动  添  加  修  改" as pages_acts
+	actor "管  理  员" as pages_admin
+	pages_token <-- pages_groups
+	pages_secret <-- pages_acts
+	pages_groups <- pages_admin
+}
+dbapi_metaweblog <-- pages_token
+dbapi_cnbapi <-- pages_secret
 package "信  息  源" {
-	actor "活  动  组  织  者" as fmorg
-	collections "活  动  发  布  信  息" as fminfo
+	actor "活  动  组  织  者" as fm_org
+	collections "活  动  发  布  信  息" as fm_info
 }
-dbadmin --> dbrepo
-wbjs <-- dbrepo
-fmorg --> dbrepo
-wbtody <-- wbjs
-fminfo --> dbadmin
+pages_acts <-- fm_org
+pages_acts <-- fm_info
+pages_admin <-- fm_org
 @enduml
