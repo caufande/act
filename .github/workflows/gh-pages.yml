@@ -13,6 +13,9 @@ permissions:
 
 jobs:
     build:
+        env:
+            PLANT_UML_VERSION: '1.2024.7'
+            UML_GRAPH_LIST: 'docs/arch.puml'
         runs-on: ubuntu-latest
         steps:
             - name: Use Node.js
@@ -32,6 +35,16 @@ jobs:
                   pnpm i
                   pnpm i
                   pnpm build
+
+            - name: Gen PlantUML
+              run: |
+                  sudo apt install graphviz
+                  wget https://github.com/plantuml/plantuml/releases/download/v${{ env.PLANT_UML_VERSION }}/plantuml-${{ env.PLANT_UML_VERSION }}.jar -O plantuml.jar
+                  IFS=',' read -r -a array <<< "${{ env.UML_GRAPH_LIST }}"
+                  for item in "${array[@]}"; do
+                    java -jar plantuml.jar -tsvg $item
+                  done
+                  rm -rf plantuml.jar
 
             - name: Save changes
               run: |
