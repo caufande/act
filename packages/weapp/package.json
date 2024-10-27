@@ -19,7 +19,7 @@
 		"dev:weapp": "npm run build:weapp -- --watch"
 	},
 	"author": "caufande",
-	"license": "GPL-2.0-or-later",
+	"license": "AGPL-3.0-or-later",
 	"dependencies": {
 		"@cauact/runner": "workspace:^",
 		"@cauact/db": "workspace:^",

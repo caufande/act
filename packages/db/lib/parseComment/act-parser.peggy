@@ -1,4 +1,8 @@
 {{
+	/**
+	 * API 获取的活动评论语法定义
+	 * @license AGPL-3.0-or-later
+	 */
 	import { textToDate } from '../util';
 	import { parseDate } from './parseDate';
 }}

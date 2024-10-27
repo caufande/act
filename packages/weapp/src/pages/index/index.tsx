@@ -1,3 +1,9 @@
+/**
+ * 主页
+ * @license AGPL-3.0-or-later
+ */
+declare module '.';
+
 import { CnbApi, CommentGetter, parseComment } from '@cauact/db';
 import { Button, Text, View } from '@tarojs/components';
 import { useContext, useRef } from 'react';

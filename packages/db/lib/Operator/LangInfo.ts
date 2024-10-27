@@ -1,6 +1,6 @@
 /**
  * 语言解析器
- * @license GPL-2.0-or-later
+ * @license AGPL-3.0-or-later
  */
 declare module './LangInfo';
 

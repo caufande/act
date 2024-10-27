@@ -1,3 +1,9 @@
+/**
+ * 根布局节点
+ * @license AGPL-3.0-or-later
+ */
+declare module './Base';
+
 import { Puller } from '@cauact/db';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { Data, DataContent } from '../lib/data-content';

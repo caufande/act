@@ -19,7 +19,7 @@
 		"lib"
 	],
 	"author": "caufande",
-	"license": "GPL-2.0-or-later",
+	"license": "AGPL-3.0-or-later",
 	"dependencies": {
 		"html-to-json-parser": "^2.0.1",
 		"@types/node": "^22.7.5",

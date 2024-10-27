@@ -7,7 +7,7 @@
 		"serve": "serve --ssl-cert ssl.pem --ssl-key ssl-key.pem"
 	},
 	"author": "caufande",
-	"license": "GPL-2.0-or-later",
+	"license": "AGPL-3.0-or-later",
 	"dependencies": {
 		"@cauact/db": "workspace:^"
 	},

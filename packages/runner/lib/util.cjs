@@ -1,7 +1,7 @@
 /**
  * 一些实用小工具
  * @module
- * @license GPL-2.0-or-later
+ * @license AGPL-3.0-or-later
  */
 const obj = {
 	/**

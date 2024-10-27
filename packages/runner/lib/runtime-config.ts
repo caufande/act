@@ -1,6 +1,6 @@
 /**
  * 运行时环境变量相关
- * @license GPL-2.0-or-later
+ * @license AGPL-3.0-or-later
  */
 declare module './runtime-config';
 

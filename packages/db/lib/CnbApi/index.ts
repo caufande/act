@@ -1,6 +1,6 @@
 /**
  * 博客 API 相关
- * @license GPL-2.0-or-later
+ * @license AGPL-3.0-or-later
  */
 /// <reference path="../../types/xmlrpc-parser.d.ts" />
 declare module '.';
