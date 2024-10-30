@@ -35,7 +35,7 @@ export default class CommentGetter {
 	protected readonly config: CnbConfig;
 	constructor(
 		readonly cnbApi: CnbApi,
-		readonly actPostId: number,
+		readonly postId: number,
 		readonly pageSize = 50,
 	) {
 		this.config = cnbApi.config;
@@ -44,7 +44,7 @@ export default class CommentGetter {
 	protected readonly cache: (readonly Comment[])[] = [];
 	async getPage(index: number): Promise<readonly Comment[]> {
 		if (this.cache[index]) return this.cache[index];
-		const data = await this.cnbApi.getCommentPage(this.actPostId, index, this.pageSize);
+		const data = await this.cnbApi.getCommentPage(this.postId, index, this.pageSize);
 		const page = data.map(n => new Comment(n));
 		return this.cache[index] = page;
 	}
