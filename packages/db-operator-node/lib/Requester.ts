@@ -15,6 +15,14 @@ import {
 import needle from 'needle';
 
 export default class Requester extends IRequester {
+	static getIniter(debug: boolean) {
+		if (!debug) return Requester;
+		return class RequesterDebug extends Requester {
+			protected override debug = true;
+		};
+	}
+
+	protected debug = false;
 	baseHeader: IncomingHttpHeaders;
 	constructor(...[baseHeader]: ConstructorParameters<RequesterIniter>) {
 		super();
@@ -23,8 +31,10 @@ export default class Requester extends IRequester {
 
 	async send<T = undefined>({ url, header = {}, method: methodIn = Method.GET, data }: RequestParams<T>): Promise<RequestedData> {
 		const method: any = (methodIn as string).toLowerCase();
+		const headers = { ...this.baseHeader, ...header };
+		if (this.debug) console.log({ method, url, data, headers });
 		const res = await needle(method, url, data ?? null, {
-			headers: { ...this.baseHeader, ...header },
+			headers,
 		});
 		const error = res.errored ? Error(res.statusMessage) : void 0;
 		return {

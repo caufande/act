@@ -4,12 +4,19 @@
  */
 declare module '.';
 
-import { Operator as IOperator, LangInfo } from '@cauact/db';
+import { Operator as IOperator, LangInfo, RequesterIniter } from '@cauact/db';
 import Requester from './Requester';
 import Storager from './Storager';
 
 export default class Operator extends IOperator {
+	constructor(
+		protected readonly debug = false,
+	) {
+		super();
+		this.requesterIniter = Requester.getIniter(debug);
+	}
+
 	langInfo = new LangInfo('zh-CN');
-	requesterIniter = Requester;
+	requesterIniter: RequesterIniter;
 	storagerIniter = Storager;
 }
