@@ -23,6 +23,8 @@
 	"author": "caufande",
 	"license": "AGPL-3.0-or-later",
 	"dependencies": {
+		"@types/deep-equal": "^1.0.4",
+		"deep-equal": "^2.2.3",
 		"ohm-js": "^17.1.0",
 		"html-to-json-parser": "^2.0.1",
 		"@types/node": "^22.7.5",
