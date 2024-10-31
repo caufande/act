@@ -28,13 +28,13 @@ const parseOpObj: GroupExprActionDict<GroupExpr> = {
 	ExprAnd(a, _, c) {
 		return resOpArr(Operation.And, [a, ...c.children]);
 	},
-	Term_expr(_a, n, _b) {
+	Quoted(_a, n, _b) {
 		return n.getTester();
 	},
 	Term_not(_, n) {
 		return [Operation.Not, n.getTester()];
 	},
-	group(n) {
+	groupName(n) {
 		return n.sourceString;
 	},
 };

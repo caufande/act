@@ -1,18 +1,24 @@
 GroupExpr {
 	Expr
-    	= ExprAnd
-    	| ExprOr
-        | group
-    ExprAnd
-    	= Term ("&" Term)+
-    ExprOr
-    	= Term ( "|" Term )+
-    Term
-    	= group -- name
-        | "(" Expr ")" -- expr
+		= ExprAnd
+		| ExprOr
+		| Term
+
+	ExprAnd
+		= Term (and Term)+
+
+	ExprOr
+		= Term (or Term )+
+
+	Term
+		= groupName -- name
 		| not Term -- not
-	group = (~ (and | or | not | space | "(" | ")") any)+
+		| Quoted<Expr> -- expr
+
+	Quoted<T> = "(" T ")"
+
+	groupName = (~ (and | or | not | space | "(" | ")") any)+
 	not = "!"
-    and = "&"
-    or = "|"
+	and = "&"
+	or = "|"
 }
