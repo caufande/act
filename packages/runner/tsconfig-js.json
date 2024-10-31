@@ -4,7 +4,6 @@
 	"include": ["**/*.cjs", "lib/types.ts"],
 	"compilerOptions": {
 		"emitDeclarationOnly": true,
-		"allowSyntheticDefaultImports": true,
 		"composite": true
 	}
 }

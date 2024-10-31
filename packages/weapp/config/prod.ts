@@ -1,7 +1,7 @@
-import type { UserConfigExport } from '@tarojs/cli';
+import { defineConfig } from '@tarojs/cli';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-export default {
+export default defineConfig<'vite'>({
 	mini: {},
 	h5: {
 		/**
@@ -18,4 +18,4 @@ export default {
 				.use(BundleAnalyzerPlugin, []);
 		},
 	},
-} satisfies UserConfigExport<'vite'>;
+});

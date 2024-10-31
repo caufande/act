@@ -1,9 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": "../../config/tsbase.json",
-	"compilerOptions": {
-		"allowSyntheticDefaultImports": true
-	},
 	"references": [{ "path": "tsconfig-js.json" }],
 	"exclude": ["lib/types.ts"],
 	"include": ["**/*.ts"]
