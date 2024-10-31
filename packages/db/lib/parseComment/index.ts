@@ -5,10 +5,11 @@
 declare module '.';
 
 import { Comment } from '../CnbApi';
+import getGroupExpr from './groupExpr';
 import Act from './Act';
 
 export * from './Act';
-export { Act };
+export { Act, getGroupExpr };
 
 export default async function parseComment(comment: Comment) {
 	const act = new Act(comment);

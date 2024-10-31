@@ -43,6 +43,8 @@ export default tseslint.config(
 			'packages/db/**/*.js',
 			'packages/db/lib/**/*.d.ts',
 			'packages/db/index.d.ts',
+			'packages/db/lib/parseComment/*.cjs',
+			'packages/db/lib/parseComment/*.d.cts',
 			'packages/db-operator-*/**/*.d.ts',
 			'packages/db-operator-*/**/*.js',
 			'packages/runner/lib/**/*.d.ts',

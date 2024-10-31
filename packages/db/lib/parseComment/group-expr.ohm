@@ -1,0 +1,18 @@
+GroupExpr {
+	Expr
+    	= ExprAnd
+    	| ExprOr
+        | group
+    ExprAnd
+    	= Term ("&" Term)+
+    ExprOr
+    	= Term ( "|" Term )+
+    Term
+    	= group -- name
+        | "(" Expr ")" -- expr
+		| not Term -- not
+	group = (~ (and | or | not | space | "(" | ")") any)+
+	not = "!"
+    and = "&"
+    or = "|"
+}

@@ -7,7 +7,9 @@
 	"type": "module",
 	"scripts": {
 		"peggy:act": "peggy --format es --dts --return-types \"{\\\"Act\\\":\\\"import('./Act').ActParsed\\\"}\" lib/parseComment/act-parser.peggy",
-		"prepare": "pnpm peggy:act",
+		"ohmjs:group-expr": "pnpm ohm generateBundles --withTypes lib/parseComment/group-expr.ohm",
+		"postohmjs:group-expr": "renamer --force lib/parseComment/group-expr.ohm-bundle.js -r group-expr.ohm-bundle.cjs; renamer --force lib/parseComment/group-expr.ohm-bundle.d.ts -r group-expr.ohm-bundle.d.cts",
+		"prepare": "pnpm peggy:act && pnpm ohmjs:group-expr",
 		"build": "tsc",
 		"test": "tsc --noEmit",
 		"clean": "rimraf -g lib/{**/,}*.{d.ts,js} index.{js,d.ts}",
@@ -21,6 +23,7 @@
 	"author": "caufande",
 	"license": "AGPL-3.0-or-later",
 	"dependencies": {
+		"ohm-js": "^17.1.0",
 		"html-to-json-parser": "^2.0.1",
 		"@types/node": "^22.7.5",
 		"xmlrpc-parser": "^1.0.4",
@@ -29,6 +32,8 @@
 		"localforage": "^1.10.0"
 	},
 	"devDependencies": {
+		"renamer": "^5.0.2",
+		"@ohm-js/cli": "^2.0.0",
 		"peggy": "^4.1.1",
 		"rimraf": "^6.0.1"
 	},
