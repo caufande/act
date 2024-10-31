@@ -6,15 +6,17 @@
 	"type": "commonjs",
 	"author": "caufande",
 	"scripts": {
+		"runall": "pnpm -F=./config -F=./packages/* -F=./docs",
 		"prepare": "husky",
+		"prepareall": "pnpm runall prepare",
 		"cz": "pnpm lint && cz",
 		"prefmt": "prettier -w .",
 		"fmt": "eslint . --fix",
 		"prelint": "prettier -c .",
 		"lint": "eslint .",
-		"build": "pnpm -F=./packages/* -F=./docs build",
-		"clean": "pnpm -F=./packages/* -F=./docs clean",
-		"test": "pnpm -F=./config -F=./docs -F=./packages/* test",
+		"build": "pnpm runall build",
+		"clean": "pnpm runall clean",
+		"test": "pnpm runall test",
 		"dev:weapp": "pnpm -F ./packages/weapp dev:weapp"
 	},
 	"devDependencies": {
