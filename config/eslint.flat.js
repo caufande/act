@@ -56,9 +56,10 @@ export default tseslint.config(
 	{
 		name: 'Node Env',
 		files: [
-			'config/**/*',
-			'packages/runner/**/*',
-			'packages/weapp/config/**/*',
+			'config/**',
+			'packages/runner/**',
+			'packages/weapp/config/**',
+			'packages/taro-plugin-*/**',
 		],
 		languageOptions: { globals: globals.node },
 	},

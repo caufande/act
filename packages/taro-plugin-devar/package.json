@@ -1,0 +1,38 @@
+{
+	"$schema": "https://json.schemastore.org/package",
+	"name": "@cauact/taro-plugin-devar",
+	"version": "1.0.0",
+	"description": "修复 Taro 在 dev 模式下不处理全局变量导致出现定义冲突的问题",
+	"keywords": [
+		"Taro",
+		"Plugin"
+	],
+	"main": "lib/index.js",
+	"type": "commonjs",
+	"scripts": {
+		"build": "tsc",
+		"test": "tsc --noEmit",
+		"clean": "rimraf -g **.d.ts"
+	},
+	"files": [
+		"lib"
+	],
+	"author": "caufande",
+	"license": "AGPL-3.0-or-later",
+	"dependencies": {
+		"@types/node": "^22.7.7",
+		"@tarojs/service": "^4.0.6"
+	},
+	"devDependencies": {
+		"rimraf": "^6.0.1"
+	},
+	"repository": {
+		"directory": "packages/db",
+		"type": "git",
+		"url": "git+https://github.com/caufande/act.git"
+	},
+	"bugs": {
+		"url": "https://github.com/caufande/act/issues"
+	},
+	"homepage": "https://github.com/caufande/act/blob/HEAD/packages/taro-plugin-devar#readme"
+}
