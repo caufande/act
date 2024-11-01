@@ -13,10 +13,10 @@ export default class Storager<T> extends IStorager<T> {
 	protected async getOrigin(key: string): Promise<unknown> {
 		return null;
 	}
-	async set(key: string, value: T): Promise<boolean> {
+	async setOrigin(key: string, value: T): Promise<boolean> {
 		return false;
 	}
-	async batchSet(kvs: Map<string, T>): Promise<boolean> {
+	async batchSetOrigin(kvs: Map<string, T>): Promise<boolean> {
 		return false;
 	}
 	async clear(): Promise<void> {

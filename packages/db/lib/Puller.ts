@@ -8,7 +8,7 @@ import { Type } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 import CnbApi, { CnbConfig, CommentGetter } from './CnbApi';
 import { throwError } from './errors';
-import { getOperator, Storager } from './Operator';
+import { CheckingType, getOperator, Storager } from './Operator';
 import parseComment, { Act } from './parseComment';
 import { range } from './util';
 
@@ -31,6 +31,10 @@ export interface Pulled {
 	readonly acts: readonly Act[];
 }
 
+export interface PullerOption {
+	checkingType?: CheckingType;
+}
+
 export default class Puller {
 	protected static verStartStr = `<pre><code class="language-js">`;
 	protected static verEndStr = `</code></pre>`;
@@ -48,12 +52,20 @@ export default class Puller {
 	constructor(
 		cnbConfig: CnbConfig,
 		readonly actPostId: number,
+		{ checkingType = CheckingType.None }: PullerOption = {},
 	) {
 		const operator = getOperator();
 		this.cnbApi = new CnbApi(cnbConfig);
 		this.commentGetter = this.cnbApi.getCommentGetter(actPostId);
-		this.storagerVersion = new operator.storagerIniter(n => Value.Assert(Version, n));
-		this.storagerAct = new operator.storagerIniter(Act.assert, Act.deserializer);
+		this.storagerVersion = new operator.storagerIniter({
+			asserter: n => Value.Assert(Version, n),
+			checkingType,
+		});
+		this.storagerAct = new operator.storagerIniter({
+			asserter: Act.assert,
+			deserializer: Act.deserializer,
+			checkingType,
+		});
 	}
 
 	protected async getStoragedAct(floor: number) {

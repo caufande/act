@@ -30,11 +30,11 @@ export default class Storager<T> extends IStorager<T> {
 			return null;
 		}
 	}
-	async set(key: string, value: T): Promise<boolean> {
+	async setOrigin(key: string, value: T): Promise<boolean> {
 		const res = await setStorage({ key, data: value });
 		return res.errMsg.includes('ok');
 	}
-	async batchSet(kvs: Map<string, T>): Promise<boolean> {
+	async batchSetOrigin(kvs: Map<string, T>): Promise<boolean> {
 		const kvList: { key: string; value: T }[] = [];
 		kvs.forEach((value, key) => kvList.push({ value, key }));
 		const res = await batchSetStorage({ kvList });
