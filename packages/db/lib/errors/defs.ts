@@ -4,10 +4,10 @@
  */
 declare module './defs';
 
-import { Any, Number, String, TSchema } from '@sinclair/typebox';
+import { Any, Number, String, TSchema, TString } from '@sinclair/typebox';
 
 export const message = String();
-export type ErrorDefs = Record<string, Record<string, TSchema>>;
+export type ErrorDefs = Record<string, Record<string, TSchema> & { message?: TString }>;
 export const errorDefs = {
 	NoTitle: {
 		floor: Number(),
@@ -46,7 +46,7 @@ export const errorDefs = {
 		lineNumber: Number(),
 	},
 	CannotParseGroupExpr: {
-		message: String(),
+		message,
 		interval: Any(),
 	},
 } satisfies ErrorDefs;

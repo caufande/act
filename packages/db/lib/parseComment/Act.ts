@@ -31,9 +31,9 @@ export interface Stage {
 	readonly details: readonly string[];
 }
 export const Stage = Type.Object({
-	name: Type.String({ default: '' }),
-	timeSteps: Type.Array(Type.Tuple([Type.Date(), Type.Date()]), { default: [] }),
-	details: Type.Array(Type.String(), { default: [] }),
+	name: Type.String(),
+	timeSteps: Type.Array(Type.Tuple([Type.Date(), Type.Date()])),
+	details: Type.Array(Type.String()),
 });
 Value.Create(Stage) satisfies Stage;
 

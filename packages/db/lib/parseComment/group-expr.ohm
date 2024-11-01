@@ -1,3 +1,7 @@
+/**
+ * 用户组表达式语法
+ * @license AGPL-3.0-or-later
+ */
 GroupExpr {
 	Expr
 		= ExprAnd
