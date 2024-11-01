@@ -30,6 +30,7 @@
 		"@types/node": "^22.7.5",
 		"xmlrpc-parser": "^1.0.4",
 		"date-fns": "^4.1.0",
+		"entities": "^5.0.0",
 		"@sinclair/typebox": "^0.33.17",
 		"localforage": "^1.10.0"
 	},

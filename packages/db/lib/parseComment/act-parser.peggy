@@ -5,6 +5,8 @@
 	 */
 	import { textToDate } from '../util';
 	import { parseDate } from './parseDate';
+	import getGroupExpr from './groupExpr';
+	import { decodeHTML } from 'entities';
 }}
 
 Act
@@ -31,14 +33,9 @@ DetailH4
 GroupsTitle '面向群体'
 	= '面向群体'
 Groups
-	= AttrH2Start GroupsTitle AttrH2End @GroupNameExps
-GroupNameExps
-	= AttrPStart exps:GroupNameExp|1..,AttrBr| AttrPEnd { return exps; }
-GroupNameExp
-	= name:GroupName AttrDouble rest:GroupNameExp { return [name, ...rest]; }
-	/ name:GroupName { return [name]; }
-GroupName '群体名称'
-	= $[^&<> ]+
+	= AttrH2Start GroupsTitle AttrH2End lines:Page {
+		return getGroupExpr(decodeHTML(lines).split('\n'));
+	}
 
 StagesTitle '时间安排'
 	= '时间安排'

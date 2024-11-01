@@ -9,6 +9,7 @@ import { Value } from '@sinclair/typebox/value';
 import { Comment } from '../CnbApi';
 import { throwError } from '../errors';
 import { parse } from './act-parser';
+import { GroupExpr } from './groupExpr';
 
 export interface Stage {
 	/**
@@ -52,13 +53,13 @@ Value.Create(Detail) satisfies Detail;
 export interface ActParsed {
 	readonly title: string;
 	readonly detail: Detail;
-	readonly groups: readonly (readonly string[])[];
+	readonly groups: GroupExpr;
 	readonly stages: readonly Stage[];
 }
 export const ActParsed = Type.Object({
 	title: Type.String(),
 	detail: Detail,
-	groups: Type.Array(Type.Array(Type.String())),
+	groups: Type.Any(),
 	stages: Type.Array(Stage),
 });
 Value.Create(ActParsed) satisfies ActParsed;
@@ -103,7 +104,7 @@ export default class Act implements ActParsed {
 	 * @minItems 1
 	 */
 	readonly stages!: readonly Stage[];
-	readonly groups!: readonly (readonly string[])[];
+	readonly groups!: GroupExpr;
 
 	readonly floor!: number;
 	readonly id!: number;

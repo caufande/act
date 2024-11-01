@@ -81,4 +81,8 @@ export const errorNames: ErrorNames = {
 		'*': Lang.zh,
 		[Lang.zh]: '一条用户组记录中的字段数量错误',
 	},
+	CannotParseGroupExpr: {
+		'*': Lang.zh,
+		[Lang.zh]: '解析用户组表达式失败',
+	},
 };

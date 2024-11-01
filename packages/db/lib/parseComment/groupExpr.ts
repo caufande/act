@@ -4,6 +4,7 @@
  */
 declare module './groupExpr';
 
+import { throwError } from '../errors';
 import groupArrxprGramm, { GroupExprActionDict } from './group-expr.ohm-bundle.cjs';
 
 export enum Operation {
@@ -12,8 +13,8 @@ export enum Operation {
 	Not,
 }
 
-export type BinOperationArr = [Operation.And | Operation.Or, GroupExpr, GroupExpr];
-export type NotArr = [Operation.Not, GroupExpr];
+export type BinOperationArr = readonly [Operation.And | Operation.Or, GroupExpr, GroupExpr];
+export type NotArr = readonly [Operation.Not, GroupExpr];
 export type GroupExpr = BinOperationArr | NotArr | string;
 
 function resOpArr(op: Operation.And | Operation.Or, arr: any): BinOperationArr | string {
@@ -41,7 +42,10 @@ const parseOpObj: GroupExprActionDict<GroupExpr> = {
 const groupExprSemantics = groupArrxprGramm.createSemantics();
 groupExprSemantics.addOperation('getTester', parseOpObj);
 
-export default function getGroupExpr(n: string): GroupExpr {
-	return groupExprSemantics(groupArrxprGramm.match(n)).getTester();
+export default function getGroupExpr(n: string | readonly string[]): GroupExpr {
+	if (!(typeof n === 'string')) n = '(' + n.join(')|(') + ')';
+	const matched = groupArrxprGramm.match(n);
+	if (matched.failed()) throwError('CannotParseGroupExpr', { interval: matched.getInterval(), message: matched.message! });
+	return groupExprSemantics(matched).getTester();
 }
 

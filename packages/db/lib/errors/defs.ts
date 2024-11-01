@@ -45,4 +45,8 @@ export const errorDefs = {
 		number: Number(),
 		lineNumber: Number(),
 	},
+	CannotParseGroupExpr: {
+		message: String(),
+		interval: Any(),
+	},
 } satisfies ErrorDefs;
