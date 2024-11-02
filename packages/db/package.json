@@ -43,6 +43,7 @@
 		"xmlrpc-parser": "^1.0.4"
 	},
 	"devDependencies": {
+		"@cauact/test-helper": "workspace:^",
 		"@ohm-js/cli": "^2.0.0",
 		"peggy": "^4.1.1",
 		"renamer": "^5.0.2",

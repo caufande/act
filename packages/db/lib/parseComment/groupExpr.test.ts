@@ -1,5 +1,5 @@
 /**
- * 用户组表达式相关
+ * 用户组表达式相关测试
  * @license AGPL-3.0-or-later
  */
 declare module './groupExpr';
@@ -7,18 +7,12 @@ declare module './groupExpr';
 import { Value } from '@sinclair/typebox/value';
 import test from 'tape';
 import getGroupExpr, { assertGroupExpr, GroupExpr, Operation } from '../../lib/parseComment/groupExpr';
+import { ta } from '@cauact/test-helper';
 
 function cer<T>(i: string, e: GroupExpr | T, b: boolean) {
 	return (t: test.Test) => {
 		t[b ? 'ok' : 'notok'](Value.Check(GroupExpr, e), i);
 	};
-}
-
-function ta(n: string, c: ((t: test.Test) => void)[]) {
-	test(n, t => {
-		c.forEach(f => f(t));
-		t.end();
-	});
 }
 
 ta('类型守卫', [
