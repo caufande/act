@@ -4,4 +4,4 @@
  */
 declare module './index.test';
 
-export {};
+export * from './lib/parseComment/groupExpr.test';
