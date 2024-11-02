@@ -4,6 +4,8 @@
  */
 declare module './groupExpr';
 
+import { Type } from '@sinclair/typebox';
+import { Value } from '@sinclair/typebox/value';
 import { throwError } from '../errors';
 import groupArrxprGramm, { GroupExprActionDict } from './group-expr.ohm-bundle.cjs';
 
@@ -16,6 +18,16 @@ export enum Operation {
 export type BinOperationArr = readonly [Operation.And | Operation.Or, GroupExpr, GroupExpr];
 export type NotArr = readonly [Operation.Not, GroupExpr];
 export type GroupExpr = BinOperationArr | NotArr | string;
+
+export const GroupExpr = Type.Union([Type.String(), Type.Any(), Type.Any()]);
+const BinOperationArr = Type.Tuple([Type.Enum(Operation), GroupExpr, GroupExpr]);
+const NotArr = Type.Tuple([Type.Enum(Operation), GroupExpr]);
+GroupExpr.anyOf[1] = BinOperationArr as any;
+GroupExpr.anyOf[2] = NotArr as any;
+
+export function assertGroupExpr(n: unknown): asserts n is GroupExpr {
+	return Value.Assert(GroupExpr, n);
+}
 
 function resOpArr(op: Operation.And | Operation.Or, arr: any): BinOperationArr | string {
 	const n = arr.pop();

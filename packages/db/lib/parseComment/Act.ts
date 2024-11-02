@@ -53,13 +53,13 @@ Value.Create(Detail) satisfies Detail;
 export interface ActParsed {
 	readonly title: string;
 	readonly detail: Detail;
-	readonly groups: GroupExpr;
+	readonly groupExpr: GroupExpr;
 	readonly stages: readonly Stage[];
 }
 export const ActParsed = Type.Object({
 	title: Type.String(),
 	detail: Detail,
-	groups: Type.Any(),
+	groupExpr: GroupExpr,
 	stages: Type.Array(Stage),
 });
 Value.Create(ActParsed) satisfies ActParsed;
@@ -104,7 +104,7 @@ export default class Act implements ActParsed {
 	 * @minItems 1
 	 */
 	readonly stages!: readonly Stage[];
-	readonly groups!: GroupExpr;
+	readonly groupExpr!: GroupExpr;
 
 	readonly floor!: number;
 	readonly id!: number;

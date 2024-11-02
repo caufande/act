@@ -10,15 +10,15 @@
 }}
 
 Act
-	= title:Title strings:Page* details:DetailH2* groups:Groups stages:Stages {
-		return { title, detail: { title, strings, details }, groups, stages };
+	= title:Title strings:Page* details:DetailH2* groupExpr:GroupExpr stages:Stages {
+		return { title, detail: { title, strings, details }, groupExpr, stages };
 	}
 
 Title '活动标题'
 	= AttrH1Start @ContentLine AttrH1End
 
 DetailH2
-	= AttrH2Start !(GroupsTitle / StagesTitle) title:ContentLine AttrH2End strings:Page* details:DetailH3* {
+	= AttrH2Start !(GroupExprTitle / StagesTitle) title:ContentLine AttrH2End strings:Page* details:DetailH3* {
 		return { title, strings, details };
 	}
 DetailH3
@@ -30,10 +30,10 @@ DetailH4
 		return { title, strings, details: [] };
 	}
 
-GroupsTitle '面向群体'
+GroupExprTitle '面向群体'
 	= '面向群体'
-Groups
-	= AttrH2Start GroupsTitle AttrH2End lines:Page {
+GroupExpr
+	= AttrH2Start GroupExprTitle AttrH2End lines:Page {
 		return getGroupExpr(decodeHTML(lines).split('\n'));
 	}
 
