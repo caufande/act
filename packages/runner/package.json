@@ -23,12 +23,12 @@
 	"author": "caufande",
 	"license": "AGPL-3.0-or-later",
 	"dependencies": {
-		"@twemoji/api": "^15.1.0",
-		"sharp": "^0.33.5",
-		"@sinclair/typebox": "^0.33.17",
-		"@types/node": "^22.7.7",
+		"@cauact/db": "workspace:^",
 		"@cauact/db-operator-node": "workspace:^",
-		"@cauact/db": "workspace:^"
+		"@sinclair/typebox": "^0.33.17",
+		"@twemoji/api": "^15.1.0",
+		"@types/node": "^22.8.6",
+		"sharp": "^0.33.5"
 	},
 	"devDependencies": {
 		"rimraf": "^6.0.1"

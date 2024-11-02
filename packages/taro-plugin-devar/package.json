@@ -20,8 +20,8 @@
 	"author": "caufande",
 	"license": "AGPL-3.0-or-later",
 	"dependencies": {
-		"@types/node": "^22.7.7",
-		"@tarojs/service": "^4.0.6"
+		"@tarojs/service": "^4.0.7",
+		"@types/node": "^22.8.6"
 	},
 	"devDependencies": {
 		"rimraf": "^6.0.1"
