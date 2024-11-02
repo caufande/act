@@ -11,14 +11,22 @@
 		"postohmjs:group-expr": "renamer --force lib/parseComment/group-expr.ohm-bundle.js -r group-expr.ohm-bundle.cjs; renamer --force lib/parseComment/group-expr.ohm-bundle.d.ts -r group-expr.ohm-bundle.d.cts",
 		"prepare": "pnpm peggy:act && pnpm ohmjs:group-expr",
 		"build": "tsc",
-		"test": "tsc --noEmit",
+		"pretest": "tsc --noEmit",
+		"test-nocover": "tsx index.test | colortape",
+		"test": "c8 -x {**/*.test.ts,lib/parseComment/{group-expr.ohm-bundle.cjs,act-parser.js}} pnpm test-nocover",
+		"test-report": "c8 report --reporter=html && serve coverage",
 		"clean": "rimraf -g lib/{**/,}*.{d.ts,js} index.{js,d.ts}",
 		"postclean": "pnpm prepare"
 	},
 	"files": [
 		"index.js",
 		"index.d.ts",
-		"lib"
+		"lib",
+		"!**/*.test.js",
+		"!**/*.ts",
+		"**/*.d.ts",
+		"!**/*.test.d.ts",
+		"!**/*.swp"
 	],
 	"author": "caufande",
 	"license": "AGPL-3.0-or-later",

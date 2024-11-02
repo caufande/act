@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": "../../config/tsbase.json",
-	"exclude": ["lib/parseComment/act-parser.js", "lib/parseComment/group-expr.ohm-bundle.cjs"],
+	"exclude": ["lib/parseComment/act-parser.js", "lib/parseComment/group-expr.ohm-bundle.cjs", "coverage"],
 	"include": ["**/*"]
 }
