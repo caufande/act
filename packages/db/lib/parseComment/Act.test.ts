@@ -272,8 +272,8 @@ test('解析实战', t => {
 				name: '报名',
 				timeSteps: [
 					[
-						new Date('2024-10-08T16:00:00.000Z'),
-						new Date('2024-11-11T16:00:00.000Z'),
+						new Date(2024, 9, 9),
+						new Date(2024, 10, 12),
 					],
 				],
 				details: [],
