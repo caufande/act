@@ -115,7 +115,6 @@ export default class Act implements ActParsed {
 		const fileName = `第 ${floor} 层评论`;
 		try {
 			const actParsed: any = parse(body, { grammarSource: fileName, floor });
-			console.log(actParsed);
 			Value.Assert(ActParsed as any, actParsed);
 			actParsed.floor = floor;
 			actParsed.id = id;
