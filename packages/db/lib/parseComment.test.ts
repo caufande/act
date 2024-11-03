@@ -2,17 +2,17 @@
  * 自然评论解析器相关测试
  * @license AGPL-3.0-or-later
  */
-declare module './index.test';
+declare module './parseComment.test';
 
 import { m } from '@cauact/test-helper';
 import test from 'tape';
-import parseComment, { Act } from '.';
-import { Comment } from '../CnbApi';
-import { Operation } from './groupExpr';
+import parseComment, { Act } from './parseComment';
+import { Comment } from './CnbApi';
+import { Operation } from './parseComment/groupExpr';
 
-export * from './Act.test';
-export * from './groupExpr.test';
-export * from './parseDate.test';
+export * from './parseComment/Act.test';
+export * from './parseComment/groupExpr.test';
+export * from './parseComment/parseDate.test';
 
 test('测试一下导出函数', t => {
 	const comment = {
