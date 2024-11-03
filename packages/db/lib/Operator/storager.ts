@@ -6,7 +6,7 @@ declare module './storager';
 
 export type StoragerIniter = new<T>(option?: StoragerOption<T>) => Storager<T>;
 
-const defaultDeserializer: Deserializer<any> = n => n;
+const defaultFn = (n: any) => n;
 
 export enum CheckingType {
 	Both,
@@ -14,28 +14,31 @@ export enum CheckingType {
 	Load,
 	None,
 }
-
 export type Asserter<T> = (n: unknown) => asserts n is T;
-
+export type Serializer<T> = (n: T) => any;
 export type Deserializer<T> = (n: any) => T;
 
 export interface StoragerOption<T> {
-	asserter?: Asserter<T>;
-	deserializer?: Deserializer<T>;
 	checkingType?: CheckingType;
+	asserter?: Asserter<T>;
+	serializer?: Serializer<T>;
+	deserializer?: Deserializer<T>;
 }
 
 export abstract class Storager<T> {
 	checkingType: CheckingType;
 	protected readonly assert: Asserter<T>;
+	protected readonly serializer: Serializer<T>;
 	protected readonly deserializer: Deserializer<T>;
 	constructor({
 		checkingType = CheckingType.None,
 		asserter = () => true,
-		deserializer = defaultDeserializer,
+		serializer = defaultFn,
+		deserializer = defaultFn,
 	}: StoragerOption<T> = {}) {
 		this.checkingType = checkingType;
 		this.assert = asserter;
+		this.serializer = serializer;
 		this.deserializer = deserializer;
 	}
 
@@ -61,7 +64,8 @@ export abstract class Storager<T> {
 	protected abstract setOrigin(key: string, value: T): Promise<boolean>;
 	set(key: string, value: T): Promise<boolean> {
 		if (this.isSetCheck()) this.assert(value);
-		return this.setOrigin(key, value);
+		const serialized = this.serializer(value);
+		return this.setOrigin(key, serialized);
 	}
 
 	protected abstract batchGetOrigin(keys: readonly string[]): Promise<unknown>;
@@ -76,10 +80,11 @@ export abstract class Storager<T> {
 	}
 
 	protected abstract batchSetOrigin(kvs: Map<string, T>): Promise<boolean>;
-	batchSet(kvs: Map<string, T>): Promise<boolean> {
+	batchSet(kvs: ReadonlyMap<string, T>): Promise<boolean> {
 		if (this.isSetCheck()) for (const [_, value] of kvs) {
 			this.assert(value);
 		}
-		return this.batchSetOrigin(kvs);
+		const serialized = new Map(kvs.entries().map(([k, v]) => [k, this.serializer(v)]));
+		return this.batchSetOrigin(serialized);
 	}
 }
