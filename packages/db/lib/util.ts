@@ -23,7 +23,7 @@ export function removeBlankBetweenAttr(str: string) {
 
 export function textToDate(text: string) {
 	const arr = text.split('/').map(n => parseInt(n)) as [number, number, number];
-	arr[1]++;
+	arr[1]--;
 	return new Date(...arr);
 }
 

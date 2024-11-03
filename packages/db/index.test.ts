@@ -10,4 +10,5 @@ import { regOperator } from './lib/Operator/register';
 regOperator(new Operator());
 
 export * from './lib/parseComment.test';
+export * from './lib/util.test';
 
