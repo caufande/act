@@ -14,7 +14,7 @@ export * from './Act.test';
 export * from './groupExpr.test';
 export * from './parseDate.test';
 
-test('测试一下导出函数', async t => {
+test('测试一下导出函数', t => {
 	const comment = {
 		id: 293,
 		body: m(
@@ -63,10 +63,15 @@ test('测试一下导出函数', async t => {
 	} satisfies Act;
 
 	t.deepEqual(
-		await parseComment(comment),
+		parseComment(comment),
 		parsed,
 		'结果一样',
 	);
+
+	t.throws(() => {
+		comment.authorUrl = 123 as any;
+		parseComment(comment, { check: true });
+	}, '类型检查');
 
 	t.end();
 });
