@@ -7,13 +7,9 @@ declare module './groupExpr';
 import { Value } from '@sinclair/typebox/value';
 import test from 'tape';
 import getGroupExpr, { assertGroupExpr, GroupExpr, Operation } from '../../lib/parseComment/groupExpr';
-import { ta } from '@cauact/test-helper';
+import { ta, gtc } from '@cauact/test-helper';
 
-function cer<T>(i: string, e: GroupExpr | T, b: boolean) {
-	return (t: test.Test) => {
-		t[b ? 'ok' : 'notok'](Value.Check(GroupExpr, e), i);
-	};
-}
+const cer = gtc(n => Value.Check(GroupExpr, n));
 
 ta('类型守卫', [
 	cer('单个组', 'aa', true),

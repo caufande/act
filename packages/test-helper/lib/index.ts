@@ -5,3 +5,5 @@
 declare module '.';
 
 export * from './tape';
+export * from './util';
+

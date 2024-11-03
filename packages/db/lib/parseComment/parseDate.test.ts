@@ -4,10 +4,10 @@
  */
 declare module './parseDate.test';
 
-import test from 'tape';
-import { Parsed, parseDate } from './parseDate';
-import { textToDate } from '../util';
 import { ta } from '@cauact/test-helper';
+import test from 'tape';
+import { textToDate } from '../util';
+import { parseDate } from './parseDate';
 
 let floor = 39;
 function c(i: string, n: string, s: [string, string] | null = null) {
