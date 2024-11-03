@@ -9,6 +9,7 @@ import getGroupExpr from './groupExpr';
 import Act from './Act';
 
 export * from './Act';
+export * from './groupExpr';
 export { Act, getGroupExpr };
 
 export default async function parseComment(comment: Comment) {

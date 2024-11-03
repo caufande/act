@@ -9,7 +9,5 @@ import { regOperator } from './lib/Operator/register';
 
 regOperator(new Operator());
 
-export * from './lib/parseComment/Act.test';
-export * from './lib/parseComment/groupExpr.test';
-export * from './lib/parseComment/parseDate.test';
+export * from './lib/parseComment/index.test';
 
