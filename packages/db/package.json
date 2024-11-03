@@ -44,6 +44,7 @@
 	},
 	"devDependencies": {
 		"@cauact/test-helper": "workspace:^",
+		"@cauact/db-operator-node": "workspace:^",
 		"@ohm-js/cli": "^2.0.0",
 		"peggy": "^4.1.1",
 		"renamer": "^5.0.2",
