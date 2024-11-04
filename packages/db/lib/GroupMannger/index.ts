@@ -6,7 +6,8 @@ declare module '.';
 
 import CnbApi, { CnbConfig } from '../CnbApi';
 
-export { default as parseGroups } from './parseGroups';
+export * from './getGroups';
+export * from './Groups';
 
 export default class GroupMannger {
 	protected readonly cnbApi: CnbApi;
