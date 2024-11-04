@@ -4,9 +4,9 @@
  */
 declare module './storager';
 
-export type StoragerIniter = new<T>(option?: StoragerOption<T>) => Storager<T>;
+import { throwError } from '../errors';
 
-const defaultFn = (n: any) => n;
+export type StoragerIniter = new<T>(option?: StoragerOption<T>) => Storager<T>;
 
 export enum CheckingType {
 	Both,
@@ -26,18 +26,23 @@ export interface StoragerOption<T> {
 }
 
 export abstract class Storager<T> {
+	private readonly asserter?: Asserter<T>;
+	protected assert(n: unknown): asserts n is T {
+		const f: (n: unknown) => void = this.asserter ?? throwError('NoAsserter', { checkingType: this.checkingType });
+		f(n);
+	}
+
 	checkingType: CheckingType;
-	protected readonly assert: Asserter<T>;
-	protected readonly serializer: Serializer<T>;
-	protected readonly deserializer: Deserializer<T>;
+	protected readonly serializer?: Serializer<T>;
+	protected readonly deserializer?: Deserializer<T>;
 	constructor({
 		checkingType = CheckingType.None,
-		asserter = () => true,
-		serializer = defaultFn,
-		deserializer = defaultFn,
+		asserter,
+		serializer,
+		deserializer,
 	}: StoragerOption<T> = {}) {
 		this.checkingType = checkingType;
-		this.assert = asserter;
+		this.asserter = asserter;
 		this.serializer = serializer;
 		this.deserializer = deserializer;
 	}
@@ -56,7 +61,7 @@ export abstract class Storager<T> {
 	async get(key: string): Promise<T | null> {
 		const data = await this.getOrigin(key);
 		if (!data) return null;
-		const deserialized = this.deserializer(data);
+		const deserialized = this.deserializer?.(data) ?? data as T;
 		if (this.isGetCheck()) this.assert(deserialized);
 		return deserialized;
 	}
@@ -64,7 +69,7 @@ export abstract class Storager<T> {
 	protected abstract setOrigin(key: string, value: T): Promise<boolean>;
 	set(key: string, value: T): Promise<boolean> {
 		if (this.isSetCheck()) this.assert(value);
-		const serialized = this.serializer(value);
+		const serialized = this.serializer?.(value) ?? value as T;
 		return this.setOrigin(key, serialized);
 	}
 
@@ -72,7 +77,7 @@ export abstract class Storager<T> {
 	async batchGet(keys: readonly string[]): Promise<(T | null)[]> {
 		const cause = await this.batchGetOrigin(keys);
 		if (!Array.isArray(cause)) throw Error('Isn\'t a Array!', { cause });
-		const deserialized = cause.map(n => (n ? this.deserializer(n) : null));
+		const deserialized = this.deserializer ? cause.map(n => (n ? this.deserializer!(n) : null)) : cause;
 		if (this.isGetCheck()) for (const data of deserialized) {
 			if (data !== null) this.assert(data);
 		}
@@ -84,7 +89,7 @@ export abstract class Storager<T> {
 		if (this.isSetCheck()) for (const [_, value] of kvs) {
 			this.assert(value);
 		}
-		const serialized = new Map(kvs.entries().map(([k, v]) => [k, this.serializer(v)]));
+		const serialized = new Map(kvs.entries().map(([k, v]) => [k, this.serializer?.(v) ?? v]));
 		return this.batchSetOrigin(serialized);
 	}
 }

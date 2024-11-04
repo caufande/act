@@ -4,7 +4,8 @@
  */
 declare module './defs';
 
-import { Any, Number, String, TSchema, TString } from '@sinclair/typebox';
+import { Any, Enum, Number, String, TSchema, TString } from '@sinclair/typebox';
+import { CheckingType } from '../Operator';
 
 export const message = String();
 export type ErrorDefs = Record<string, Record<string, TSchema> & { message?: TString }>;
@@ -48,5 +49,8 @@ export const errorDefs = {
 	CannotParseGroupExpr: {
 		message,
 		interval: Any(),
+	},
+	NoAsserter: {
+		checkingType: Enum(CheckingType),
 	},
 } satisfies ErrorDefs;

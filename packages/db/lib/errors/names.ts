@@ -85,4 +85,8 @@ export const errorNames: ErrorNames = {
 		'*': Lang.zh,
 		[Lang.zh]: '解析用户组表达式失败',
 	},
+	NoAsserter: {
+		'*': Lang.zh,
+		[Lang.zh]: '没有断言函数，无法进行类型检查',
+	},
 };
