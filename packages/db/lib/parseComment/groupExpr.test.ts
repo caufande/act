@@ -103,5 +103,13 @@ test('表达式解析', t => {
 		getGroupExpr('asd&');
 	}, '错误表达式');
 
+	t.throws(() => {
+		getGroupExpr('');
+	}, '空字符报错');
+
+	t.throws(() => {
+		getGroupExpr([]);
+	}, '空字符串组报错');
+
 	t.end();
 });

@@ -55,7 +55,7 @@ const groupExprSemantics = groupArrxprGramm.createSemantics();
 groupExprSemantics.addOperation('getTester', parseOpObj);
 
 export default function getGroupExpr(n: string | readonly string[]): GroupExpr {
-	if (!(typeof n === 'string')) n = '(' + n.join(')|(') + ')';
+	if (typeof n !== 'string') n = '(' + n.join(')|(') + ')';
 	const matched = groupArrxprGramm.match(n);
 	if (matched.failed()) throwError('CannotParseGroupExpr', { interval: matched.getInterval(), message: matched.message! });
 	return groupExprSemantics(matched).getTester();
