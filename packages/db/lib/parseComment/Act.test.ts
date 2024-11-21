@@ -4,6 +4,27 @@
  */
 declare module './Act.test';
 
+const parseBodys = [
+	m(
+		'<h1 id="正大杯第十五届全国大学生市场调查与分析大赛在华留学生组">“正大杯”第十五届全国大学生市场调查与分析大赛在华留学生组</h1>',
+		'<h2 id="面向群体">面向群体</h2>',
+		'<p>在华留学生<br>',
+		'在校 &amp; 本科生<br>',
+		'在校 &amp; 研究生</p>',
+		'<h2 id="时间安排">时间安排</h2>',
+		'<h3 id="报名">报名</h3>',
+		'<p>2024/10/9 到 2024/11/12</p>',
+		'',
+	),
+] as const;
+
+if (process.argv.at(-1)?.includes('--body')) {
+	for (const body of parseBodys) {
+		console.log(body);
+	}
+	process.exit(0);
+}
+
 import { gtc, m, ta } from '@cauact/test-helper';
 import { Value } from '@sinclair/typebox/value';
 import test from 'tape';
@@ -234,17 +255,7 @@ ta('编译错误类型守卫', [
 test('解析实战', t => {
 	const comment = {
 		id: 5316890,
-		body: m(
-			'<h1 id="正大杯第十五届全国大学生市场调查与分析大赛在华留学生组">“正大杯”第十五届全国大学生市场调查与分析大赛在华留学生组</h1>',
-			'<h2 id="面向群体">面向群体</h2>',
-			'<p>在华留学生<br>',
-			'在校 &amp; 本科生<br>',
-			'在校 &amp; 研究生</p>',
-			'<h2 id="时间安排">时间安排</h2>',
-			'<h3 id="报名">报名</h3>',
-			'<p>2024/10/9 到 2024/11/12</p>',
-			'',
-		),
+		body: parseBodys[0],
 		author: '肉丁土豆表',
 		authorUrl: 'https://home.cnblogs.com/u/2611309/',
 		faceUrl: 'https://pic.cnblogs.com/face/2611309/20211031003846.png',
