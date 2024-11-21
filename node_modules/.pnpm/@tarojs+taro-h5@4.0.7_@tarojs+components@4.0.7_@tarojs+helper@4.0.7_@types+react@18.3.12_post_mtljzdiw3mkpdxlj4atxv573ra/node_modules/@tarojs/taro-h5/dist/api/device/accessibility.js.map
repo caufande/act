@@ -1,0 +1,1 @@
+{"version":3,"file":"accessibility.js","sources":["../../../src/api/device/accessibility.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 无障碍\nexport const checkIsOpenAccessibility = /* @__PURE__ */ temporarilyNotSupport('checkIsOpenAccessibility')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,wBAAwB,mBAAmB,qBAAqB,CAAC,0BAA0B;;;;"}

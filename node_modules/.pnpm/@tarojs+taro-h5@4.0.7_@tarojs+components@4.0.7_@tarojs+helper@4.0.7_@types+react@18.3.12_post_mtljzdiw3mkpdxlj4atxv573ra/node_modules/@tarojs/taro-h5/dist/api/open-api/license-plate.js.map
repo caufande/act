@@ -1,0 +1,1 @@
+{"version":3,"file":"license-plate.js","sources":["../../../src/api/open-api/license-plate.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 车牌\nexport const chooseLicensePlate = /* @__PURE__ */ temporarilyNotSupport('chooseLicensePlate')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,kBAAkB,mBAAmB,qBAAqB,CAAC,oBAAoB;;;;"}

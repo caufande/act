@@ -1,0 +1,35 @@
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
+export declare class Slider implements ComponentInterface {
+  private sliderInsRef;
+  private handler;
+  el: HTMLElement;
+  min: number;
+  max: number;
+  step: number;
+  disabled: boolean;
+  value: number;
+  activeColor: string;
+  backgroundColor: string;
+  blockSize: number;
+  blockColor: string;
+  showValue: boolean;
+  name: string;
+  totalWidth: number;
+  touching: boolean;
+  ogX: number;
+  touchId: number | null;
+  percent: number;
+  ogPercent: number;
+  isWillLoadCalled: boolean;
+  function(value: any): void;
+  componentDidLoad(): void;
+  onChange: EventEmitter;
+  onChanging: EventEmitter;
+  componentWillLoad(): void;
+  handleTouchStart: (e: TouchEvent) => void;
+  handleTouchMove: (e: TouchEvent) => void;
+  handleTouchEnd: (e: TouchEvent) => void;
+  handleValueUpdate: (e: number, min?: number, max?: number) => number;
+  updateByStep(value: number): void;
+  render(): any;
+}

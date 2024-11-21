@@ -14,6 +14,8 @@ const parseBodys = [
 		'<h2 id="时间安排">时间安排</h2>',
 		'<h3 id="报名">报名</h3>',
 		'<p>2024/10/9 到 2024/11/12</p>',
+		'<h3 id="报名">[本科生 &amp; 在校] 报名</h3>',
+		'<p>2024/10/5 到 2024/11/7</p>',
 		'',
 	),
 ] as const;
@@ -31,31 +33,36 @@ import test from 'tape';
 import type { Comment } from '../CnbApi';
 import Act, { ActParsed, Detail, Stage } from './Act';
 import { Operation } from './groupExpr';
+import { demoGroupExpr } from './groupExpr.test';
 
+export const demoStage = {
+	name: 'akjdkjaslkwejjsdk',
+	timeSteps: [
+		[new Date(219832), new Date(3298782)],
+		[new Date(223819832), new Date(38782)],
+	],
+	details: [
+		'sdjsjhdj',
+		'sdku',
+		'igfi',
+	],
+	partition: demoGroupExpr,
+} satisfies Stage;
 const cs = gtc(n => Value.Check(Stage, n));
 ta('活动阶段类型守卫', [
 	cs('空', {
 		name: '',
 		timeSteps: [],
 		details: [],
+		partition: null,
 	}, true),
 	cs('普通', {
 		name: 'sdkjs',
 		timeSteps: [[new Date(18937), new Date(98347)]],
 		details: ['sdkjsd'],
+		partition: demoGroupExpr,
 	}, true),
-	cs('大', {
-		name: 'akjdkjaslkwejjsdk',
-		timeSteps: [
-			[new Date(219832), new Date(3298782)],
-			[new Date(223819832), new Date(38782)],
-		],
-		details: [
-			'sdjsjhdj',
-			'sdku',
-			'igfi',
-		],
-	}, true),
+	cs('大', demoStage, true),
 	cs('少字段', {
 		name: 'asda',
 		details: ['asd'],
@@ -66,6 +73,7 @@ ta('活动阶段类型守卫', [
 			[new Date(92873)],
 		],
 		details: [],
+		partition: null,
 	}, false),
 	cs('描述类型不对', {
 		name: '982',
@@ -75,9 +83,27 @@ ta('活动阶段类型守卫', [
 			21321,
 			'asdjks',
 		],
+		partition: null,
 	}, false),
 ]);
 
+export const demoDetail = {
+	title: 'asuiduyqk',
+	strings: ['asdouh2ka', 'sdkljq278', 'asjklj27'],
+	details: [
+		{
+			title: '1298bf',
+			strings: ['sadkj23iu', 'fdlkq234y83'],
+			details: [
+				{
+					title: 'asdlkj12io',
+					strings: ['asdku2ui'],
+					details: [],
+				},
+			],
+		},
+	],
+} satisfies Detail;
 const cd = gtc(n => Value.Check(Detail, n));
 ta('详细信息类型守卫', [
 	cd('空', {
@@ -96,23 +122,7 @@ ta('详细信息类型守卫', [
 			},
 		],
 	}, true),
-	cd('大', {
-		title: 'asuiduyqk',
-		strings: ['asdouh2ka', 'sdkljq278', 'asjklj27'],
-		details: [
-			{
-				title: '1298bf',
-				strings: ['sadkj23iu', 'fdlkq234y83'],
-				details: [
-					{
-						title: 'asdlkj12io',
-						strings: ['asdku2ui'],
-						details: [],
-					},
-				],
-			},
-		],
-	}, true),
+	cd('大', demoDetail, true),
 	cd('缺字段', {
 		title: 'asjklda',
 		strings: [],
@@ -147,18 +157,15 @@ ta('详细信息类型守卫', [
 	}, false),
 ]);
 
+export const demoActParsed = {
+	title: '',
+	detail: demoDetail,
+	groupExpr: '',
+	stages: [],
+} satisfies ActParsed;
 const cad = gtc(n => Value.Check(ActParsed, n));
 ta('解析后项目的类型守卫', [
-	cad('空', {
-		title: '',
-		detail: {
-			title: '',
-			strings: [],
-			details: [],
-		},
-		groupExpr: '',
-		stages: [],
-	}, true),
+	cad('空', demoActParsed, true),
 	cad('缺字段', {
 		title: '',
 		detail: {
@@ -170,22 +177,19 @@ ta('解析后项目的类型守卫', [
 	}, false),
 ]);
 
+export const demoAct = {
+	title: '',
+	detail: demoDetail,
+	groupExpr: '',
+	stages: [],
+	floor: 0,
+	id: 0,
+	author: '',
+	authorUrl: '',
+} satisfies Act;
 const ca = gtc(n => Value.Check(Act.tSchema, n));
 ta('项目的类型守卫', [
-	ca('空', {
-		title: '',
-		detail: {
-			title: '',
-			strings: [],
-			details: [],
-		},
-		groupExpr: '',
-		stages: [],
-		floor: 0,
-		id: 0,
-		author: '',
-		authorUrl: '',
-	}, true),
+	ca('空', demoAct, true),
 	ca('缺字段', {
 		title: '',
 		detail: {
@@ -222,7 +226,7 @@ test('项目反序列化器', t => {
 		authorUrl: '',
 	};
 	// @ts-ignore
-	a.stages.push({ name: 'asd', timeSteps: [[Date(), Date()]], details: [] });
+	a.stages.push({ name: 'asd', timeSteps: [[Date(), Date()]], details: [], partition: null });
 
 	t.throws(() => {
 		Act.assert(a);
@@ -288,6 +292,22 @@ test('解析实战', t => {
 					],
 				],
 				details: [],
+				partition: null,
+			},
+			{
+				name: '报名',
+				timeSteps: [
+					[
+						new Date(2024, 9, 5),
+						new Date(2024, 10, 7),
+					],
+				],
+				details: [],
+				partition: [
+					Operation.And,
+					'在校',
+					'本科生',
+				],
 			},
 		],
 		floor: 4,

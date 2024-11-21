@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.off=exports.on=void 0;var on=function(e,o){require("../packages/frame-talk-client-pc/index.js").addEventListener(e,o)};exports.on=on;var off=function(e,o){require("../packages/frame-talk-client-pc/index.js").removeEventListener(e,o)};exports.off=off;

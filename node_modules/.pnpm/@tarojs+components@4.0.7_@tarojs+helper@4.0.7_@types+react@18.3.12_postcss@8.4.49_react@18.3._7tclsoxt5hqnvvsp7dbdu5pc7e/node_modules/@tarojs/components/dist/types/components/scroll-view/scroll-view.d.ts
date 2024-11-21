@@ -1,0 +1,30 @@
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
+import type { ScrollViewContext } from '@tarojs/taro';
+export declare class ScrollView implements ComponentInterface {
+  private _scrollLeft;
+  private _scrollTop;
+  el: HTMLElement;
+  scrollX: boolean;
+  scrollY: boolean;
+  upperThreshold: number | string;
+  lowerThreshold: number | string;
+  mpScrollTop: number | string;
+  mpScrollLeft: number | string;
+  mpScrollIntoView: string;
+  mpScrollIntoViewAlignment: 'start' | 'center' | 'end' | 'nearest';
+  animated: boolean;
+  onScroll: EventEmitter;
+  onScrollToUpper: EventEmitter;
+  onScrollToLower: EventEmitter;
+  watchScrollLeft(newVal: any): void;
+  watchScrollTop(newVal: any): void;
+  watchScrollIntoView(newVal: any): void;
+  handleScroll(e: Event): void;
+  handleTouchMove(e: Event): void;
+  mpScrollToMethod(object: ScrollViewContext.scrollTo.Option): Promise<void>;
+  mpScrollIntoViewMethod(selector: string): Promise<void>;
+  componentDidLoad(): void;
+  upperAndLower: (...args: any[]) => void;
+  componentDidRender(): void;
+  render(): any;
+}

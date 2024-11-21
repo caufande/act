@@ -25,6 +25,8 @@ test('测试一下导出函数', t => {
 			'<h2>时间安排</h2>',
 			'<h3>pqwj</h3>',
 			'<p>2024/10/9  2024/11/12</p>',
+			'<h3>[hh &amp; kk]eiqo</h3>',
+			'<p>2024/10/2  2024/11/2</p>',
 		),
 		author: 'oqj',
 		authorUrl: 'pqjs',
@@ -47,13 +49,15 @@ test('测试一下导出函数', t => {
 		stages: [
 			{
 				name: 'pqwj',
-				timeSteps: [
-					[
-						new Date(2024, 9, 9),
-						new Date(2024, 10, 12),
-					],
-				],
+				timeSteps: [[new Date(2024, 9, 9), new Date(2024, 10, 12)]],
 				details: [],
+				partition: null,
+			},
+			{
+				name: 'eiqo',
+				timeSteps: [[new Date(2024, 9, 2), new Date(2024, 10, 2)]],
+				details: [],
+				partition: [Operation.And, 'kk', 'hh'],
 			},
 		],
 		floor: 561,

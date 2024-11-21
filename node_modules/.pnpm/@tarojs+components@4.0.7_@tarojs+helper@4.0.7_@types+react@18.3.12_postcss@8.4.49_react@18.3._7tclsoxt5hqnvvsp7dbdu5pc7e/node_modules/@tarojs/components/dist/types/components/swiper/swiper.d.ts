@@ -1,0 +1,96 @@
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
+import type ISwiper from 'swiper';
+export declare class Swiper implements ComponentInterface {
+  #private;
+  el: HTMLElement;
+  swiperWrapper: HTMLElement | null;
+  private swiper;
+  isWillLoadCalled: boolean;
+  /**
+   * 是否显示面板指示点
+   */
+  indicatorDots: boolean;
+  /**
+   * 指示点颜色
+   */
+  indicatorColor: string;
+  /**
+   * 当前选中的指示点颜色
+   */
+  indicatorActiveColor: string;
+  /**
+   * 是否自动切换
+   */
+  autoplay: boolean;
+  /**
+   * 当前所在滑块的 index
+   */
+  current: number;
+  /**
+   * 当前所在滑块的 item-id
+   */
+  currentItemId: string;
+  /**
+   * 自动切换时间间隔
+   */
+  interval: number;
+  /**
+   * 滑动动画时长
+   */
+  duration: number;
+  /**
+   * 是否采用衔接滑动
+   */
+  circular: boolean;
+  /**
+   * 滑动方向是否为纵向
+   */
+  vertical: boolean;
+  /**
+   * 前边距，可用于露出前一项的一小部分，接受 px 值
+   */
+  previousMargin: string;
+  /**
+   * 后边距，可用于露出后一项的一小部分，接受 px 值
+   */
+  nextMargin: string;
+  /**
+   * 同时显示的滑块数量
+   */
+  displayMultipleItems: number;
+  /**
+   * 给 previewImage API 使用，全屏显示 swiper
+   */
+  full: boolean;
+  /**
+   * 给 previewImage API 使用，缩放支持
+   */
+  zoom: boolean;
+  /**
+   * swiper11 相关的动效参数，具体见文档 https://swiperjs.com/swiper-api#parameters
+  */
+  effectsProps: Record<string, any>;
+  onChange: EventEmitter;
+  onAnimationFinish: EventEmitter;
+  watchCurrent(newVal: any): void;
+  watchCurrentItemId(newVal: any): void;
+  watchAutoplay(newVal: any): void;
+  watchDuration(newVal: any): void;
+  watchInterval(newVal: any): void;
+  watchSwiperWrapper(newVal?: HTMLElement): void;
+  handleSwiperSizeDebounce: (...args: any[]) => void;
+  watchCircular(): void;
+  watchDisplayMultipleItems(): void;
+  observer: MutationObserver;
+  componentWillLoad(): void;
+  componentDidLoad(): void;
+  disconnectedCallback(): void;
+  handleInit(reset?: boolean): void;
+  reset: () => void;
+  getSlidersList: () => NodeListOf<Element>;
+  getNeedFixLoop: () => boolean;
+  getLoopAdditionalSlides(): number;
+  parseMargin: () => number[];
+  getCurrentItemId(swiper: ISwiper): any;
+  render(): any;
+}

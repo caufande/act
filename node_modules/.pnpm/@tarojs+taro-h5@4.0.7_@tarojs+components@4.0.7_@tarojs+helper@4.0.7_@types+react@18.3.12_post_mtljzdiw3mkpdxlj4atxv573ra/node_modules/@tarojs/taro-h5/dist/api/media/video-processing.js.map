@@ -1,0 +1,1 @@
+{"version":3,"file":"video-processing.js","sources":["../../../src/api/media/video-processing.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 音视频合成\nexport const createMediaContainer = /* @__PURE__ */ temporarilyNotSupport('createMediaContainer')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,oBAAoB,mBAAmB,qBAAqB,CAAC,sBAAsB;;;;"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"my-miniprogram.js","sources":["../../../src/api/open-api/my-miniprogram.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 我的小程序\nexport const checkIsAddedToMyMiniProgram = /* @__PURE__ */ temporarilyNotSupport('checkIsAddedToMyMiniProgram')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,2BAA2B,mBAAmB,qBAAqB,CAAC,6BAA6B;;;;"}

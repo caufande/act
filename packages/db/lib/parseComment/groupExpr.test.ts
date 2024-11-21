@@ -10,7 +10,6 @@ import getGroupExpr, { assertGroupExpr, GroupExpr, Operation } from '../../lib/p
 import { ta, gtc } from '@cauact/test-helper';
 
 const cer = gtc(n => Value.Check(GroupExpr, n));
-
 ta('类型守卫', [
 	cer('单个组', 'aa', true),
 	cer('非', [Operation.Not, 'bb'], true),
@@ -38,6 +37,27 @@ test('类型断言器', t => {
 	t.end();
 });
 
+export const demoGroupExpr = [
+	Operation.Or,
+	[
+		Operation.And,
+		[Operation.Not, [Operation.Not, 'hhh']],
+		[
+			Operation.And,
+			'ggg',
+			[Operation.Not, 'fff'],
+		],
+	],
+	[
+		Operation.Or,
+		[
+			Operation.And,
+			'eee',
+			[Operation.Not, 'ddd'],
+		],
+		'ccc',
+	],
+] satisfies GroupExpr;
 test('表达式解析', t => {
 	t.deepEqual(
 		getGroupExpr('rr &ss&tt&uu & vv'),
@@ -75,27 +95,7 @@ test('表达式解析', t => {
 
 	t.deepEqual(
 		getGroupExpr(['ccc ', '( !ddd & eee) ', '(!fff&ggg&!!hhh)']),
-		[
-			Operation.Or,
-			[
-				Operation.And,
-				[Operation.Not, [Operation.Not, 'hhh']],
-				[
-					Operation.And,
-					'ggg',
-					[Operation.Not, 'fff'],
-				],
-			],
-			[
-				Operation.Or,
-				[
-					Operation.And,
-					'eee',
-					[Operation.Not, 'ddd'],
-				],
-				'ccc',
-			],
-		] satisfies GroupExpr,
+		demoGroupExpr,
 		'扁平嵌套',
 	);
 

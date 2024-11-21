@@ -1,0 +1,1 @@
+{"version":3,"file":"account.js","sources":["../../../src/api/open-api/account.ts"],"sourcesContent":["import { temporarilyNotSupport } from '../../utils'\n\n// 帐号信息\nexport const getAccountInfoSync = /* @__PURE__ */ temporarilyNotSupport('getAccountInfoSync')\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,kBAAkB,mBAAmB,qBAAqB,CAAC,oBAAoB;;;;"}

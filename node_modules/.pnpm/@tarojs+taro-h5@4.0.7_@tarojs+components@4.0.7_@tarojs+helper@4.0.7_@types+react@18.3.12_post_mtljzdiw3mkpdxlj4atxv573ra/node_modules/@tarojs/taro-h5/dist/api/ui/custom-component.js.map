@@ -1,0 +1,1 @@
+{"version":3,"file":"custom-component.js","sources":["../../../src/api/ui/custom-component.ts"],"sourcesContent":["import Taro from '@tarojs/api'\n\n// 自定义组件\nexport const nextTick = Taro.nextTick\n"],"names":[],"mappings":";;AAEA;AACa,MAAA,QAAQ,GAAG,IAAI,CAAC;;;;"}

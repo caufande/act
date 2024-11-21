@@ -1,0 +1,9 @@
+import { Config } from 'typescript-eslint';
+
+/**
+ * 「精确类型」风格 ESLint 配置
+ * @license MIT
+ * @version 0.2.2
+ */
+declare const config: Config & [];
+export = config;

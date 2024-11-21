@@ -1,0 +1,12 @@
+import { Props } from './props';
+import type { FormElement, TaroElement } from '@tarojs/runtime';
+import type { RestoreType } from './event';
+declare function updateInputWrapper(element: TaroElement, oldValue: RestoreType, props: Props): void;
+export declare function getToStringValue(value: any): any;
+export declare function toString(value: any): string;
+export declare function updateWrapper(element: TaroElement, oldValue: RestoreType, props: Props): void;
+export declare function setNodeValue(node: FormElement, oldValue: RestoreType, value: any, type?: string): void;
+export declare function isTextInputElement(elem: TaroElement): boolean;
+export declare const ReactDOMTextareaRestoreControlledState: typeof updateWrapper;
+export declare const ReactDOMInputRestoreControlledState: typeof updateInputWrapper;
+export {};

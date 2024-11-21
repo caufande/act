@@ -1,0 +1,61 @@
+import Taro from '@tarojs/api';
+import { CallbackManager } from "../../../utils/handler.js";
+declare class InnerAudioContext implements Taro.InnerAudioContext {
+    Instance?: HTMLAudioElement;
+    errorStack: CallbackManager;
+    stopStack: CallbackManager;
+    __startTime: number;
+    __isFirstPlay: boolean;
+    constructor();
+    set autoplay(e: boolean);
+    get autoplay(): boolean;
+    get buffered(): number;
+    get currentTime(): number;
+    set currentTime(e: number);
+    get duration(): number;
+    set loop(e: boolean);
+    get loop(): boolean;
+    get paused(): boolean;
+    set src(e: string);
+    get src(): string;
+    set volume(e: number);
+    get volume(): number;
+    set playbackRate(e: number);
+    get playbackRate(): number;
+    set obeyMuteSwitch(_e: boolean);
+    get obeyMuteSwitch(): boolean;
+    set startTime(e: number);
+    get startTime(): number;
+    set referrerPolicy(e: string);
+    get referrerPolicy(): string;
+    private setProperty;
+    play: () => Promise<void> | undefined;
+    pause: () => void | undefined;
+    stop: () => void;
+    seek: (position: number) => void;
+    /**
+     * @TODO destroy得并不干净
+     */
+    destroy: () => void;
+    onCanplay: (callback?: Taro.InnerAudioContext.OnCanplayCallback) => void | undefined;
+    onPlay: (callback?: Taro.InnerAudioContext.OnPlayCallback) => void | undefined;
+    onPause: (callback?: Taro.InnerAudioContext.OnPauseCallback) => void | undefined;
+    onStop: (callback?: Taro.InnerAudioContext.OnStopCallback) => void;
+    onEnded: (callback?: Taro.InnerAudioContext.OnEndedCallback) => void | undefined;
+    onTimeUpdate: (callback?: Taro.InnerAudioContext.OnTimeUpdateCallback) => void | undefined;
+    onError: (callback: Taro.InnerAudioContext.OnErrorCallback) => void;
+    onWaiting: (callback?: Taro.InnerAudioContext.OnWaitingCallback) => void | undefined;
+    onSeeking: (callback?: Taro.InnerAudioContext.OnSeekingCallback) => void | undefined;
+    onSeeked: (callback?: Taro.InnerAudioContext.OnSeekedCallback) => void | undefined;
+    offCanplay: (callback?: Taro.InnerAudioContext.OnCanplayCallback) => void | undefined;
+    offPlay: (callback?: Taro.InnerAudioContext.OnPlayCallback) => void | undefined;
+    offPause: (callback?: Taro.InnerAudioContext.OnPauseCallback) => void | undefined;
+    offStop: (callback?: Taro.InnerAudioContext.OnStopCallback) => void;
+    offEnded: (callback?: Taro.InnerAudioContext.OnEndedCallback) => void | undefined;
+    offTimeUpdate: (callback?: Taro.InnerAudioContext.OnTimeUpdateCallback) => void | undefined;
+    offError: (callback?: Taro.InnerAudioContext.OnErrorCallback) => void;
+    offWaiting: (callback?: Taro.InnerAudioContext.OnWaitingCallback) => void | undefined;
+    offSeeking: (callback?: Taro.InnerAudioContext.OnSeekingCallback) => void | undefined;
+    offSeeked: (callback?: Taro.InnerAudioContext.OnSeekedCallback) => void | undefined;
+}
+export { InnerAudioContext };

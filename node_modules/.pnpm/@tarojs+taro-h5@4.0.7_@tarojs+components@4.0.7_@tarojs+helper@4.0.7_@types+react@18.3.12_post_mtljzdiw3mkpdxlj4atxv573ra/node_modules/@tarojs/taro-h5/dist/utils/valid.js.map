@@ -1,0 +1,1 @@
+{"version":3,"file":"valid.js","sources":["../../src/utils/valid.ts"],"sourcesContent":["const VALID_COLOR_REG = /^#[0-9a-fA-F]{6}$/\nexport const isValidColor = (color: string) => {\n  return VALID_COLOR_REG.test(color)\n}\n"],"names":[],"mappings":"AAAA,MAAM,eAAe,GAAG,mBAAmB,CAAA;AAC9B,MAAA,YAAY,GAAG,CAAC,KAAa,KAAI;AAC5C,IAAA,OAAO,eAAe,CAAC,IAAI,CAAC,KAAK,CAAC,CAAA;AACpC;;;;"}

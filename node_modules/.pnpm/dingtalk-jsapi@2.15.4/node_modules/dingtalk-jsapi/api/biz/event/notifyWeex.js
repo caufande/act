@@ -1,0 +1,1 @@
+"use strict";function notifyWeex$(e){return ddSdk_1.ddSdk.invokeAPI(apiName,e)}var _a;Object.defineProperty(exports,"__esModule",{value:!0}),exports.notifyWeex$=void 0;var ddSdk_1=require("../../../lib/ddSdk"),apiName="biz.event.notifyWeex";ddSdk_1.ddSdk.setAPI(apiName,(_a={},_a[ddSdk_1.ENV_ENUM.ios]={vs:"4.5.0"},_a)),exports.notifyWeex$=notifyWeex$,exports.default=notifyWeex$;

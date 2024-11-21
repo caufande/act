@@ -1,0 +1,7 @@
+import { h, Host } from '@stencil/core';
+export class Block {
+  render() {
+    return (h(Host, null));
+  }
+  static get is() { return "taro-block-core"; }
+}
