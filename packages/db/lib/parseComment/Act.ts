@@ -29,11 +29,13 @@ export interface Stage {
 	 * 活动的描述
 	 */
 	readonly details: readonly string[];
+	readonly partition: GroupExpr | null;
 }
 export const Stage = Type.Object({
 	name: Type.String(),
 	timeSteps: Type.Array(Type.Tuple([Type.Date(), Type.Date()])),
 	details: Type.Array(Type.String()),
+	partition: Type.Union([Type.Null(), GroupExpr]),
 });
 Value.Create(Stage) satisfies Stage;
 

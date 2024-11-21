@@ -43,8 +43,8 @@ StagesTitle '时间安排'
 Stages
 	= AttrH2Start StagesTitle AttrH2End @Stage+
 Stage
-	= AttrH3Start name:ContentLine AttrH3End timeSteps:StageDateP details:StageDetail* {
-		return { name, timeSteps, details };
+    = AttrH3Start partStr:('[' @$[^<>\]]+ ']' _ )?  name:ContentLine AttrH3End timeSteps:StageDateP details:StageDetail* {
+		return { name, partition: partStr && getGroupExpr(decodeHTML(partStr)), timeSteps, details };
 	}
 StageDateP
 	= lines:Page {
